@@ -1,16 +1,11 @@
-/* ANIGMA - style.css */
+/* ANIGMA - Style.css */
 
-/* RESET */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap');
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 a { text-decoration: none; color: inherit; }
 button { cursor: pointer; font-family: 'DM Sans', sans-serif; }
 
-/* BASE */
 body {
   font-family: 'DM Sans', sans-serif;
   min-height: 100vh;
@@ -18,15 +13,12 @@ body {
   background: #0a0a0e;
 }
 
-/* ====================================================
-   BACKGROUND - foto + overlay escuro
-==================================================== */
+/* FUNDO */
 .bg-photo {
   position: fixed;
   inset: 0;
   z-index: 0;
-  /* Muda aqui para o caminho da tua imagem */
-  background-image: url('images/background.jpg');
+  background-image: url('Imagens/background.jpg');
   background-size: cover;
   background-position: center top;
   background-attachment: fixed;
@@ -39,14 +31,12 @@ body {
   background: rgba(6, 6, 10, 0.88);
 }
 
-/* ====================================================
-   HEADER
-==================================================== */
+/* HEADER */
 header {
   position: sticky;
   top: 0;
   z-index: 200;
-  height: 110px;
+  height: 96px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,7 +47,6 @@ header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-/* Logo */
 .logo-wrap {
   height: 80px;
   display: flex;
@@ -67,11 +56,10 @@ header {
 .logo-wrap img {
   height: 100%;
   width: auto;
-  display: block;
   max-height: 80px;
+  display: block;
 }
 
-/* Nav direita */
 .header-right {
   display: flex;
   align-items: center;
@@ -93,17 +81,8 @@ header {
   align-items: center;
 }
 
-.btn-nav:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.28);
-}
-
-.btn-nav.active {
-  background: #ffffff;
-  border-color: #ffffff;
-  color: #111111;
-}
+.btn-nav:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.28); }
+.btn-nav.active { background: #ffffff; border-color: #ffffff; color: #111111; }
 
 .header-sep {
   width: 1px;
@@ -112,7 +91,6 @@ header {
   margin: 0 4px;
 }
 
-/* Botao Login */
 .btn-login {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.30);
@@ -129,20 +107,10 @@ header {
   gap: 7px;
 }
 
-.btn-login:hover {
-  background: #ffffff;
-  color: #111111;
-}
+.btn-login:hover { background: #ffffff; color: #111111; }
+.btn-login svg { width: 14px; height: 14px; }
 
-.btn-login svg {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-}
-
-/* ====================================================
-   MAIN WRAPPER
-==================================================== */
+/* MAIN */
 main {
   position: relative;
   z-index: 2;
@@ -151,19 +119,8 @@ main {
   padding: 52px 24px 100px;
 }
 
-/* Titulos de seccao */
-.section-label {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 20px;
-}
-
-/* ====================================================
-   TITULO ANIGMA - acima da grelha, centrado
-==================================================== */
+/* TITULO ANIGMA */
 .anime-section-title {
-  width: 100%;
   text-align: center;
   font-size: 3.5rem;
   font-weight: 800;
@@ -171,16 +128,13 @@ main {
   text-transform: uppercase;
   color: #ffffff;
   margin-bottom: 36px;
-  /* puxa o titulo para fora do padding do main para ficar mesmo centrado na pagina */
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
 }
 
-/* ====================================================
-   ANIME GRID - cards quadrados mais pequenos
-==================================================== */
+/* GRID DE ANIMES */
 .anime-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -188,25 +142,17 @@ main {
   margin-bottom: 64px;
 }
 
-@media (max-width: 860px) {
-  .anime-grid { grid-template-columns: repeat(4, 1fr); }
-}
+@media (max-width: 860px) { .anime-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 560px) { .anime-grid { grid-template-columns: repeat(3, 1fr); } }
 
-@media (max-width: 560px) {
-  .anime-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* Card individual */
 .anime-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
-  position: relative;
 }
 
-/* Quadrado com a foto */
 .anime-thumb {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -225,19 +171,13 @@ main {
   display: block;
 }
 
-/*
-  Placeholder cinza - aparece enquanto nao ha imagem.
-  Para adicionar imagem:
-    1. Apaga a <div class="placeholder">
-    2. Adiciona <img src="images/animes/nome.jpg" alt="Nome">
-*/
 .anime-thumb .placeholder {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.58rem;
+  font-size: 0.60rem;
   font-weight: 600;
   letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.15);
@@ -250,7 +190,6 @@ main {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.60);
 }
 
-/* Badge NEW */
 .badge-new {
   position: absolute;
   top: 6px;
@@ -267,11 +206,10 @@ main {
   z-index: 2;
 }
 
-/* Nome do anime */
 .anime-name {
   font-weight: 700;
-  font-size: 0.68rem;
-  letter-spacing: 0.8px;
+  font-size: 0.76rem;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
   text-align: center;
@@ -279,22 +217,24 @@ main {
   line-height: 1.3;
 }
 
-.anime-card:hover .anime-name {
-  color: #ffffff;
-}
+.anime-card:hover .anime-name { color: #ffffff; }
 
-/* ====================================================
-   DIVIDER
-==================================================== */
+/* DIVISOR */
 .divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.07);
   margin-bottom: 48px;
 }
 
-/* ====================================================
-   REGRAS
-==================================================== */
+/* SECAO LABEL */
+.section-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+/* REGRAS */
 .rules-intro {
   font-size: 0.88rem;
   color: rgba(255, 255, 255, 0.40);
@@ -303,7 +243,6 @@ main {
   max-width: 580px;
 }
 
-/* Bloco de pontos */
 .rules-points {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -311,9 +250,7 @@ main {
   margin-bottom: 32px;
 }
 
-@media (max-width: 600px) {
-  .rules-points { grid-template-columns: 1fr 1fr; }
-}
+@media (max-width: 600px) { .rules-points { grid-template-columns: 1fr 1fr; } }
 
 .rule-card {
   background: rgba(255, 255, 255, 0.04);
@@ -322,20 +259,10 @@ main {
   padding: 16px 15px;
 }
 
-.rule-card-title {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 5px;
-}
+.rule-card-title { font-size: 0.82rem; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
+.rule-card-desc  { font-size: 0.76rem; color: rgba(255,255,255,0.36); line-height: 1.6; }
 
-.rule-card-desc {
-  font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.36);
-  line-height: 1.6;
-}
-
-/* Bloco de cores das celulas */
+/* CORES */
 .colors-label {
   font-size: 0.72rem;
   font-weight: 700;
@@ -352,33 +279,16 @@ main {
   margin-bottom: 32px;
 }
 
-@media (max-width: 600px) {
-  .colors-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 600px) { .colors-grid { grid-template-columns: 1fr; } }
 
-.color-block {
-  border-radius: 6px;
-  padding: 14px 15px;
-}
+.color-block { border-radius: 6px; padding: 14px 15px; }
+.color-block.c-green  { background: rgba(21,128,61,0.25);  border: 1px solid rgba(22,163,74,0.50); }
+.color-block.c-yellow { background: rgba(120,53,15,0.25);  border: 1px solid rgba(217,119,6,0.50); }
+.color-block.c-red    { background: rgba(127,29,29,0.25);  border: 1px solid rgba(185,28,28,0.50); }
+.color-block-title { font-size: 0.82rem; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
+.color-block-desc  { font-size: 0.76rem; color: rgba(255,255,255,0.45); line-height: 1.55; }
 
-.color-block.c-green  { background: rgba(21, 128, 61, 0.25);  border: 1px solid rgba(22, 163, 74, 0.50); }
-.color-block.c-yellow { background: rgba(120, 53, 15, 0.25);  border: 1px solid rgba(217, 119, 6, 0.50); }
-.color-block.c-red    { background: rgba(127, 29, 29, 0.25);  border: 1px solid rgba(185, 28, 28, 0.50); }
-
-.color-block-title {
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: #ffffff;
-  margin-bottom: 4px;
-}
-
-.color-block-desc {
-  font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.45);
-  line-height: 1.55;
-}
-
-/* Tabela de setas */
+/* SETAS */
 .arrows-label {
   font-size: 0.72rem;
   font-weight: 700;
@@ -389,18 +299,14 @@ main {
 }
 
 .arrows-table-wrap {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 7px;
   overflow: hidden;
   margin-bottom: 48px;
 }
 
-.arrows-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.82rem;
-}
+.arrows-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
 
 .arrows-table th {
   text-align: left;
@@ -409,31 +315,22 @@ main {
   font-weight: 700;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.25);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255,255,255,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.02);
 }
 
 .arrows-table td {
   padding: 11px 16px;
-  color: rgba(255, 255, 255, 0.60);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255,255,255,0.60);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   font-weight: 500;
-  font-size: 0.82rem;
   vertical-align: middle;
 }
 
-.arrows-table tr:last-child td {
-  border-bottom: none;
-}
+.arrows-table tr:last-child td { border-bottom: none; }
+.arrows-table td:first-child { color: rgba(255,255,255,0.30); font-size: 0.76rem; width: 140px; }
 
-.arrows-table td:first-child {
-  color: rgba(255, 255, 255, 0.30);
-  font-size: 0.76rem;
-  width: 140px;
-}
-
-/* Chips de exemplo */
 .chip {
   display: inline-flex;
   align-items: center;
@@ -444,39 +341,15 @@ main {
   font-weight: 600;
 }
 
-.chip.neutral {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.70);
-}
-
-.chip.yellow {
-  background: rgba(120, 53, 15, 0.35);
-  border: 1px solid rgba(217,119,6,0.40);
-  color: #fbbf24;
-}
-
-.chip.green {
-  background: rgba(21, 128, 61, 0.30);
-  border: 1px solid rgba(22,163,74,0.40);
-  color: #4ade80;
-}
-
-.chip.red {
-  background: rgba(127, 29, 29, 0.35);
-  border: 1px solid rgba(185,28,28,0.40);
-  color: #f87171;
-}
-
+.chip.yellow { background: rgba(120,53,15,0.35); border: 1px solid rgba(217,119,6,0.40); color: #fbbf24; }
+.chip.green  { background: rgba(21,128,61,0.30);  border: 1px solid rgba(22,163,74,0.40);  color: #4ade80; }
 .arrow-up   { color: #4ade80; }
 .arrow-down { color: #f87171; }
 
-/* ====================================================
-   NOTA RANKING / LOGIN
-==================================================== */
+/* RANKING NOTE */
 .ranking-note {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 7px;
   padding: 20px 22px;
   display: flex;
@@ -485,26 +358,9 @@ main {
   margin-bottom: 64px;
 }
 
-.ranking-note-icon {
-  font-size: 1.3rem;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-
-.ranking-note-title {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 5px;
-}
-
-.ranking-note-text {
-  font-size: 0.80rem;
-  color: rgba(255, 255, 255, 0.40);
-  line-height: 1.65;
-  margin-bottom: 12px;
-}
+.ranking-note-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.ranking-note-title { font-size: 0.88rem; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
+.ranking-note-text  { font-size: 0.80rem; color: rgba(255,255,255,0.40); line-height: 1.65; margin-bottom: 12px; }
 
 .btn-login-inline {
   display: inline-flex;
@@ -522,15 +378,11 @@ main {
   transition: opacity 0.15s;
 }
 
-.btn-login-inline:hover {
-  opacity: 0.85;
-}
+.btn-login-inline:hover { opacity: 0.85; }
 
-/* ====================================================
-   ABOUT
-==================================================== */
+/* ABOUT */
 .about-wrap {
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(255,255,255,0.07);
   padding-top: 48px;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -538,13 +390,8 @@ main {
   align-items: start;
 }
 
-@media (max-width: 540px) {
-  .about-wrap {
-    grid-template-columns: 1fr;
-  }
-}
+@media (max-width: 540px) { .about-wrap { grid-template-columns: 1fr; } }
 
-/* Foto do criador - substitui pelo teu src */
 .about-photo {
   width: 88px;
   height: 88px;
@@ -555,14 +402,8 @@ main {
   flex-shrink: 0;
 }
 
-.about-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* Placeholder enquanto nao ha foto */
 .about-photo .placeholder {
   width: 100%;
   height: 100%;
@@ -576,41 +417,15 @@ main {
   text-transform: uppercase;
 }
 
+.about-tag  { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 6px; }
+.about-name { font-size: 1.05rem; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
+.about-text { font-size: 0.84rem; color: rgba(255,255,255,0.42); line-height: 1.75; max-width: 520px; }
 
-.about-tag {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
-  margin-bottom: 6px;
-}
-
-.about-name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 10px;
-}
-
-.about-text {
-  font-size: 0.84rem;
-  color: rgba(255, 255, 255, 0.42);
-  line-height: 1.75;
-  max-width: 520px;
-}
-
-.about-links {
-  display: flex;
-  gap: 10px;
-  margin-top: 14px;
-  flex-wrap: wrap;
-}
+.about-links { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
 
 .about-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.10);
   color: rgba(255,255,255,0.55);
@@ -618,237 +433,250 @@ main {
   padding: 5px 13px;
   font-size: 0.74rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
-.about-link:hover {
-  background: rgba(255,255,255,0.10);
-  color: #ffffff;
-  border-color: rgba(255,255,255,0.22);
-}
-/* ====================================================
-   MODO CLARO
-==================================================== */
-.btn-theme {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.30);
-  color: #ffffff;
-  padding: 7px 18px;
-  border-radius: 4px;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 700;
-  font-size: 0.78rem;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-}
+.about-link:hover { background: rgba(255,255,255,0.10); color: #ffffff; border-color: rgba(255,255,255,0.22); }
 
-.btn-theme:hover {
-  background: #ffffff;
-  color: #111111;
-}
-
-body.light-mode {
-  background: #f0f0f0;
-  color: #111111;
-}
-
-body.light-mode .bg-overlay {
-  background: rgba(240, 240, 240, 0.93);
-}
-
-body.light-mode header {
-  background: rgba(255, 255, 255, 0.95);
-  border-bottom: 1px solid #dddddd;
-}
-
-body.light-mode .btn-nav {
-  border-color: #cccccc;
-  color: #444444;
-}
-
-body.light-mode .btn-nav:hover,
-body.light-mode .btn-nav.active {
-  background: #111111;
-  border-color: #111111;
-  color: #ffffff;
-}
-
-body.light-mode .btn-login {
-  border-color: #999999;
-  color: #111111;
-}
-
-body.light-mode .btn-login:hover {
-  background: #111111;
-  color: #ffffff;
-}
-
-body.light-mode .btn-theme {
-  border-color: #999999;
-  color: #111111;
-}
-
-body.light-mode .btn-theme:hover {
-  background: #111111;
-  color: #ffffff;
-}
-
-body.light-mode .anime-section-title {
-  color: #111111;
-}
-
-body.light-mode .anime-thumb {
-  background: #dddddd;
-  border-color: rgba(0, 0, 0, 0.20);
-}
-
-body.light-mode .anime-thumb .placeholder {
-  color: rgba(0, 0, 0, 0.30);
-}
-
-body.light-mode .anime-card:hover .anime-thumb {
-  border-color: rgba(0, 0, 0, 0.50);
-}
-
-body.light-mode .anime-name {
-  color: #444444;
-}
-
-body.light-mode .anime-card:hover .anime-name {
-  color: #111111;
-}
-
-body.light-mode .section-label {
-  color: #111111;
-}
-
-body.light-mode .rules-intro {
-  color: #555555;
-}
-
-body.light-mode .rule-card {
-  background: #ffffff;
-  border-color: #dddddd;
-}
-
-body.light-mode .rule-card-title {
-  color: #111111;
-}
-
-body.light-mode .rule-card-desc {
-  color: #666666;
-}
-
-body.light-mode .colors-label,
-body.light-mode .arrows-label {
-  color: #888888;
-}
-
-body.light-mode .color-block.c-green {
-  background: rgba(21, 128, 61, 0.15);
-  border-color: rgba(22, 163, 74, 0.40);
-}
-
-body.light-mode .color-block.c-yellow {
-  background: rgba(120, 53, 15, 0.12);
-  border-color: rgba(217, 119, 6, 0.40);
-}
-
-body.light-mode .color-block.c-red {
-  background: rgba(127, 29, 29, 0.12);
-  border-color: rgba(185, 28, 28, 0.40);
-}
-
-body.light-mode .color-block-title {
-  color: #111111;
-}
-
-body.light-mode .color-block-desc {
-  color: #555555;
-}
-
-body.light-mode .arrows-table-wrap {
-  background: #ffffff;
-  border-color: #dddddd;
-}
-
-body.light-mode .arrows-table th {
-  background: #f5f5f5;
-  color: #888888;
-  border-bottom-color: #e0e0e0;
-}
-
-body.light-mode .arrows-table td {
-  color: #333333;
-  border-bottom-color: #eeeeee;
-}
-
-body.light-mode .arrows-table td:first-child {
-  color: #888888;
-}
-
-body.light-mode .chip.neutral {
-  background: rgba(0,0,0,0.06);
-  border-color: rgba(0,0,0,0.15);
-  color: #333333;
-}
-
-body.light-mode .divider {
-  background: #dddddd;
-}
-
-body.light-mode .ranking-note {
-  background: #ffffff;
-  border-color: #dddddd;
-}
-
-body.light-mode .ranking-note-title {
-  color: #111111;
-}
-
-body.light-mode .ranking-note-text {
-  color: #666666;
-}
-
-body.light-mode .about-tag {
-  color: #999999;
-}
-
-body.light-mode .about-name {
-  color: #111111;
-}
-
-body.light-mode .about-text {
-  color: #555555;
-}
-
-body.light-mode .about-link {
-  background: #ffffff;
-  border-color: #dddddd;
-  color: #555555;
-}
-
-body.light-mode .about-link:hover {
-  background: #f0f0f0;
-  color: #111111;
-}
-
-body.light-mode footer {
-  border-top-color: #dddddd;
-  color: #aaaaaa;
-}
-/* ====================================================
-   FOOTER
-==================================================== */
+/* FOOTER */
 footer {
   position: relative;
   z-index: 2;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
   padding: 20px 40px;
   text-align: center;
   font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.18);
-  font-weight: 400;
+  color: rgba(255,255,255,0.18);
 }
+
+/* THEME DROPDOWN */
+.theme-wrap { position: relative; }
+
+.btn-theme {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.30);
+  color: #ffffff;
+  padding: 7px 18px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s;
+}
+
+.btn-theme:hover { background: rgba(255,255,255,0.08); }
+
+.theme-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.theme-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #1a1a22;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 150px;
+  z-index: 300;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.theme-menu.open { display: block; }
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  transition: background 0.15s, color 0.15s;
+}
+
+.theme-option:hover { background: rgba(255,255,255,0.06); color: #ffffff; }
+.theme-option.active { color: #ffffff; }
+
+.theme-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.theme-option[data-theme="escuro"] .theme-dot { background: #555566; }
+.theme-option[data-theme="claro"]  .theme-dot { background: #e0e0e0; border: 1px solid #aaa; }
+.theme-option[data-theme="sakura"] .theme-dot { background: #f9a8d4; }
+.theme-option[data-theme="oceano"] .theme-dot { background: #38bdf8; }
+.theme-option.active .theme-dot { background: #22c55e !important; border: none !important; }
+
+/* ANIMACAO SAKURA */
+.sakura-container {
+  display: none;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+body.theme-sakura .sakura-container { display: block; }
+
+.petal {
+  position: absolute;
+  top: -20px;
+  border-radius: 0 50% 0 50%;
+  animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+  0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0.85; }
+  50%  { transform: translateY(50vh) rotate(180deg) translateX(25px); }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+}
+
+/* ANIMACAO OCEANO */
+.ocean-canvas {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+body.theme-oceano .ocean-canvas { display: block; }
+
+/* TEMA CLARO */
+body.light-mode { background: #f0f0f0; color: #111111; }
+body.light-mode .bg-overlay { background: rgba(240,240,240,0.93); }
+body.light-mode header { background: rgba(255,255,255,0.95); border-bottom: 1px solid #ddd; }
+body.light-mode .btn-nav { border-color: #ccc; color: #444; }
+body.light-mode .btn-nav:hover,
+body.light-mode .btn-nav.active { background: #111; border-color: #111; color: #fff; }
+body.light-mode .btn-login,
+body.light-mode .btn-theme { border-color: #999; color: #111; }
+body.light-mode .btn-login:hover,
+body.light-mode .btn-theme:hover { background: #111; color: #fff; }
+body.light-mode .theme-menu { background: #fff; border-color: #ddd; }
+body.light-mode .theme-option { color: #555; }
+body.light-mode .theme-option:hover { background: #f5f5f5; color: #111; }
+body.light-mode .anime-section-title { color: #111; }
+body.light-mode .anime-thumb { background: #ddd; border-color: rgba(0,0,0,0.20); }
+body.light-mode .anime-thumb .placeholder { color: rgba(0,0,0,0.30); }
+body.light-mode .anime-card:hover .anime-thumb { border-color: rgba(0,0,0,0.50); }
+body.light-mode .anime-name { color: #444; }
+body.light-mode .anime-card:hover .anime-name { color: #111; }
+body.light-mode .section-label { color: #111; }
+body.light-mode .rules-intro { color: #555; }
+body.light-mode .rule-card { background: #fff; border-color: #ddd; }
+body.light-mode .rule-card-title { color: #111; }
+body.light-mode .rule-card-desc { color: #666; }
+body.light-mode .colors-label,
+body.light-mode .arrows-label { color: #888; }
+body.light-mode .arrows-table-wrap { background: #fff; border-color: #ddd; }
+body.light-mode .arrows-table th { background: #f5f5f5; color: #888; border-bottom-color: #e0e0e0; }
+body.light-mode .arrows-table td { color: #333; border-bottom-color: #eee; }
+body.light-mode .arrows-table td:first-child { color: #888; }
+body.light-mode .divider { background: #ddd; }
+body.light-mode .ranking-note { background: #fff; border-color: #ddd; }
+body.light-mode .ranking-note-title { color: #111; }
+body.light-mode .ranking-note-text { color: #666; }
+body.light-mode .about-tag { color: #999; }
+body.light-mode .about-name { color: #111; }
+body.light-mode .about-text { color: #555; }
+body.light-mode .about-link { background: #fff; border-color: #ddd; color: #555; }
+body.light-mode .about-link:hover { background: #f0f0f0; color: #111; }
+body.light-mode footer { border-top-color: #ddd; color: #aaa; }
+
+/* TEMA SAKURA */
+body.theme-sakura { background: #2d0a1a; color: #f9e4ec; }
+body.theme-sakura .bg-overlay { background: rgba(45,10,26,0.88); }
+body.theme-sakura header { background: rgba(45,10,26,0.90); border-bottom: 1px solid rgba(249,168,212,0.15); }
+body.theme-sakura .btn-nav { border-color: rgba(249,168,212,0.25); color: rgba(249,168,212,0.60); }
+body.theme-sakura .btn-nav:hover,
+body.theme-sakura .btn-nav.active { background: #f9a8d4; border-color: #f9a8d4; color: #2d0a1a; }
+body.theme-sakura .btn-login,
+body.theme-sakura .btn-theme { border-color: rgba(249,168,212,0.35); color: #f9a8d4; }
+body.theme-sakura .theme-menu { background: #3d1225; border-color: rgba(249,168,212,0.15); }
+body.theme-sakura .theme-option { color: rgba(249,168,212,0.55); }
+body.theme-sakura .theme-option:hover { background: rgba(249,168,212,0.06); color: #f9a8d4; }
+body.theme-sakura .anime-section-title { color: #f9a8d4; }
+body.theme-sakura .anime-thumb { background: #3d1225; border-color: rgba(249,168,212,0.25); }
+body.theme-sakura .anime-card:hover .anime-thumb { border-color: rgba(249,168,212,0.60); }
+body.theme-sakura .anime-name { color: rgba(249,168,212,0.70); }
+body.theme-sakura .anime-card:hover .anime-name { color: #f9a8d4; }
+body.theme-sakura .section-label { color: #f9a8d4; }
+body.theme-sakura .rules-intro { color: rgba(249,168,212,0.50); }
+body.theme-sakura .rule-card { background: rgba(249,168,212,0.05); border-color: rgba(249,168,212,0.12); }
+body.theme-sakura .rule-card-title { color: #f9a8d4; }
+body.theme-sakura .rule-card-desc { color: rgba(249,168,212,0.50); }
+body.theme-sakura .colors-label,
+body.theme-sakura .arrows-label { color: rgba(249,168,212,0.35); }
+body.theme-sakura .arrows-table-wrap { background: rgba(249,168,212,0.04); border-color: rgba(249,168,212,0.10); }
+body.theme-sakura .arrows-table th { color: rgba(249,168,212,0.35); border-bottom-color: rgba(249,168,212,0.08); }
+body.theme-sakura .arrows-table td { color: rgba(249,168,212,0.70); border-bottom-color: rgba(249,168,212,0.06); }
+body.theme-sakura .arrows-table td:first-child { color: rgba(249,168,212,0.35); }
+body.theme-sakura .divider { background: rgba(249,168,212,0.10); }
+body.theme-sakura .ranking-note { background: rgba(249,168,212,0.04); border-color: rgba(249,168,212,0.10); }
+body.theme-sakura .ranking-note-title { color: #f9a8d4; }
+body.theme-sakura .ranking-note-text { color: rgba(249,168,212,0.50); }
+body.theme-sakura .about-tag { color: rgba(249,168,212,0.35); }
+body.theme-sakura .about-name { color: #f9a8d4; }
+body.theme-sakura .about-text { color: rgba(249,168,212,0.55); }
+body.theme-sakura .about-link { background: rgba(249,168,212,0.06); border-color: rgba(249,168,212,0.15); color: rgba(249,168,212,0.60); }
+body.theme-sakura .about-link:hover { background: rgba(249,168,212,0.12); color: #f9a8d4; }
+body.theme-sakura footer { border-top-color: rgba(249,168,212,0.08); color: rgba(249,168,212,0.25); }
+
+/* TEMA OCEANO */
+body.theme-oceano { background: #051525; color: #e0f2fe; }
+body.theme-oceano .bg-overlay { background: rgba(5,21,37,0.88); }
+body.theme-oceano header { background: rgba(5,21,37,0.92); border-bottom: 1px solid rgba(56,189,248,0.15); }
+body.theme-oceano .btn-nav { border-color: rgba(56,189,248,0.25); color: rgba(56,189,248,0.60); }
+body.theme-oceano .btn-nav:hover,
+body.theme-oceano .btn-nav.active { background: #38bdf8; border-color: #38bdf8; color: #051525; }
+body.theme-oceano .btn-login,
+body.theme-oceano .btn-theme { border-color: rgba(56,189,248,0.35); color: #38bdf8; }
+body.theme-oceano .theme-menu { background: #0a2540; border-color: rgba(56,189,248,0.15); }
+body.theme-oceano .theme-option { color: rgba(56,189,248,0.55); }
+body.theme-oceano .theme-option:hover { background: rgba(56,189,248,0.06); color: #38bdf8; }
+body.theme-oceano .anime-section-title { color: #38bdf8; }
+body.theme-oceano .anime-thumb { background: #0a2540; border-color: rgba(56,189,248,0.25); }
+body.theme-oceano .anime-card:hover .anime-thumb { border-color: rgba(56,189,248,0.60); }
+body.theme-oceano .anime-name { color: rgba(56,189,248,0.70); }
+body.theme-oceano .anime-card:hover .anime-name { color: #38bdf8; }
+body.theme-oceano .section-label { color: #38bdf8; }
+body.theme-oceano .rules-intro { color: rgba(56,189,248,0.50); }
+body.theme-oceano .rule-card { background: rgba(56,189,248,0.05); border-color: rgba(56,189,248,0.12); }
+body.theme-oceano .rule-card-title { color: #38bdf8; }
+body.theme-oceano .rule-card-desc { color: rgba(56,189,248,0.50); }
+body.theme-oceano .colors-label,
+body.theme-oceano .arrows-label { color: rgba(56,189,248,0.35); }
+body.theme-oceano .arrows-table-wrap { background: rgba(56,189,248,0.04); border-color: rgba(56,189,248,0.10); }
+body.theme-oceano .arrows-table th { color: rgba(56,189,248,0.35); border-bottom-color: rgba(56,189,248,0.08); }
+body.theme-oceano .arrows-table td { color: rgba(56,189,248,0.70); border-bottom-color: rgba(56,189,248,0.06); }
+body.theme-oceano .arrows-table td:first-child { color: rgba(56,189,248,0.35); }
+body.theme-oceano .divider { background: rgba(56,189,248,0.10); }
+body.theme-oceano .ranking-note { background: rgba(56,189,248,0.04); border-color: rgba(56,189,248,0.10); }
+body.theme-oceano .ranking-note-title { color: #38bdf8; }
+body.theme-oceano .ranking-note-text { color: rgba(56,189,248,0.50); }
+body.theme-oceano .about-tag { color: rgba(56,189,248,0.35); }
+body.theme-oceano .about-name { color: #38bdf8; }
+body.theme-oceano .about-text { color: rgba(56,189,248,0.55); }
+body.theme-oceano .about-link { background: rgba(56,189,248,0.06); border-color: rgba(56,189,248,0.15); color: rgba(56,189,248,0.60); }
+body.theme-oceano .about-link:hover { background: rgba(56,189,248,0.12); color: #38bdf8; }
+body.theme-oceano footer { border-top-color: rgba(56,189,248,0.08); color: rgba(56,189,248,0.25); }

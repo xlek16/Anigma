@@ -6,32 +6,48 @@
   <title>ANIGMA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 
-  <!-- FUNDO: coloca a tua imagem em images/background.jpg -->
+  <div class="sakura-container" id="sakuraContainer"></div>
+  <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
   <div class="bg-photo"></div>
   <div class="bg-overlay"></div>
 
-  <!-- ══════════════════════════════════════════════
-       HEADER
-  ══════════════════════════════════════════════ -->
   <header>
-
     <div class="logo-wrap">
       <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
     </div>
-
     <div class="header-right">
       <a class="btn-nav active" href="index.html">Jogar</a>
       <a class="btn-nav" href="ranking.html">Ranking</a>
-          <button class="btn-theme" id="themeToggle" onclick="toggleTheme()">
-        * modo claro
-    </button>
+
+      <div class="theme-wrap" id="themeWrap">
+        <button class="btn-theme" onclick="toggleThemeMenu()">
+          <span class="theme-indicator"></span>
+          <span id="themeLabel">Dark</span>
+          &#9662;
+        </button>
+        <div class="theme-menu" id="themeMenu">
+          <div class="theme-option" data-theme="escuro" onclick="setTheme('escuro')">
+            <span class="theme-dot"></span> Dark
+          </div>
+          <div class="theme-option" data-theme="claro" onclick="setTheme('claro')">
+            <span class="theme-dot"></span> Light
+          </div>
+          <div class="theme-option" data-theme="sakura" onclick="setTheme('sakura')">
+            <span class="theme-dot"></span> Sakura
+          </div>
+          <div class="theme-option" data-theme="oceano" onclick="setTheme('oceano')">
+            <span class="theme-dot"></span> Ocean
+          </div>
+        </div>
+      </div>
 
       <div class="header-sep"></div>
+
       <a class="btn-login" href="login.html">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -43,80 +59,56 @@
     </div>
   </header>
 
-  <!-- ══════════════════════════════════════════════
-       MAIN
-  ══════════════════════════════════════════════ -->
   <main>
 
-    <!-- ── SECÇÃO: ANIMES ───────────────────────── -->
     <div class="anime-section-title">ANIGMA</div>
-
-    <!--
-      COMO ADICIONAR A TUA FOTO:
-      1. Coloca o ficheiro em  images/animes/nomeAnime.jpg
-      2. Dentro de .anime-thumb, apaga a <div class="placeholder">
-      3. Adiciona: <img src="images/animes/nomeAnime.jpg" alt="Nome do Anime">
-
-      COMO ADICIONAR UM ANIME NOVO:
-      - Copia um bloco <a class="anime-card"> completo
-      - Muda o href para o ficheiro HTML do anime
-      - Muda o nome e a foto
-      - Adiciona <span class="badge-new">New</span> se for novo
-    -->
 
     <div class="anime-grid">
 
       <a class="anime-card" href="dragonball.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/dragonball.jpg" alt="Dragon Ball"> -->
-          <div class="placeholder">foto</div>
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/dragonball.webp" alt="Dragon Ball">
         </div>
         <div class="anime-name">Dragon Ball</div>
       </a>
 
       <a class="anime-card" href="onepiece.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/onepiece.jpg" alt="One Piece"> -->
-          <div class="placeholder">foto</div>
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/OnePiece.webp" alt="One Piece">
         </div>
         <div class="anime-name">One Piece</div>
       </a>
 
       <a class="anime-card" href="jujutsukaisen.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/jjk.jpg" alt="Jujutsu Kaisen"> -->
-          <div class="placeholder">foto</div>
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JJk.webp" alt="Jujutsu Kaisen">
         </div>
         <div class="anime-name">Jujutsu Kaisen</div>
       </a>
 
       <a class="anime-card" href="naruto.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/naruto.jpg" alt="Naruto"> -->
-          <div class="placeholder">foto</div>
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/Naruto.webp" alt="Naruto">
         </div>
         <div class="anime-name">Naruto</div>
       </a>
 
       <a class="anime-card" href="jojo.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/jojo.jpg" alt="JoJo"> -->
-          <div class="placeholder">foto</div>
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JOJO.webp" alt="JoJo">
         </div>
         <div class="anime-name">JoJo</div>
       </a>
 
       <a class="anime-card" href="hunterxhunter.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/hxh.jpg" alt="Hunter x Hunter"> -->
-          <div class="placeholder">foto</div>
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/HXH.webp" alt="Hunter x Hunter">
         </div>
         <div class="anime-name">Hunter x Hunter</div>
       </a>
 
       <a class="anime-card" href="demonslayer.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/demonslayer.jpg" alt="Demon Slayer"> -->
           <div class="placeholder">foto</div>
         </div>
         <div class="anime-name">Demon Slayer</div>
@@ -124,7 +116,6 @@
 
       <a class="anime-card" href="attackontitan.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/aot.jpg" alt="Attack on Titan"> -->
           <div class="placeholder">foto</div>
         </div>
         <div class="anime-name">Attack on Titan</div>
@@ -132,7 +123,6 @@
 
       <a class="anime-card" href="boruto.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/boruto.jpg" alt="Boruto"> -->
           <div class="placeholder">foto</div>
           <span class="badge-new">New</span>
         </div>
@@ -141,7 +131,6 @@
 
       <a class="anime-card" href="dandadan.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/dandadan.jpg" alt="Dan Da Dan"> -->
           <div class="placeholder">foto</div>
           <span class="badge-new">New</span>
         </div>
@@ -150,7 +139,6 @@
 
       <a class="anime-card" href="gintama.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/gintama.jpg" alt="Gintama"> -->
           <div class="placeholder">foto</div>
           <span class="badge-new">New</span>
         </div>
@@ -159,7 +147,6 @@
 
       <a class="anime-card" href="kagurabachi.html">
         <div class="anime-thumb">
-          <!-- <img src="images/animes/kagurabachi.jpg" alt="Kagurabachi"> -->
           <div class="placeholder">foto</div>
           <span class="badge-new">New</span>
         </div>
@@ -168,162 +155,95 @@
 
     </div>
 
-    <!-- ── DIVISOR ────────────────────────────────── -->
     <div class="divider"></div>
 
-    <!-- ── SECÇÃO: REGRAS ─────────────────────────── -->
     <div class="section-label">Como Jogar</div>
 
     <p class="rules-intro">
-      Escolhe um anime, depois tenta adivinhar o personagem secreto do dia.
-      A cada tentativa recebes pistas visuais sobre os atributos do personagem —
-      usa-as para chegar à resposta certa com o máximo de pontos possível.
+      Escolhe um anime e tenta adivinhar o personagem secreto do dia.
+      A cada tentativa recebes pistas visuais sobre os atributos do personagem.
+      Usa-as para chegar a resposta certa com o maximo de pontos possivel.
     </p>
 
-    <!-- Pontos -->
     <div class="rules-points">
-
       <div class="rule-card">
         <div class="rule-card-title">100 pontos</div>
-        <div class="rule-card-desc">Cada ronda começa com 100 pontos no marcador</div>
+        <div class="rule-card-desc">Cada ronda comeca com 100 pontos no marcador</div>
       </div>
-
       <div class="rule-card">
-        <div class="rule-card-title">−2 por tentativa errada</div>
-        <div class="rule-card-desc">Cada palpite incorreto remove 2 pontos da pontuação</div>
+        <div class="rule-card-title">-2 por tentativa errada</div>
+        <div class="rule-card-desc">Cada palpite incorreto remove 2 pontos da pontuacao</div>
       </div>
-
       <div class="rule-card">
-        <div class="rule-card-title">Dicas — disponíveis a partir da 10.ª tentativa</div>
-        <div class="rule-card-desc">Cada dica usada custa 5 pontos. Usa com cuidado</div>
+        <div class="rule-card-title">Dicas a partir da 10.a tentativa</div>
+        <div class="rule-card-desc">Cada dica custa 5 pontos. Usa com cuidado</div>
       </div>
-
     </div>
 
-    <!-- Cores das células -->
     <div class="colors-label">O que significa cada cor</div>
     <div class="colors-grid">
-
       <div class="color-block c-green">
-        <div class="color-block-title">Verde — Correto</div>
-        <div class="color-block-desc">
-          O atributo do teu palpite é exatamente igual ao do personagem secreto.
-        </div>
+        <div class="color-block-title">Verde - Correto</div>
+        <div class="color-block-desc">O atributo e exatamente igual ao do personagem secreto.</div>
       </div>
-
       <div class="color-block c-yellow">
-        <div class="color-block-title">Amarelo — Próximo</div>
-        <div class="color-block-desc">
-          O valor está perto do correto. Usado em campos numéricos como a altura
-          — diferença de até 10 cm.
-        </div>
+        <div class="color-block-title">Amarelo - Proximo</div>
+        <div class="color-block-desc">Perto do valor correto. Em campos numericos a diferenca e de ate 10 cm.</div>
       </div>
-
       <div class="color-block c-red">
-        <div class="color-block-title">Vermelho — Errado</div>
-        <div class="color-block-desc">
-          O atributo é diferente do personagem secreto. Continua a tentar.
-        </div>
+        <div class="color-block-title">Vermelho - Errado</div>
+        <div class="color-block-desc">O atributo e diferente do personagem secreto.</div>
       </div>
-
     </div>
 
-    <!-- Setas explicadas -->
     <div class="arrows-label">O que significam as setas</div>
-
     <div class="arrows-table-wrap">
       <table class="arrows-table">
         <thead>
           <tr>
             <th>Atributo</th>
-            <th>O que vês</th>
+            <th>O que ves</th>
             <th>O que significa</th>
           </tr>
         </thead>
         <tbody>
-
           <tr>
             <td>Altura</td>
-            <td>
-              <span class="chip yellow">
-                180 cm <span class="arrow-up">▲</span>
-              </span>
-            </td>
-            <td>
-              O personagem secreto é <strong>mais alto</strong> do que o teu palpite.
-              A seta aponta para <strong>cima = maior</strong>.
-            </td>
+            <td><span class="chip yellow">180 cm <span class="arrow-up">&#9650;</span></span></td>
+            <td>O personagem secreto e <strong>mais alto</strong> - seta para cima = maior.</td>
           </tr>
-
           <tr>
             <td>Altura</td>
-            <td>
-              <span class="chip yellow">
-                180 cm <span class="arrow-down">▼</span>
-              </span>
-            </td>
-            <td>
-              O personagem secreto é <strong>mais baixo</strong> do que o teu palpite.
-              A seta aponta para <strong>baixo = menor</strong>.
-            </td>
+            <td><span class="chip yellow">180 cm <span class="arrow-down">&#9660;</span></span></td>
+            <td>O personagem secreto e <strong>mais baixo</strong> - seta para baixo = menor.</td>
           </tr>
-
           <tr>
             <td>Primeiro Arco</td>
-            <td>
-              <span class="chip yellow">
-                Arco da Liberdade <span class="arrow-down">▼</span>
-              </span>
-            </td>
-            <td>
-              O arco do personagem secreto aparece <strong>antes</strong> do teu palpite
-              na história. A seta para baixo indica que o arco correto é
-              <strong>mais cedo</strong> na linha temporal.
-            </td>
+            <td><span class="chip yellow">Arco da Liberdade <span class="arrow-down">&#9660;</span></span></td>
+            <td>O arco correto aparece <strong>antes</strong> na historia - mais cedo na linha temporal.</td>
           </tr>
-
           <tr>
             <td>Primeiro Arco</td>
-            <td>
-              <span class="chip yellow">
-                Arco da Liberdade <span class="arrow-up">▲</span>
-              </span>
-            </td>
-            <td>
-              O arco do personagem secreto aparece <strong>depois</strong> do teu palpite.
-              A seta para cima indica que o arco correto é <strong>mais tarde</strong>
-              na linha temporal.
-            </td>
+            <td><span class="chip yellow">Arco da Liberdade <span class="arrow-up">&#9650;</span></span></td>
+            <td>O arco correto aparece <strong>depois</strong> na historia - mais tarde na linha temporal.</td>
           </tr>
-
           <tr>
             <td>Qualquer campo</td>
-            <td>
-              <span class="chip green">
-                Konoha
-              </span>
-            </td>
-            <td>
-              Sem seta = resposta <strong>completamente correta</strong>.
-              A célula fica verde.
-            </td>
+            <td><span class="chip green">Konoha</span></td>
+            <td>Sem seta = <strong>completamente correto</strong>. A celula fica verde.</td>
           </tr>
-
         </tbody>
       </table>
     </div>
 
-    <!-- Nota sobre Ranking / Login -->
     <div class="ranking-note">
-      <div class="ranking-note-icon">🏆</div>
+      <div class="ranking-note-icon">&#127942;</div>
       <div class="ranking-note-body">
-        <div class="ranking-note-title">O Ranking é exclusivo para utilizadores com conta</div>
+        <div class="ranking-note-title">O Ranking e exclusivo para utilizadores com conta</div>
         <div class="ranking-note-text">
-          Podes jogar livremente sem conta — mas a tua pontuação não será guardada
-          nem aparecerá na tabela de classificação. Faz login para competir com outros
-          jogadores e aparecer no ranking global e por anime.
+          Podes jogar sem conta mas a tua pontuacao nao sera guardada nem aparecera
+          na tabela de classificacao. Faz login para competir com outros jogadores.
         </div>
-        <!-- Liga ao teu ficheiro de login -->
         <a class="btn-login-inline" href="login.html">
           <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
                fill="none" stroke="currentColor" stroke-width="2.5"
@@ -336,58 +256,34 @@
       </div>
     </div>
 
-    <!-- ── DIVISOR ────────────────────────────────── -->
     <div class="divider"></div>
 
-    <!-- ── ABOUT ──────────────────────────────────── -->
     <div class="about-wrap">
-
-      <!-- Foto do criador -->
       <div class="about-photo">
-        <!--
-          Coloca aqui a tua foto:
-          <img src="images/creator.jpg" alt="O teu nome">
-        -->
+        <!-- <img src="Imagens/creator.jpg" alt="Nome"> -->
         <div class="placeholder">foto</div>
       </div>
-
       <div class="about-content">
         <div class="about-tag">Criador do projeto</div>
-
-        <!--
-          Substitui os textos abaixo pelos teus:
-          - about-name → o teu nome ou username
-          - about-text → a tua descrição
-          - about-link  → os teus links (GitHub, Twitter, Instagram, etc.)
-        -->
-
         <div class="about-name">O teu nome aqui</div>
-
         <p class="about-text">
-          Escreve aqui um texto sobre ti — quem és, porque criaste o ANIGMA,
-          o que gostas de fazer, ou qualquer coisa que queiras partilhar com
-          quem visita o site. Podes falar da tua paixão por anime, pelos teus
-          projetos, ou simplesmente apresentares-te.
+          Escreve aqui um texto sobre ti e sobre o ANIGMA.
         </p>
-
-        <!-- Links para as tuas redes — adiciona ou remove à vontade -->
         <div class="about-links">
           <a class="about-link" href="#" target="_blank">GitHub</a>
           <a class="about-link" href="#" target="_blank">Twitter / X</a>
           <a class="about-link" href="#" target="_blank">Instagram</a>
         </div>
       </div>
-
     </div>
 
   </main>
 
-  <!-- ══════════════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════════════ -->
   <footer>
-    © 2025 ANIGMA — Todos os direitos reservados
+    &copy; 2025 ANIGMA
   </footer>
-   <script src="Tema.js"></script>
+
+  <script src="Tema.js"></script>
+
 </body>
 </html>
