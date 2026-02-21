@@ -13,24 +13,6 @@ body {
   background: #0a0a0e;
 }
 
-/* FUNDO */
-.bg-photo {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background-image: url('Imagens/background.jpg');
-  background-size: cover;
-  background-position: center top;
-  background-attachment: fixed;
-}
-
-.bg-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  background: rgba(6, 6, 10, 0.88);
-}
-
 /* HEADER */
 header {
   position: sticky;
@@ -51,6 +33,7 @@ header {
   height: 80px;
   display: flex;
   align-items: center;
+  
 }
 
 .logo-wrap img {
@@ -58,6 +41,21 @@ header {
   width: auto;
   max-height: 80px;
   display: block;
+}
+
+.logo-wrap img {
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease, filter 220ms ease;
+  will-change: transform;
+}
+
+.logo-wrap:hover img {
+  transform: scale(1.06) rotate(-360deg);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  filter: brightness(1.03);
+}
+
+.logo-wrap img:active {
+  transform: scale(0.99) rotate(-1deg);
 }
 
 .header-right {
@@ -151,6 +149,8 @@ main {
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  position: relative;
+  z-index: 10;
 }
 
 .anime-thumb {
@@ -529,7 +529,7 @@ footer {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 3;
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -604,9 +604,9 @@ body.light-mode .about-link:hover { background: #f0f0f0; color: #111; }
 body.light-mode footer { border-top-color: #ddd; color: #aaa; }
 
 /* TEMA SAKURA */
-body.theme-sakura { background: #2d0a1a; color: #f9e4ec; }
-body.theme-sakura .bg-overlay { background: rgba(45,10,26,0.88); }
-body.theme-sakura header { background: rgba(45,10,26,0.90); border-bottom: 1px solid rgba(249,168,212,0.15); }
+body.theme-sakura { background: #5f2d44; color: #f9e4ec; }
+body.theme-sakura .bg-overlay { background: rgba(61,26,42,0.78); }
+body.theme-sakura header { background: rgba(61,26,42,0.85); border-bottom: 1px solid rgba(249,168,212,0.15); }
 body.theme-sakura .btn-nav { border-color: rgba(249,168,212,0.25); color: rgba(249,168,212,0.60); }
 body.theme-sakura .btn-nav:hover,
 body.theme-sakura .btn-nav.active { background: #f9a8d4; border-color: #f9a8d4; color: #2d0a1a; }
