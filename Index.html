@@ -20,18 +20,18 @@
   ══════════════════════════════════════════════ -->
   <header>
 
-    <!-- LOGO: quando tiveres a logo, apaga o span e descomenta o img -->
     <div class="logo-wrap">
-      <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma">
+      <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
     </div>
 
     <div class="header-right">
       <a class="btn-nav active" href="index.html">Jogar</a>
       <a class="btn-nav" href="ranking.html">Ranking</a>
+          <button class="btn-theme" id="themeToggle" onclick="toggleTheme()">
+        * modo claro
+    </button>
 
       <div class="header-sep"></div>
-
-      <!-- Botão Login — liga ao teu ficheiro de login -->
       <a class="btn-login" href="login.html">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -41,7 +41,6 @@
         Login
       </a>
     </div>
-
   </header>
 
   <!-- ══════════════════════════════════════════════
@@ -389,6 +388,6 @@
   <footer>
     © 2025 ANIGMA — Todos os direitos reservados
   </footer>
-
+   <script src="Tema.js"></script>
 </body>
 </html>
