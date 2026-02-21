@@ -91,9 +91,9 @@ class OceanParticle {
     this.y = Math.random() * canvas.height * 0.6;
     this.size = Math.random() * 3 + 1;
     this.opacity = Math.random() * 0.4 + 0.1;
-    this.speedX = (Math.random() - 0.5) * 0.5;
-    this.speedY = Math.random() * 0.3 + 0.1;
-    this.wobbleSpeed = Math.random() * 0.03 + 0.01;
+    this.speedX = (Math.random() - 1) * 1;
+    this.speedY = Math.random() * 0.5 + 0.3;
+    this.wobbleSpeed = Math.random() * 0.3 + 0.1;
     this.wobbleAmount = 0;
   }
 
@@ -101,7 +101,7 @@ class OceanParticle {
     this.x += this.speedX;
     this.y += this.speedY;
     this.wobbleAmount += this.wobbleSpeed;
-    this.x += Math.sin(this.wobbleAmount) * 0.3;
+    this.x += Math.sin(this.wobbleAmount) * 0.5;
     this.opacity -= 0.0015;
   }
 }
@@ -122,12 +122,11 @@ function iniciarOceano() {
   redimensionar();
   window.addEventListener('resize', redimensionar);
 
+  // menos camadas e velocidades mais baixas para um movimento mais realista
   const ondas = [
-    { cor: 'rgba(3, 45, 75, 0.50)', amp: 60, freq: 0.006, vel: 0.008, yBase: 0.48, phase: 0 },
-    { cor: 'rgba(7, 80, 120, 0.40)', amp: 50, freq: 0.008, vel: 0.012, yBase: 0.56, phase: Math.PI * 0.3 },
-    { cor: 'rgba(14, 120, 160, 0.32)', amp: 40, freq: 0.011, vel: 0.018, yBase: 0.64, phase: Math.PI * 0.6 },
-    { cor: 'rgba(30, 160, 200, 0.24)', amp: 32, freq: 0.014, vel: 0.024, yBase: 0.72, phase: Math.PI * 0.9 },
-    { cor: 'rgba(56, 189, 248, 0.18)', amp: 24, freq: 0.018, vel: 0.032, yBase: 0.80, phase: Math.PI * 1.2 },
+    { cor: 'rgba(7, 80, 120, 0.42)', amp: 36, freq: 0.0045, vel: 0.0045, yBase: 0.56, phase: 0 },
+    { cor: 'rgba(14, 120, 160, 0.30)', amp: 28, freq: 0.0052, vel: 0.0058, yBase: 0.66, phase: Math.PI * 0.5 },
+    { cor: 'rgba(56, 189, 248, 0.20)', amp: 20, freq: 0.0068, vel: 0.0065, yBase: 0.76, phase: Math.PI * 1.0 },
   ];
 
   let t = 0;
@@ -205,7 +204,8 @@ function iniciarOceano() {
     ctx.fillStyle = topGlow;
     ctx.fillRect(0, 0, canvas.width, canvas.height * 0.3);
 
-    t++;
+    // incrementar t mais devagar para desacelerar o movimento geral
+    t += 0.35;
     oceanAnimation = requestAnimationFrame(desenhar);
   }
 

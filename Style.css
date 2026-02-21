@@ -673,10 +673,10 @@ body.theme-oceano .arrows-table td:first-child { color: rgba(56,189,248,0.35); }
 body.theme-oceano .divider { background: rgba(56,189,248,0.10); }
 body.theme-oceano .ranking-note { background: rgba(56,189,248,0.04); border-color: rgba(56,189,248,0.10); }
 body.theme-oceano .ranking-note-title { color: #38bdf8; }
-body.theme-oceano .ranking-note-text { color: rgba(56,189,248,0.50); }
+body.theme-oceano .ranking-note-text { color: rgba(16, 173, 235, 0.5); }
 body.theme-oceano .about-tag { color: rgba(56,189,248,0.35); }
 body.theme-oceano .about-name { color: #38bdf8; }
-body.theme-oceano .about-text { color: rgba(56,189,248,0.55); }
+body.theme-oceano .about-text { color: rgba(15, 170, 236, 0.55); }
 body.theme-oceano .about-link { background: rgba(56,189,248,0.06); border-color: rgba(56,189,248,0.15); color: rgba(56,189,248,0.60); }
 body.theme-oceano .about-link:hover { background: rgba(56,189,248,0.12); color: #38bdf8; }
 body.theme-oceano footer { border-top-color: rgba(56,189,248,0.08); color: rgba(56,189,248,0.25); }
