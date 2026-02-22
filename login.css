@@ -278,3 +278,9 @@ body.theme-oceano .register-link { color: rgba(56,189,248,0.65); }
 body.theme-oceano .register-link a { color: #38bdf8; }
 body.theme-oceano .btn-login-nav { border-color: rgba(56,189,248,0.35); color: #38bdf8; }
 body.theme-oceano .btn-login-nav:hover { background: #38bdf8; color: #051525; }
+.form-msg {
+  font-size: 0.80rem;
+  margin-top: 10px;
+  min-height: 18px;
+  text-align: center;
+}
