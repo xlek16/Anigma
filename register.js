@@ -75,6 +75,26 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     return;
   }
 
+  // Verifica se o username já existe (evita duplicados no ranking)
+  try {
+    const { data: existing, error: existErr } = await window.supabaseClient
+      .from('profiles')
+      .select('id')
+      .eq('username', username)
+      .limit(1);
+
+    if (existErr) {
+      // se houver erro de leitura, log e continuar (não bloqueia o signup)
+      console.warn('Erro ao verificar username existente:', existErr);
+    } else if (existing && existing.length > 0) {
+      msg.textContent = 'Este username ja esta a ser usado. Escolhe outro.';
+      msg.style.color = '#f87171';
+      return;
+    }
+  } catch (checkEx) {
+    console.error('Erro ao verificar username:', checkEx);
+  }
+
   const usernameRegex = /^[A-Za-z0-9_]+( [A-Za-z0-9_]+)*$/;
 
   if (!usernameRegex.test(username)) {
@@ -122,21 +142,10 @@ document.getElementById('registerForm').addEventListener('submit', async functio
       return;
     }
 
-    const { error: profileError } = await window.supabaseClient
-      .from('profiles')
-      .insert([
-        {
-          id: data.user.id,
-          username: username,
-          created_at: new Date()
-        }
-      ]);
-
-    if (profileError) {
-      msg.textContent = 'Conta criada, mas erro ao guardar username.';
-      msg.style.color = '#f87171';
-      return;
-    }
+    // Nota: não inserimos em `profiles` aqui porque o utilizador pode ainda
+    // não ter sessão activa (confirmação de email) e a inserção client-side
+    // falha com RLS. A criação do profile é feita no primeiro login em
+    // `auth.js` (lazy creation) onde a sessão está activa.
 
   } catch (err) {
     msg.textContent = 'Erro inesperado: ' + err.message;
