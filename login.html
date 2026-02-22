@@ -12,10 +12,8 @@
   <link rel="stylesheet" href="login.css">
 </head>
 <body>
-      <div class="page-transition" id="pageTransition"></div>
-     <div class="sakura-container" id="sakuraContainer"></div>
-      <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
 
+  <div class="page-transition" id="pageTransition"></div>
   <div class="sakura-container" id="sakuraContainer"></div>
   <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
   <div class="bg-photo"></div>
@@ -25,7 +23,6 @@
   <header>
     <div class="logo-wrap">
       <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
-      
     </div>
     <div class="header-right">
       <a class="btn-nav" href="index.html">Jogar</a>
@@ -66,30 +63,32 @@
     </div>
   </header>
 
-  <!-- MAIN — card de login centrado -->
+  <!-- MAIN -->
   <main class="login-page">
     <div class="login-card">
 
       <h1>Login</h1>
 
-      <form class="login-form" action="#" method="post">
+      <form id="loginForm">
 
         <label class="input-box">
-          <input type="text" name="username" placeholder="Username" required>
-          <i class="bx bx-user"></i>
+          <input type="email" id="loginEmail" placeholder="Email" required>
+          <i class="bx bx-envelope"></i>
         </label>
 
         <label class="input-box">
-          <input type="password" name="password" placeholder="Password" required>
+          <input type="password" id="loginPassword" placeholder="Password" required>
           <i class="bx bx-lock"></i>
         </label>
 
         <div class="remember-forgot">
           <label class="remember">
-            <input type="checkbox" name="remember"> Remember me
+            <input type="checkbox"> Remember me
           </label>
           <a class="forgot" href="#">Forgot password?</a>
         </div>
+
+        <div id="loginMsg" class="form-msg"></div>
 
         <button type="submit" class="btn-submit">Login</button>
 
@@ -105,8 +104,12 @@
     &copy; 2025 ANIGMA
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js"></script>
+  <script src="login.js"></script>
   <script src="Tema.js"></script>
-  <script src="transitions.js"></script>
+  <script src="transicao.js"></script>
 
 </body>
 </html>
