@@ -680,3 +680,27 @@ body.theme-oceano .about-text { color: rgba(15, 170, 236, 0.55); }
 body.theme-oceano .about-link { background: rgba(56,189,248,0.06); border-color: rgba(56,189,248,0.15); color: rgba(56,189,248,0.60); }
 body.theme-oceano .about-link:hover { background: rgba(56,189,248,0.12); color: #38bdf8; }
 body.theme-oceano footer { border-top-color: rgba(56,189,248,0.08); color: rgba(56,189,248,0.25); }
+/* PAGE TRANSITIONS */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0e;
+  z-index: 9999;
+  pointer-events: none;
+  animation: fadeOut 0.5s ease forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+body {
+  animation: fadeIn 0.4s ease forwards;
+}

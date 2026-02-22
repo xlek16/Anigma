@@ -8,7 +8,7 @@ const TEMAS = {
 };
 
 const LOGO_BRANCA = 'Imagens/LogoSite/LogoSite.png';
-const LOGO_PRETA  = 'Imagens/LogoSite/LogoSitePreta.png';
+const LOGO_PRETA  = 'Imagens/LogoSite/LogoPreta.png';
 
 // APLICAR TEMA
 function setTheme(tema) {
