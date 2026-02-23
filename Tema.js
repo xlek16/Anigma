@@ -7,8 +7,12 @@ const TEMAS = {
   oceano: { label: 'Ocean',  classe: 'theme-oceano' },
 };
 
-const LOGO_BRANCA = 'Imagens/LogoSite/LogoSite.png';
-const LOGO_PRETA  = 'Imagens/LogoSite/LogoPreta.png';
+// Verifica se estamos dentro da pasta Jogos para ajustar o caminho da imagem
+const isGamePath = window.location.pathname.includes('/Jogos/');
+const pathPrefix = isGamePath ? '../' : '';
+
+const LOGO_BRANCA = pathPrefix + 'Imagens/LogoSite/LogoSite.png';
+const LOGO_PRETA  = pathPrefix + 'Imagens/LogoSite/LogoPreta.png';
 
 // APLICAR TEMA
 function setTheme(tema) {
@@ -26,15 +30,7 @@ function setTheme(tema) {
 
   document.getElementById('themeLabel').textContent = TEMAS[tema].label;
 
-  const menu   = document.getElementById('themeMenu');
-  const opcoes = document.querySelectorAll('.theme-option');
-  opcoes.forEach(op => op.classList.remove('active'));
-
-  const ativa = document.querySelector(`.theme-option[data-theme="${tema}"]`);
-  if (ativa) {
-    ativa.classList.add('active');
-    menu.insertBefore(ativa, menu.firstChild);
-  }
+  updateThemeMenu();
 
   if (tema === 'sakura') criarPetalas();
   if (tema === 'oceano') iniciarOceano();
@@ -43,6 +39,28 @@ function setTheme(tema) {
   closeThemeMenu();
 }
 
+function updateThemeMenu() {
+  const menu = document.getElementById('themeMenu');
+  if (!menu) return;
+
+  const temaAtual = localStorage.getItem('anigma_tema') || 'escuro';
+
+  menu.innerHTML = '';
+
+  Object.keys(TEMAS).forEach(temaId => {
+    const temaInfo = TEMAS[temaId];
+
+    const option = document.createElement('div');
+    option.className = 'theme-option';
+    option.dataset.theme = temaId;
+    option.onclick = () => setTheme(temaId);
+
+    if (temaId === temaAtual) option.classList.add('active');
+
+    option.innerHTML = `<span class="theme-dot"></span> ${temaInfo.label}`;
+    menu.appendChild(option);
+  });
+}
 // MENU
 function toggleThemeMenu() {
   document.getElementById('themeMenu').classList.toggle('open');
@@ -223,4 +241,5 @@ function pararOceano() {
 window.onload = function () {
   const temaGuardado = localStorage.getItem('anigma_tema') || 'escuro';
   setTheme(temaGuardado);
+  updateThemeMenu();
 };

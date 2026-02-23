@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIGMA — Perfil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="perfil.css">
+</head>
+<body>
+
+  <div class="page-transition" id="pageTransition"></div>
+  <div class="sakura-container" id="sakuraContainer"></div>
+  <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-wrap">
+      <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
+    </div>
+    <div class="header-right">
+      <a class="btn-nav" href="index.html">Jogar</a>
+      <a class="btn-nav" href="ranking.html">Ranking</a>
+
+      <div class="theme-wrap" id="themeWrap">
+        <button class="btn-theme" onclick="toggleThemeMenu()">
+          <span class="theme-indicator"></span>
+          <span id="themeLabel">Dark</span>
+          &#9662;
+        </button>
+        <div class="theme-menu" id="themeMenu"></div>
+      </div>
+
+      <div class="header-sep"></div>
+
+      <a class="btn-nav" href="loja.html" id="btnLoja" style="display:none;">💎 Loja</a>
+
+      <div class="header-stats" id="headerStats" style="display:none;">
+        <div class="header-stat">
+          <span class="header-stat-icon">⭐</span>
+          <span class="header-stat-val" id="headerPontos">0</span>
+        </div>
+        <div class="header-stat">
+          <span class="header-stat-icon">💎</span>
+          <span class="header-stat-val" id="headerDiamantes">0</span>
+        </div>
+      </div>
+
+      <a class="btn-login" href="login.html" id="btnLogin">Login</a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="perfil-main">
+    
+    <!-- INFO DO UTILIZADOR -->
+    <div class="profile-header">
+      <div class="profile-avatar-wrap">
+        <img src="" alt="Avatar" id="pAvatar" class="profile-avatar-img">
+      </div>
+      <div class="profile-info">
+        <h1 id="pUsername">Carregando...</h1>
+        <div id="pTitle" class="profile-title-badge" style="display:none;"></div>
+        <div class="profile-stats-row">
+          <div class="p-stat"><span class="p-label">Nível</span> <span class="p-val" id="pLevel">0</span></div>
+          <div class="p-stat"><span class="p-label">Pontos</span> <span class="p-val" id="pPoints">0</span></div>
+          <div class="p-stat"><span class="p-label">Diamantes</span> <span class="p-val" id="pDiamonds">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- AVATARES DESBLOQUEADOS -->
+    <div class="section-label">Meus Avatares</div>
+    <p class="section-desc">Clica num avatar para o equipar.</p>
+    
+    <div id="avatarGrid">
+      <!-- JS vai preencher -->
+      <div class="loading-spinner"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CONQUISTAS -->
+    <div class="section-label">Conquistas & Títulos</div>
+    <p class="section-desc">Desbloqueia conquistas para ganhar diamantes e equipar títulos exclusivos.</p>
+
+    <div class="achievements-grid" id="achievementsGrid">
+      <!-- JS vai preencher -->
+    </div>
+
+  </main>
+
+  <footer>&copy; 2025 ANIGMA</footer>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js"></script>
+  <script src="Tema.js"></script>
+  <script src="transicao.js"></script>
+  <script src="avatars.js"></script>
+  <script src="achievements.js"></script>
+  <script src="perfil.js"></script>
+</body>
+</html>

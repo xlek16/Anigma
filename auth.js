@@ -10,16 +10,64 @@ function atualizarHeaderStats(diamantes, pontos) {
   if (hDiamantes) hDiamantes.textContent = diamantes ?? 0;
 }
 
+// ── Sistema de Níveis ─────────────────────────────────────────
+function calculateLevel(points) {
+  if (points < 0) return 1;
+  // Formula: Nível 1 = 0-99, Nível 2 = 100-299, etc.
+  return Math.floor(1 + (Math.sqrt(8 * (points / 100) + 1) - 1) / 2);
+}
+
+async function handleLevelUp(userId, pontosAntigos, pontosNovos) {
+  const nivelAntigo = calculateLevel(pontosAntigos);
+  const nivelNovo = calculateLevel(pontosNovos);
+
+  if (nivelNovo > nivelAntigo) {
+      const niveisSubidos = nivelNovo - nivelAntigo;
+      const diamantesGanhos = niveisSubidos * 10; // Recompensa: 10 diamantes por nível
+
+      try {
+          const { data: profile, error: fetchError } = await window.supabaseClient
+              .from('profiles')
+              .select('diamantes')
+              .eq('id', userId)
+              .single();
+          
+          if (fetchError) throw fetchError;
+
+          const { error: updateError } = await window.supabaseClient
+              .from('profiles')
+              .update({ 
+                  level: nivelNovo,
+                  diamantes: (profile.diamantes || 0) + diamantesGanhos
+              })
+              .eq('id', userId);
+
+          if (updateError) throw updateError;
+
+          // Atraso para não colidir com o alerta de recompensas do jogo
+          setTimeout(() => {
+            alert(`Subiste para o Nível ${nivelNovo}! Ganhaste 💎 ${diamantesGanhos} diamantes!`);
+          }, 1500);
+      } catch (e) {
+          console.error("Erro ao processar subida de nível:", e);
+      }
+  }
+}
+
 // ── Atualizar o header consoante sessao ───────────────────────
 async function atualizarHeader(session) {
-  const btnLogin = document.getElementById('btnLogin');
+  let btnLogin = document.getElementById('btnLogin');
   const btnLoja  = document.getElementById('btnLoja');
   const hStats   = document.getElementById('headerStats');
 
   if (!session) {
     if (btnLogin) {
       btnLogin.style.display = 'inline-flex';
-      btnLogin.href          = 'login.html';
+      
+      // Ajusta o link dependendo se estamos na raiz ou dentro da pasta Jogos
+      const isGamePage = window.location.pathname.includes('/Jogos/');
+      btnLogin.href    = isGamePage ? '../login.html' : 'login.html';
+
       btnLogin.innerHTML     = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -35,24 +83,83 @@ async function atualizarHeader(session) {
   }
 
   try {
-    const { data: profile } = await window.supabaseClient
+    let { data: profile } = await window.supabaseClient
       .from('profiles')
-      .select('username, diamantes, pontos_totais')
+      .select('id, username, diamantes, pontos_totais, unlocked_themes, avatar_url, unlocked_achievements, level')
       .eq('id', session.user.id)
       .single();
 
-    const username = profile?.username || session.user.email?.split('@')[0] || 'User';
+    // ── ATRIBUIR RECOMPENSAS PENDENTES (do modo convidado) ──
+    const pendingRewardsJSON = localStorage.getItem('anigma_pending_rewards');
+    if (pendingRewardsJSON && profile) {
+      try {
+        const pendingRewards = JSON.parse(pendingRewardsJSON);
+        localStorage.removeItem('anigma_pending_rewards'); // Atribuir só uma vez
+
+        const novosDiamantes = (profile.diamantes || 0) + pendingRewards.diamantes;
+        const novosPontos = (profile.pontos_totais || 0) + pendingRewards.pontos;
+
+        const { data: updatedProfile, error: updateError } = await window.supabaseClient
+          .from('profiles')
+          .update({
+            diamantes: novosDiamantes,
+            pontos_totais: novosPontos,
+          })
+          .eq('id', session.user.id)
+          .select()
+          .single();
+
+        if (updateError) throw updateError;
+
+        profile = updatedProfile; // Usar o perfil atualizado para o resto da função
+
+        // Verificar se subiu de nível com os pontos ganhos
+        await handleLevelUp(session.user.id, (profile.pontos_totais - pendingRewards.pontos), profile.pontos_totais);
+
+        // Alerta o utilizador sobre as recompensas recebidas
+        setTimeout(() => {
+          alert(`Recompensas da sua última partida foram adicionadas!\n\n💎 +${pendingRewards.diamantes} Diamantes\n⭐ +${pendingRewards.pontos} Pontos`);
+        }, 500);
+
+      } catch (e) {
+        console.error('Erro ao atribuir recompensas pendentes:', e);
+      }
+    }
+
+    // Guardar temas desbloqueados no localStorage para acesso rápido
+    if (profile && profile.unlocked_themes) {
+      localStorage.setItem('anigma_unlocked_themes', JSON.stringify(profile.unlocked_themes));
+    }
+
+    // 1. Tenta usar o username da BD ou dos metadados (registo)
+    let username = profile?.username || session.user.user_metadata?.username;
+
+    // 2. Se não houver username, usa o início do email como fallback
+    if (!username) {
+      username = (session.user.email || 'User').split('@')[0];
+    }
 
     if (btnLogin) {
+      // Clona o botão para remover event listeners do transicao.js
+      const novoBtn = btnLogin.cloneNode(true);
+      btnLogin.parentNode.replaceChild(novoBtn, btnLogin);
+      btnLogin = novoBtn;
+
+      // Usa o avatar do perfil (o perfil sabe qual está equipado)
+      const avatarUrl = profile?.avatar_url;
+
+      let avatarHtml = '';
+      if (avatarUrl && (avatarUrl.endsWith('.webm') || avatarUrl.endsWith('.mp4'))) {
+        avatarHtml = `<video src="${avatarUrl}" autoplay loop muted style="width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,0.2);"></video>`;
+      } else {
+        const imgUrl = avatarUrl || 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/avatar_default.png';
+        avatarHtml = `<img src="${imgUrl}" alt="Avatar" style="width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,0.2);">`;
+      }
+
       btnLogin.style.display = 'inline-flex';
       btnLogin.href          = 'perfil.html';
       btnLogin.innerHTML     = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             style="width:14px;height:14px;">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
+        ${avatarHtml}
         ${username}
         <span style="font-size:0.7rem;opacity:0.5;">▾</span>`;
       btnLogin.onclick = function (e) {
@@ -66,6 +173,11 @@ async function atualizarHeader(session) {
       hStats.style.display = 'flex';
       // Usar pontos_totais para o header — nunca pontos_db que é só da partida
       atualizarHeaderStats(profile?.diamantes ?? 0, profile?.pontos_totais ?? 0);
+    }
+
+    // Verificar conquistas passivas (nível, diamantes, etc)
+    if (typeof verificarConquistas === 'function' && profile) {
+      verificarConquistas(profile);
     }
 
   } catch (e) {
@@ -108,7 +220,10 @@ function mostrarMenuUser(session, username) {
 
   document.getElementById('btnLogout').onclick = async function () {
     await window.supabaseClient.auth.signOut();
-    sairDaPagina('index.html');
+    
+    // Verifica se está na pasta Jogos para redirecionar corretamente para o login
+    const isGamePage = window.location.pathname.includes('/Jogos/');
+    sairDaPagina(isGamePage ? '../login.html' : 'login.html');
   };
 
   setTimeout(() => {

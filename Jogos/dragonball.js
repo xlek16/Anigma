@@ -31,6 +31,70 @@ const PERSONAGENS = [
   { nome: 'Broly',       genero: 'Masculino', raca: 'Saiyajin',        afiliacao: 'Nenhuma',        altura: 198, primeiroArco: 9,  estado: 'Vivo',  img: '' },
   { nome: 'Pan',         genero: 'Feminino',  raca: 'Quarto-Saiyajin', afiliacao: 'Z Fighters',     altura: 115, primeiroArco: 8,  estado: 'Viva',  img: '' },
   { nome: 'Uub',         genero: 'Masculino', raca: 'Humano',          afiliacao: 'Z Fighters',     altura: 142, primeiroArco: 8,  estado: 'Vivo',  img: '' },
+   // DRAGON BALL CLÁSSICO
+{ nome: 'Oolong', genero: 'Masculino', raca: 'Metamorfo', afiliacao: 'Nenhuma', altura: 115, primeiroArco: 1, estado: 'Vivo', img: '' },
+{ nome: 'Puar', genero: 'Feminino', raca: 'Metamorfo', afiliacao: 'Nenhuma', altura: 90, primeiroArco: 1, estado: 'Viva', img: '' },
+{ nome: 'Mestre Kame', genero: 'Masculino', raca: 'Humano', afiliacao: 'Z Fighters', altura: 165, primeiroArco: 1, estado: 'Vivo', img: '' },
+{ nome: 'Chi-Chi', genero: 'Feminino', raca: 'Humano', afiliacao: 'Z Fighters', altura: 163, primeiroArco: 1, estado: 'Viva', img: '' },
+{ nome: 'Yajirobe', genero: 'Masculino', raca: 'Humano', afiliacao: 'Z Fighters', altura: 165, primeiroArco: 2, estado: 'Vivo', img: '' },
+{ nome: 'Karin', genero: 'Masculino', raca: 'Deidade', afiliacao: 'Nenhuma', altura: 130, primeiroArco: 2, estado: 'Vivo', img: '' },
+{ nome: 'Kami-sama', genero: 'Masculino', raca: 'Namekuseijin', afiliacao: 'Nenhuma', altura: 190, primeiroArco: 6, estado: 'Morto', img: '' },
+{ nome: 'Mr. Popo', genero: 'Masculino', raca: 'Outro Mundo', afiliacao: 'Nenhuma', altura: 170, primeiroArco: 6, estado: 'Vivo', img: '' },
+{ nome: 'Pilaf', genero: 'Masculino', raca: 'Extraterrestre', afiliacao: 'Império Pilaf', altura: 120, primeiroArco: 1, estado: 'Vivo', img: '' },
+{ nome: 'Mai', genero: 'Feminino', raca: 'Humano', afiliacao: 'Império Pilaf', altura: 160, primeiroArco: 1, estado: 'Viva', img: '' },
+{ nome: 'Shu', genero: 'Masculino', raca: 'Antropomorfo', afiliacao: 'Império Pilaf', altura: 150, primeiroArco: 1, estado: 'Vivo', img: '' },
+{ nome: 'Tao Pai Pai', genero: 'Masculino', raca: 'Humano', afiliacao: 'Red Ribbon', altura: 178, primeiroArco: 3, estado: 'Vivo', img: '' },
+{ nome: 'General Red', genero: 'Masculino', raca: 'Humano', afiliacao: 'Red Ribbon', altura: 110, primeiroArco: 3, estado: 'Morto', img: '' },
+{ nome: 'Comandante Blue', genero: 'Masculino', raca: 'Humano', afiliacao: 'Red Ribbon', altura: 180, primeiroArco: 3, estado: 'Morto', img: '' },
+{ nome: 'Piccolo Daimaoh', genero: 'Masculino', raca: 'Namekuseijin', afiliacao: 'Nenhuma', altura: 220, primeiroArco: 6, estado: 'Morto', img: '' },
+
+// SAIYAJINS E RELACIONADOS
+
+{ nome: 'Rei Vegeta', genero: 'Masculino', raca: 'Saiyajin', afiliacao: 'Planeta Vegeta', altura: 190, primeiroArco: 8, estado: 'Morto', img: '' },
+{ nome: 'Bardock', genero: 'Masculino', raca: 'Saiyajin', afiliacao: 'Exército Saiyajin', altura: 180, primeiroArco: 8, estado: 'Morto', img: '' },
+{ nome: 'Gine', genero: 'Feminino', raca: 'Saiyajin', afiliacao: 'Exército Saiyajin', altura: 165, primeiroArco: 8, estado: 'Morta', img: '' },
+
+// NAMEK
+
+{ nome: 'Dende', genero: 'Masculino', raca: 'Namekuseijin', afiliacao: 'Terra', altura: 140, primeiroArco: 9, estado: 'Vivo', img: '' },
+{ nome: 'Nail', genero: 'Masculino', raca: 'Namekuseijin', afiliacao: 'Namek', altura: 210, primeiroArco: 9, estado: 'Morto', img: '' },
+{ nome: 'Rei Cold', genero: 'Masculino', raca: 'Frost Demon', afiliacao: 'Frieza Force', altura: 210, primeiroArco: 11, estado: 'Morto', img: '' },
+
+// ANDROIDES
+
+{ nome: 'Android 16', genero: 'Masculino', raca: 'Androide', afiliacao: 'Nenhuma', altura: 226, primeiroArco: 13, estado: 'Morto', img: '' },
+{ nome: 'Android 19', genero: 'Masculino', raca: 'Androide', afiliacao: 'Red Ribbon', altura: 155, primeiroArco: 13, estado: 'Morto', img: '' },
+{ nome: 'Dr. Gero', genero: 'Masculino', raca: 'Humano', afiliacao: 'Red Ribbon', altura: 165, primeiroArco: 13, estado: 'Morto', img: '' },
+
+// BUU
+
+{ nome: 'Babidi', genero: 'Masculino', raca: 'Mago', afiliacao: 'Nenhuma', altura: 140, primeiroArco: 17, estado: 'Morto', img: '' },
+{ nome: 'Dabura', genero: 'Masculino', raca: 'Demônio', afiliacao: 'Babidi', altura: 190, primeiroArco: 17, estado: 'Morto', img: '' },
+{ nome: 'Supremo Kaioshin', genero: 'Masculino', raca: 'Kaioshin', afiliacao: 'Deuses', altura: 170, primeiroArco: 17, estado: 'Vivo', img: '' },
+
+// GT
+
+{ nome: 'Baby', genero: 'Masculino', raca: 'Tsufurujin', afiliacao: 'Nenhuma', altura: 180, primeiroArco: 20, estado: 'Morto', img: '' },
+{ nome: 'Super 17', genero: 'Masculino', raca: 'Androide', afiliacao: 'Nenhuma', altura: 185, primeiroArco: 21, estado: 'Morto', img: '' },
+{ nome: 'Omega Shenron', genero: 'Masculino', raca: 'Dragão', afiliacao: 'Nenhuma', altura: 230, primeiroArco: 22, estado: 'Morto', img: '' },
+
+// SUPER
+
+{ nome: 'Champa', genero: 'Masculino', raca: 'Deus da Destruição', afiliacao: 'Universo 6', altura: 180, primeiroArco: 25, estado: 'Vivo', img: '' },
+{ nome: 'Vados', genero: 'Feminino', raca: 'Anjo', afiliacao: 'Universo 6', altura: 210, primeiroArco: 25, estado: 'Viva', img: '' },
+{ nome: 'Zeno Sama', genero: 'Masculino', raca: 'Rei de Tudo', afiliacao: 'Multiverso', altura: 120, primeiroArco: 26, estado: 'Vivo', img: '' },
+{ nome: 'Daishinkan', genero: 'Masculino', raca: 'Anjo', afiliacao: 'Multiverso', altura: 230, primeiroArco: 26, estado: 'Vivo', img: '' },
+{ nome: 'Goku Black', genero: 'Masculino', raca: 'Kaioshin', afiliacao: 'Nenhuma', altura: 175, primeiroArco: 26, estado: 'Morto', img: '' },
+{ nome: 'Zamasu', genero: 'Masculino', raca: 'Kaioshin', afiliacao: 'Universo 10', altura: 175, primeiroArco: 26, estado: 'Morto', img: '' },
+{ nome: 'Hit', genero: 'Masculino', raca: 'Assassino', afiliacao: 'Universo 6', altura: 198, primeiroArco: 25, estado: 'Vivo', img: '' },
+{ nome: 'Toppo', genero: 'Masculino', raca: 'Extraterrestre', afiliacao: 'Pride Troopers', altura: 190, primeiroArco: 27, estado: 'Vivo', img: '' },
+{ nome: 'Caulifla', genero: 'Feminino', raca: 'Saiyajin', afiliacao: 'Universo 6', altura: 160, primeiroArco: 27, estado: 'Viva', img: '' },
+{ nome: 'Kale', genero: 'Feminino', raca: 'Saiyajin', afiliacao: 'Universo 6', altura: 155, primeiroArco: 27, estado: 'Viva', img: '' },
+{ nome: 'Cabba', genero: 'Masculino', raca: 'Saiyajin', afiliacao: 'Universo 6', altura: 165, primeiroArco: 25, estado: 'Vivo', img: '' },
+{ nome: 'Gamma 1', genero: 'Masculino', raca: 'Androide', afiliacao: 'Red Ribbon', altura: 180, primeiroArco: 28, estado: 'Vivo', img: '' },
+{ nome: 'Gamma 2', genero: 'Masculino', raca: 'Androide', afiliacao: 'Red Ribbon', altura: 180, primeiroArco: 28, estado: 'Morto', img: '' },
+{ nome: 'Dr. Hedo', genero: 'Masculino', raca: 'Humano', afiliacao: 'Red Ribbon', altura: 165, primeiroArco: 28, estado: 'Vivo', img: '' },
+{ nome: 'Cell Max', genero: 'Masculino', raca: 'Androide', afiliacao: 'Red Ribbon', altura: 300, primeiroArco: 28, estado: 'Morto', img: '' },
 ];
 
 const ARCOS = {
@@ -40,18 +104,19 @@ const ARCOS = {
   10: 'Battle of Gods', 11: 'Universe 6', 12: 'Tournament of Power',
 };
 
-const PONTOS_INICIAIS  = 150;
+const PONTOS_INICIAIS  = 300;
 const CUSTO_TENTATIVA  = 2;
-const CUSTO_DICA       = 5;
+const CUSTO_DICA       = 20;
 const DICAS_GRATIS     = 3;
 const TENTATIVAS_DICAS = 10;
+const MAX_TENTATIVAS   = 50;
 
 let estado = {
   personagemSecretoIdx: 0,
-  pontos:               PONTOS_INICIAIS, // pontos desta partida (começa 150, desce)
-  diamantes:            0,               // total diamantes do user no DB
-  pontosTotais:         0,               // total pontos acumulados do user no DB
-  diamantesPendentes:   0,               // diamantes ganhos nesta partida, nao claimed
+  pontos:               PONTOS_INICIAIS, 
+  diamantes:            0,               
+  pontosTotais:         0,              
+  diamantesPendentes:   0,               
   tentativas:           0,
   jogoTerminado:        false,
   claimFeito:           false,
@@ -70,9 +135,42 @@ async function carregarProgresso() {
   try {
     const { data: { session } } = await window.supabaseClient.auth.getSession();
     sessaoAtiva = session;
-    if (!session) return;
 
     const hoje = new Date().toISOString().split('T')[0];
+
+    // ── MODO CONVIDADO (Sem Login) ────────────────────────────
+    if (!session) {
+      const localData = localStorage.getItem('anigma_dragonball_save');
+      if (localData) {
+        const data = JSON.parse(localData);
+        // Só carrega se for do mesmo dia
+        if (data.data === hoje) {
+          estado.pontos             = data.pontos;
+          estado.tentativas         = data.tentativas;
+          estado.jogoTerminado      = data.jogoTerminado;
+          estado.diamantesPendentes = data.diamantesPendentes || 0;
+          estado.palpitesDados      = data.palpites || [];
+          estado.claimFeito         = data.claimFeito || false;
+
+          // Renderizar palpites
+          const secreto = PERSONAGENS[estado.personagemSecretoIdx];
+          estado.palpitesDados.forEach(nome => {
+            const p = PERSONAGENS.find(x => x.nome === nome);
+            if (p) renderizarLinha(p, secreto, p.nome === secreto.nome, false);
+          });
+
+          if (estado.jogoTerminado) {
+            const ganhou = estado.palpitesDados.includes(secreto.nome);
+            mostrarResultado(ganhou, !estado.claimFeito);
+          }
+        } else {
+          // Dia diferente, limpa save antigo
+          localStorage.removeItem('anigma_dragonball_save');
+        }
+      }
+      return;
+    }
+    // ──────────────────────────────────────────────────────────
 
     const { data } = await window.supabaseClient
       .from('profiles')
@@ -133,8 +231,23 @@ async function carregarProgresso() {
 // GUARDAR PROGRESSO (so estado da partida, NAO totais)
 // ============================================================
 async function guardarProgresso() {
-  if (!sessaoAtiva) return;
   const hoje = new Date().toISOString().split('T')[0];
+
+  // Se não tiver login, guarda no navegador
+  if (!sessaoAtiva) {
+    const saveState = {
+      data:               hoje,
+      pontos:             estado.pontos,
+      tentativas:         estado.tentativas,
+      jogoTerminado:      estado.jogoTerminado,
+      palpites:           estado.palpitesDados,
+      diamantesPendentes: estado.diamantesPendentes,
+      claimFeito:         estado.claimFeito
+    };
+    localStorage.setItem('anigma_dragonball_save', JSON.stringify(saveState));
+    return;
+  }
+
   try {
     await window.supabaseClient.from('profiles').update({
       pontos_db:      estado.pontos,
@@ -152,7 +265,7 @@ async function guardarProgresso() {
 // CLAIM — somar ao pontos_totais e diamantes, nunca substituir
 // ============================================================
 function mostrarBotaoClaim(diamantesGanhos) {
-  if (!sessaoAtiva || estado.claimFeito) return;
+  if (estado.claimFeito) return;
 
   const resultEl = document.getElementById('gameResult');
   if (!resultEl) return;
@@ -167,6 +280,34 @@ function mostrarBotaoClaim(diamantesGanhos) {
   btn.className = 'btn-claim';
   btn.innerHTML = `💎 Receber ${diamantesGanhos} Diamantes · ⭐ +${pontosFinais} Pontos`;
 
+  // Se for convidado, mostra mensagem e manda para login
+  if (!sessaoAtiva) {
+    btn.innerHTML = `
+      <div>💎 ${diamantesGanhos} Diamantes · ⭐ ${pontosFinais} Pontos</div>
+      <div style="font-size:0.65rem; font-weight:400; opacity:0.9; margin-top:2px;">Só pode dar claim se tiver uma conta</div>
+    `;
+    btn.style.flexDirection = 'column';
+    btn.style.gap = '2px';
+    btn.onclick = function () {
+      // Guardar recompensas para atribuir após login/registo
+      const pendingRewards = {
+        diamantes: diamantesGanhos,
+        pontos:    pontosFinais,
+      };
+      localStorage.setItem('anigma_pending_rewards', JSON.stringify(pendingRewards));
+
+      // Mudar o texto do resultado para informar o utilizador
+      const resultTextEl = document.getElementById('resultText');
+      if (resultTextEl) {
+        resultTextEl.innerHTML = `As tuas recompensas (💎 ${diamantesGanhos} e ⭐ ${pontosFinais}) foram guardadas! <br><strong>Cria uma conta ou faz login para as receber.</strong>`;
+      }
+      this.textContent = 'Criar Conta para Receber';
+      this.onclick = () => sairDaPagina('../register.html');
+    };
+    resultEl.appendChild(btn);
+    return;
+  }
+
   btn.onclick = async function () {
     if (estado.claimFeito) return;
     estado.claimFeito = true;
@@ -178,15 +319,26 @@ function mostrarBotaoClaim(diamantesGanhos) {
       const novosDiamantes = estado.diamantes    + diamantesGanhos;
       const novosPontos    = estado.pontosTotais + pontosFinais;
 
-      const { error } = await window.supabaseClient.from('profiles').update({
+      const { data: updatedProfile, error } = await window.supabaseClient.from('profiles').update({
         diamantes:     novosDiamantes, // total diamantes acumulado
         pontos_totais: novosPontos,    // total pontos acumulado
         claim_feito:   true,
-      }).eq('id', sessaoAtiva.user.id);
+      }).eq('id', sessaoAtiva.user.id).select().single();
 
       if (error) throw error;
 
       // Atualizar estado local
+      if (typeof handleLevelUp === 'function') {
+        await handleLevelUp(sessaoAtiva.user.id, estado.pontosTotais, novosPontos);
+      }
+
+      // Verificar conquistas
+      if (typeof verificarConquistas === 'function') {
+        // Criar objeto perfil temporário para verificação
+        const perfilTemp = { id: sessaoAtiva.user.id, diamantes: novosDiamantes, pontos_totais: novosPontos, unlocked_achievements: updatedProfile.unlocked_achievements, level: updatedProfile.level };
+        verificarConquistas(perfilTemp);
+      }
+
       estado.diamantes          = novosDiamantes;
       estado.pontosTotais       = novosPontos;
       estado.diamantesPendentes = 0;
@@ -366,8 +518,13 @@ async function submeterPalpite() {
   inputEl.value = '';
   suggestionsEl.classList.remove('open');
 
-  if (correto) await terminarJogo(true);
-  else await guardarProgresso();
+  if (correto) {
+    await terminarJogo(true);
+  } else if (estado.tentativas >= MAX_TENTATIVAS) {
+    await terminarJogo(false);
+  } else {
+    await guardarProgresso();
+  }
 }
 
 // ============================================================
@@ -432,13 +589,13 @@ function verificarDiamantes(genero, raca, afil, altura, arco, estadoC, acertou) 
 
   if (!estado.primeiroAmarelo && (genero || raca || afil || estadoC || altura || arco)) {
     estado.primeiroAmarelo = true;
-    ganhou += 5;
+    ganhou += 10;
   }
 
   if (acertou && !estado.primeiroVerde) {
     estado.primeiroVerde = true;
-    ganhou += 10;
-    const bonus = Math.max(0, 20 - estado.tentativas * 2);
+    ganhou += 25;
+    const bonus = Math.max(0, 25 - estado.tentativas * 2);
     ganhou += bonus;
   }
 
@@ -517,7 +674,7 @@ function mostrarResultado(ganhou, mostrarClaim = true) {
   if (inputEl)   inputEl.disabled   = true;
   if (btnSubmit) btnSubmit.disabled = true;
 
-  if (mostrarClaim && estado.diamantesPendentes > 0 && !estado.claimFeito && sessaoAtiva) {
+  if (mostrarClaim && estado.diamantesPendentes > 0 && !estado.claimFeito) {
     mostrarBotaoClaim(estado.diamantesPendentes);
   }
 }

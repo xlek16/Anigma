@@ -518,6 +518,12 @@ footer {
 
 .theme-option:hover { background: rgba(255,255,255,0.06); color: #ffffff; }
 .theme-option.active { color: #ffffff; }
+.theme-option.locked {
+  color: rgba(255,255,255,0.25);
+  cursor: not-allowed;
+  justify-content: space-between;
+}
+.theme-option.locked:hover { background: none; }
 
 .theme-dot {
   width: 8px;
@@ -573,8 +579,8 @@ body.theme-sakura .sakura-container { display: block; }
 body.theme-oceano .ocean-canvas { display: block; }
 
 /* TEMA CLARO */
-body.light-mode { background: #f0f0f0; color: #111111; }
-body.light-mode .bg-overlay { background: rgba(240,240,240,0.93); }
+body.light-mode { background: #d4d4d4; color: #111111; }
+body.light-mode .bg-overlay { background: rgba(220,220,220,0.95); }
 body.light-mode header { background: rgba(255,255,255,0.95); border-bottom: 1px solid #ddd; }
 body.light-mode .btn-nav { border-color: #ccc; color: #444; }
 body.light-mode .btn-nav:hover,
