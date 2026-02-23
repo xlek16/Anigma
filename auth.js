@@ -1,3 +1,8 @@
+if (typeof supabase === 'undefined') {
+  console.error('supabase nao carregou!');
+} else {
+  verificarSessao();
+}
 async function verificarSessao() {
   // usa a instância `supabaseClient` criada em `supabase.js`
   const { data: { session } } = await window.supabaseClient.auth.getSession();
@@ -85,5 +90,3 @@ async function logout() {
   await window.supabaseClient.auth.signOut();
   window.location.href = 'index.html';
 }
-
-verificarSessao();

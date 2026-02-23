@@ -131,7 +131,13 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     });
 
     if (error) {
-      msg.textContent = error.message;
+      console.error('SignUp error:', error);
+      // Mensagem amigável para o utilizador e dica para o administrador
+      if (error.message && error.message.toLowerCase().includes('confirmation')) {
+        msg.textContent = 'Erro ao enviar email de confirmação. Verifique as configurações SMTP no painel Supabase.';
+      } else {
+        msg.textContent = error.message || 'Erro no registo.';
+      }
       msg.style.color = '#f87171';
       return;
     }
