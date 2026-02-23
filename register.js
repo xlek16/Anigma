@@ -127,7 +127,12 @@ document.getElementById('registerForm').addEventListener('submit', async functio
   try {
     const { data, error } = await window.supabaseClient.auth.signUp({
       email: email,
-      password: password
+      password: password,
+      options: {
+        data: {
+          username: username
+        }
+      }
     });
 
     if (error) {

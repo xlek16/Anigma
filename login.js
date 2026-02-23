@@ -35,7 +35,8 @@ document.getElementById('loginForm').addEventListener('submit', async function (
   msg.textContent = 'Login feito com sucesso!';
   msg.style.color = '#4ade80';
 
-  // Redireciona para a pagina principal
+  // Redireciona para a página de perfil (configurações) após login bem-sucedido
+  // (antes ia para index.html — muda para onde o utilizador espera)
   setTimeout(function () {
     window.location.href = 'index.html';
   }, 800);

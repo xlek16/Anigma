@@ -3,172 +3,222 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!DOCTYPE html>
-  <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANIGMA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Style.css">
-  </head>
-  <body>
-    <div class="page-transition" id="pageTransition"></div>
-    <div class="sakura-container" id="sakuraContainer"></div>
-    <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
-    <div class="bg-photo"></div>
-    <div class="bg-overlay"></div>
+  <title>ANIGMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <div class="page-transition" id="pageTransition"></div>
+  <div class="sakura-container" id="sakuraContainer"></div>
+  <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
 
-    <header>
-      <div class="logo-wrap">
-        <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
-      </div>
-      <div class="header-right">
-        <a class="btn-nav active" href="index.html">Jogar</a>
-        <a class="btn-nav" href="ranking.html">Ranking</a>
+  <header>
+    <div class="logo-wrap">
+      <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
+    </div>
+    <div class="header-right">
+      <a class="btn-nav active" href="index.html">Jogar</a>
+      <a class="btn-nav" href="ranking.html">Ranking</a>
 
-        <div class="theme-wrap" id="themeWrap">
-          <button class="btn-theme" onclick="toggleThemeMenu()">
-            <span class="theme-indicator"></span>
-            <span id="themeLabel">Dark</span>
-            &#9662;
-          </button>
-          <div class="theme-menu" id="themeMenu">
-            <div class="theme-option" data-theme="escuro" onclick="setTheme('escuro')">
-              <span class="theme-dot"></span> Dark
-            </div>
-            <div class="theme-option" data-theme="claro" onclick="setTheme('claro')">
-              <span class="theme-dot"></span> Light
-            </div>
-            <div class="theme-option" data-theme="sakura" onclick="setTheme('sakura')">
-              <span class="theme-dot"></span> Sakura
-            </div>
-            <div class="theme-option" data-theme="oceano" onclick="setTheme('oceano')">
-              <span class="theme-dot"></span> Ocean
-            </div>
+      <div class="theme-wrap" id="themeWrap">
+        <button class="btn-theme" onclick="toggleThemeMenu()">
+          <span class="theme-indicator"></span>
+          <span id="themeLabel">Dark</span>
+          &#9662;
+        </button>
+        <div class="theme-menu" id="themeMenu">
+          <div class="theme-option" data-theme="escuro" onclick="setTheme('escuro')">
+            <span class="theme-dot"></span> Dark
+          </div>
+          <div class="theme-option" data-theme="claro" onclick="setTheme('claro')">
+            <span class="theme-dot"></span> Light
+          </div>
+          <div class="theme-option" data-theme="sakura" onclick="setTheme('sakura')">
+            <span class="theme-dot"></span> Sakura
+          </div>
+          <div class="theme-option" data-theme="oceano" onclick="setTheme('oceano')">
+            <span class="theme-dot"></span> Ocean
           </div>
         </div>
-
-        <div class="header-sep"></div>
-
-        <a class="btn-login" href="login.html">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-          Login
-        </a>
-      </div>
-    </header>
-
-    <main>
-
-      <div class="anime-section-title">ANIGMA</div>
-
-      <div class="anime-grid">
-
-        <a class="anime-card" href="#">
-          <div class="anime-thumb">
-            <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/dragonball.webp" alt="Dragon Ball">
-          </div>
-          <div class="anime-name">Dragon Ball</div>
-        </a>
-
-        <a class="anime-card" href="#">
-          <div class="anime-thumb">
-            <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/OnePiece.webp" alt="One Piece">
-          </div>
-          <div class="anime-name">One Piece</div>
-        </a>
-
-        <a class="anime-card" href="#">
-          <div class="anime-thumb">
-            <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JJk.webp" alt="Jujutsu Kaisen">
-          </div>
-          <div class="anime-name">Jujutsu Kaisen</div>
-        </a>
-
-        <a class="anime-card" href="#">
-          <div class="anime-thumb">
-            <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/Naruto.webp" alt="Naruto">
-          </div>
-          <div class="anime-name">Naruto</div>
-        </a>
-
       </div>
 
-      <div class="divider"></div>
+      <div class="header-sep"></div>
 
-      <div class="section-label">Como Jogar</div>
+      <a class="btn-login" href="login.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Login
+      </a>
+    </div>
+  </header>
 
-      <p class="rules-intro">
-        Escolhe um anime e tenta adivinhar o personagem secreto do dia.
-        A cada tentativa recebes pistas visuais sobre os atributos do personagem.
-        Usa-as para chegar a resposta certa com o maximo de pontos possivel.
-      </p>
+  <main>
+    <div class="anime-section-title">ANIGMA</div>
 
-    </main>
-    <footer>
-      &copy; 2025 ANIGMA
-    </footer>
+    <div class="anime-grid">
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/dragonball.webp" alt="Dragon Ball"></div><div class="anime-name">Dragon Ball</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/OnePiece.webp" alt="One Piece"></div><div class="anime-name">One Piece</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JJk.webp" alt="Jujutsu Kaisen"></div><div class="anime-name">Jujutsu Kaisen</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/Naruto.webp" alt="Naruto"></div><div class="anime-name">Naruto</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JOJO.webp" alt="JoJo"></div><div class="anime-name">JoJo</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/HXH.webp" alt="Hunter x Hunter"></div><div class="anime-name">Hunter x Hunter</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/Ds.webp" alt="Demon Slayer"></div><div class="anime-name">Demon Slayer</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/AOT.webp" alt="Attack on Titan"></div><div class="anime-name">Attack on Titan</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/chainsawman.webp" alt="Chainsaw Man"><span class="badge-new">New</span></div><div class="anime-name">Chainsaw Man</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/sl.webp" alt="Solo Leveling"><span class="badge-new">New</span></div><div class="anime-name">Solo leveling</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/frieren.webp" alt="Sousou no Frieren"><span class="badge-new">New</span></div><div class="anime-name">Sousou no Frieren</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/FM.webp" alt="Fullmetal Alchemist"><span class="badge-new">New</span></div><div class="anime-name">Fullmetal Alchemist</div></a>
+    </div>
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
-  <script src="supabase.js"></script>
-  <script src="auth.js"></script>
-  <script src="register.js"></script>
-  <script src="Tema.js"></script>
-  <script src="transicao.js"></script>
-  </body>
-  </html>
+    <div class="divider"></div>
+
+    <div class="section-label">Como Jogar</div>
+    <p class="rules-intro">
+      Escolhe um anime e tenta adivinhar o personagem secreto do dia.
+      A cada tentativa recebes pistas visuais sobre os atributos do personagem.
+      Usa-as para chegar a resposta certa com o maximo de pontos possivel.
+    </p>
+
+    <div class="rules-points">
+      <div class="rule-card">
+        <div class="rule-card-title">100 pontos</div>
+        <div class="rule-card-desc">Cada ronda comeca com 100 pontos no marcador</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-title">-2 por tentativa errada</div>
+        <div class="rule-card-desc">Cada palpite incorreto remove 2 pontos da pontuacao</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-card-title">Dicas a partir da 10.a tentativa</div>
+        <div class="rule-card-desc">Cada dica custa 5 pontos. Usa com cuidado</div>
+      </div>
+    </div>
+
+    <div class="colors-label">O que significa cada cor</div>
+    <div class="colors-grid">
+      <div class="color-block c-green">
+        <div class="color-block-title">Verde - Correto</div>
+        <div class="color-block-desc">O atributo e exatamente igual ao do personagem secreto.</div>
+      </div>
+      <div class="color-block c-yellow">
+        <div class="color-block-title">Amarelo - Proximo</div>
+        <div class="color-block-desc">Perto do valor correto. Em campos numericos a diferenca e de ate 10 cm.</div>
+      </div>
+      <div class="color-block c-red">
+        <div class="color-block-title">Vermelho - Errado</div>
+        <div class="color-block-desc">O atributo e diferente do personagem secreto.</div>
+      </div>
+    </div>
+
+    <div class="arrows-label">O que significam as setas</div>
+    <div class="arrows-table-wrap">
+      <table class="arrows-table">
+        <thead>
+          <tr>
+            <th>Atributo</th>
+            <th>O que ves</th>
+            <th>O que significa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Altura</td>
+            <td><span class="chip yellow">180 cm <span class="arrow-up">&#9650;</span></span></td>
+            <td>O personagem secreto e <strong>mais alto</strong> - seta para cima = maior.</td>
+          </tr>
+          <tr>
+            <td>Altura</td>
+            <td><span class="chip yellow">180 cm <span class="arrow-down">&#9660;</span></span></td>
+            <td>O personagem secreto e <strong>mais baixo</strong> - seta para baixo = menor.</td>
+          </tr>
+          <tr>
+            <td>Primeiro Arco</td>
+            <td><span class="chip yellow">Arco da Liberdade <span class="arrow-down">&#9660;</span></span></td>
+            <td>O arco correto aparece <strong>antes</strong> na historia - mais cedo na linha temporal.</td>
+          </tr>
+          <tr>
+            <td>Primeiro Arco</td>
+            <td><span class="chip yellow">Arco da Liberdade <span class="arrow-up">&#9650;</span></span></td>
+            <td>O arco correto aparece <strong>depois</strong> na historia - mais tarde na linha temporal.</td>
+          </tr>
+          <tr>
+            <td>Qualquer campo</td>
+            <td><span class="chip green">Konoha</span></td>
+            <td>Sem seta = <strong>completamente correto</strong>. A celula fica verde.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ranking-note">
+      <div class="ranking-note-icon">&#127942;</div>
+      <div class="ranking-note-body">
+        <div class="ranking-note-title">O Ranking e exclusivo para utilizadores com conta</div>
+        <div class="ranking-note-text">
+          Podes jogar sem conta mas a tua pontuacao nao sera guardada nem aparecera na tabela de classificacao.
+        </div>
+        <a class="btn-login-inline" href="login.html">Criar conta / Entrar</a>
+      </div>
+    </div>
+
+    <div class="pontos-note">
+      <div class="pontos-note-icon">&#127919;</div>
+      <div class="ponto-note-body">
+        <div class="pontos-note-title">Pontos e Ranking</div>
+        <div class="pontos-note-text">
+          A pontuacao de cada jogador e calculada com base na sua performance em cada ronda. O ranking e atualizado diariamente. &#129351;
+        </div>
+        <a class="btn-Ranking" href="ranking.html">Ranking</a>
+      </div>
+    </div>
+
+    <div class="dinheiro-note">
+        <div class="dinheiro-note-icon">&#128142;</div>
+        <div class="dinheiro-note-body">
+          <div class="dinheiro-note-title">Dinheiro e Loja</div>
           <div class="dinheiro-note-text">
-            A completar cada Anigma dependendo de quantas tentativas e dicas usar vai receber um dinheiro especial no canto superior direito da sua tela com o emoji de &#128142;, esse dinheiro pode ser usado para comprar itens na loja do Anigma, como dicas extras, ou para personalizar o seu perfil. O dinheiro é atualizado após completar cada Anigma, então quanto melhor for a sua performance, mais dinheiro você ganha! &#128176;
+            A completar cada Anigma vai receber um dinheiro especial (&#128142;) que pode ser usado para comprar itens na loja, como dicas extras ou personalizar o perfil. &#128176;
           </div>
-          <a class="btn-Loja" href="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
-               fill="none" stroke="currentColor" stroke-width="2.5"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-          Loja
-        </a>
-         </div>
+          <a class="btn-Loja" href="loja.html">Loja</a>
         </div>
+    </div>
 
     <div class="divider"></div>
 
     <div class="about-wrap">
       <div class="about-photo">
-       <img src="Imagens/LogoSite/Imagem Borges/Borges.jpg" alt="Nome">
+       <img src="Imagens/LogoSite/Imagem Borges/Borges.jpg" alt="Borges">
       </div>
       <div class="about-content">
         <div class="about-tag">Criador do projeto</div>
         <div class="about-name">Borges Dev</div>
         <p class="about-text">
-          Olá! Se estás a ler isto, é porque tens interesse em saber quem está por trás do Anigma. Sou o Borges, e sou um apaixonado por animes e jogos , este site é o meu projeto onde tento combinar a minha paixão por animes e por jogos. O Anigma nasceu da minha vontade de criar e da minha vontade de mostrar o meu potencial para o mundo. Espero que se divirtam no site tanto quanto eu me diverti a criá-lo!
+          Olá! Sou o Borges, e sou um apaixonado por animes e jogos. O Anigma nasceu da minha vontade de criar e mostrar o meu potencial para o mundo. Espero que se divirtam!
         </p>
         <div class="about-links">
-          <a class="about-link" href="https://github.com/xlek16" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a class="about-link" href="#" target="_blank" rel="noopener noreferrer">Twitter / X</a>
-          <a class="about-link" href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="about-link" href="https://github.com/xlek16" target="_blank">GitHub</a>
+          <a class="about-link" href="#">Twitter / X</a>
+          <a class="about-link" href="#">Instagram</a>
         </div>
       </div>
     </div>
-
   </main>
 
   <footer>
     &copy; 2025 ANIGMA
   </footer>
 
-<script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
-<script src="supabase.js"></script>
-<script src="auth.js"></script>
-<script src="register.js"></script>
-<script src="Tema.js"></script>
-<script src="transicao.js"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js"></script>
+  <script src="Tema.js"></script>
+  <script src="transicao.js"></script>
 </body>
 </html>

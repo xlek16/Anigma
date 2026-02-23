@@ -13,13 +13,17 @@ async function verificarSessao() {
     // Passo 1: Criar o registo em `profiles` se não existir (lazy creation)
     const { data: existingProfile, error: checkError } = await window.supabaseClient
       .from('profiles')
-      .select('id')
+      .select('username')
       .eq('id', session.user.id)
       .single();
+
+    let dbUsername = null;
 
     if (checkError && checkError.code === 'PGRST116') {
       // Registo não existe, cria um novo
       const username = session.user.user_metadata?.username || session.user.email.split('@')[0];
+      dbUsername = username;
+
       const { error: insertError } = await window.supabaseClient
         .from('profiles')
         .insert({
@@ -32,10 +36,13 @@ async function verificarSessao() {
       } else {
         console.log('Profile criado com sucesso para:', username);
       }
+    } else if (existingProfile) {
+      dbUsername = existingProfile.username;
     }
 
     // Passo 2: Mostrar o botão Loja e menu de utilizador
-    const username = session.user.user_metadata?.username || 
+    const username = dbUsername || 
+                     session.user.user_metadata?.username || 
                      session.user.email?.split('@')[0] || 
                      'Utilizador';
     
