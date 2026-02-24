@@ -22,9 +22,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     titleEl.style.display = 'inline-block';
   }
 
+  // ── BARRA DE PROGRESSO ──
+  const currentLevel = profile.level || 1;
+  const totalPoints = profile.pontos_totais || 0;
+  
+  // Fórmula inversa da usada no auth.js (Base 500): Pontos = 250 * Nivel * (Nivel - 1)
+  const currentLevelBaseXP = 250 * currentLevel * (currentLevel - 1);
+  const nextLevelXP = 250 * (currentLevel + 1) * currentLevel;
+  const xpNeeded = nextLevelXP - currentLevelBaseXP;
+  const currentXP = totalPoints - currentLevelBaseXP;
+  const progressPercent = Math.min(100, Math.max(0, (currentXP / xpNeeded) * 100));
+
+  document.getElementById('pLevelFill').style.width = `${progressPercent}%`;
+  document.getElementById('pCurrentXP').textContent = currentXP.toLocaleString();
+  document.getElementById('pNextXP').textContent = xpNeeded.toLocaleString();
+  document.getElementById('pNextLevel').textContent = currentLevel + 1;
+
   document.getElementById('pLevel').textContent = profile.level || 1;
   document.getElementById('pPoints').textContent = (profile.pontos_totais || 0).toLocaleString();
   document.getElementById('pDiamonds').textContent = (profile.diamantes || 0).toLocaleString();
+  document.getElementById('pStreak').textContent = (profile.current_streak || 0);
   
   const currentAvatar = profile.avatar_url || 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/avatar_default.png';
   

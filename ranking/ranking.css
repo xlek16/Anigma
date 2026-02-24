@@ -1,7 +1,7 @@
 .ranking-main {
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 52px 24px 100px;
 }
 
 .ranking-header-title {
@@ -151,3 +151,24 @@ body.light-mode .ranking-row.top-2 { background: rgba(192, 192, 192, 0.15); }
 body.light-mode .ranking-row.top-3 { background: rgba(205, 127, 50, 0.15); }
 body.light-mode .loading-spinner { border-color: #eee; border-top-color: #333; }
 body.light-mode .ranking-empty { color: #999; }
+
+/* Header Stats (Correção visual para Pontos e Diamantes) */
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.header-stat { display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-right: 1px solid rgba(255,255,255,0.10); }
+.header-stat:last-child { border-right: none; }
+.header-stat-icon { font-size: 0.85rem; line-height: 1; }
+.header-stat-val  { font-size: 0.82rem; font-weight: 700; color: #ffffff; min-width: 20px; }
+
+body.light-mode .header-stats { background: #fff; border-color: #ddd; }
+body.light-mode .header-stat  { border-right-color: #eee; }
+body.light-mode .header-stat-val { color: #111; }
+body.theme-sakura .header-stats { background: rgba(249,168,212,0.08); border-color: rgba(249,168,212,0.20); }
+body.theme-oceano .header-stats { background: rgba(56,189,248,0.08); border-color: rgba(56,189,248,0.20); }

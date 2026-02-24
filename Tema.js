@@ -8,8 +8,9 @@ const TEMAS = {
 };
 
 // Verifica se estamos dentro da pasta Jogos para ajustar o caminho da imagem
-const isGamePath = window.location.pathname.includes('/Jogos/');
-const pathPrefix = isGamePath ? '../' : '';
+const path = window.location.pathname;
+const isSubFolder = path.includes('/Jogos/') || path.includes('/loja/') || path.includes('/ranking/');
+const pathPrefix = isSubFolder ? '../' : '';
 
 const LOGO_BRANCA = pathPrefix + 'Imagens/LogoSite/LogoSite.png';
 const LOGO_PRETA  = pathPrefix + 'Imagens/LogoSite/LogoPreta.png';

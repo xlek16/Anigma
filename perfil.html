@@ -25,7 +25,7 @@
     </div>
     <div class="header-right">
       <a class="btn-nav" href="index.html">Jogar</a>
-      <a class="btn-nav" href="ranking.html">Ranking</a>
+      <a class="btn-nav" href="ranking/ranking.html">Ranking</a>
 
       <div class="theme-wrap" id="themeWrap">
         <button class="btn-theme" onclick="toggleThemeMenu()">
@@ -38,7 +38,7 @@
 
       <div class="header-sep"></div>
 
-      <a class="btn-nav" href="loja.html" id="btnLoja" style="display:none;">💎 Loja</a>
+      <a class="btn-nav" href="loja/loja.html" id="btnLoja" style="display:none;">💎 Loja</a>
 
       <div class="header-stats" id="headerStats" style="display:none;">
         <div class="header-stat">
@@ -66,10 +66,17 @@
       <div class="profile-info">
         <h1 id="pUsername">Carregando...</h1>
         <div id="pTitle" class="profile-title-badge" style="display:none;"></div>
+        <div class="level-progress-container">
+          <div class="level-progress-bar">
+            <div class="level-progress-fill" id="pLevelFill" style="width: 0%"></div>
+          </div>
+          <div class="level-progress-text"><span id="pCurrentXP">0</span> / <span id="pNextXP">100</span> XP para Nível <span id="pNextLevel">2</span></div>
+        </div>
         <div class="profile-stats-row">
           <div class="p-stat"><span class="p-label">Nível</span> <span class="p-val" id="pLevel">0</span></div>
           <div class="p-stat"><span class="p-label">Pontos</span> <span class="p-val" id="pPoints">0</span></div>
           <div class="p-stat"><span class="p-label">Diamantes</span> <span class="p-val" id="pDiamonds">0</span></div>
+          <div class="p-stat"><span class="p-label">Streak</span> <span class="p-val" id="pStreak">0</span> <span style="font-size:0.8rem">🔥</span></div>
         </div>
       </div>
     </div>

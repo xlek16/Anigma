@@ -1054,3 +1054,25 @@ body.theme-oceano .user-menu-divider { background: rgba(56,189,248,0.10); }
   transform: translateY(2px);
   box-shadow: none;
  }
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.header-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-right: 1px solid rgba(255,255,255,0.10);
+}
+
+.header-stat:last-child { border-right: none; }
+
+.header-stat-icon { font-size: 0.85rem; line-height: 1; }
+.header-stat-val  { font-size: 0.82rem; font-weight: 700; color: #ffffff; min-width: 20px; }

@@ -151,7 +151,7 @@ async function carregarProgresso() {
           });
           if (estado.jogoTerminado) {
             const ganhou = estado.palpitesDados.includes(secreto.nome);
-            mostrarResultado(ganhou, !estado.claimFeito); // Nota: claim_feito não está separado por jogo no SQL original, assumindo reset diário
+            mostrarResultado(ganhou, !estado.claimFeito);
           }
         } catch (e) {
           console.warn('Erro ao restaurar palpites:', e);
@@ -257,7 +257,6 @@ function mostrarBotaoClaim(diamantesGanhos) {
       const novosDiamantes = estado.diamantes    + diamantesGanhos;
       const novosPontos    = estado.pontosTotais + pontosFinais;
 
-      // Primeiro, atualiza os pontos e diamantes
       const { data: updatedProfile, error } = await window.supabaseClient.from('profiles').update({
         diamantes:     novosDiamantes,
         pontos_totais: novosPontos,
@@ -265,14 +264,11 @@ function mostrarBotaoClaim(diamantesGanhos) {
 
       if (error) throw error;
 
-      // Depois, verifica se a nova pontuação total resultou numa subida de nível
       if (typeof handleLevelUp === 'function') {
         await handleLevelUp(sessaoAtiva.user.id, estado.pontosTotais, novosPontos);
       }
 
-      // Verificar conquistas
       if (typeof verificarConquistas === 'function') {
-        // Criar objeto perfil temporário para verificação
         const perfilTemp = { id: sessaoAtiva.user.id, diamantes: novosDiamantes, pontos_totais: novosPontos, unlocked_achievements: updatedProfile.unlocked_achievements, level: updatedProfile.level };
         verificarConquistas(perfilTemp);
       }
@@ -478,19 +474,36 @@ async function usarDica(num) {
   await guardarProgresso();
 }
 
-async function terminarJogo(ganhou) {
-  estado.jogoTerminado = true;
-  const secreto = PERSONAGENS[estado.personagemSecretoIdx];
+function mostrarResultado(ganhou, mostrarClaim = true) {
+  const secreto  = PERSONAGENS[estado.personagemSecretoIdx];
   const resultEl = document.getElementById('gameResult');
+  if (!resultEl) return;
+
   document.getElementById('resultIcon').textContent  = ganhou ? '🎉' : '😔';
   document.getElementById('resultTitle').textContent = ganhou ? 'Acertaste!' : 'Não foi desta...';
-  document.getElementById('resultText').textContent  = ganhou ? `Encontraste em ${estado.tentativas} tentativa(s) com ${Math.max(0, estado.pontos)} pontos!` : `O personagem era: ${secreto.nome}`;
-  document.getElementById('resultDiamonds').textContent = estado.diamantesPendentes > 0 ? `💎 +${estado.diamantesPendentes} diamantes para receber!` : '';
+  document.getElementById('resultText').textContent  = ganhou
+    ? `Encontraste em ${estado.tentativas} tentativa(s) com ${Math.max(0, estado.pontos)} pontos!`
+    : `O personagem era: ${secreto.nome}`;
+  document.getElementById('resultDiamonds').textContent = estado.diamantesPendentes > 0
+    ? `💎 +${estado.diamantesPendentes} diamantes para receber!`
+    : '';
+
   resultEl.style.display = 'block';
   resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  document.getElementById('searchInput').disabled = true;
-  document.querySelector('.btn-submit-guess').disabled = true;
-  if (estado.diamantesPendentes > 0 && !estado.claimFeito) mostrarBotaoClaim(estado.diamantesPendentes);
+
+  const inputEl   = document.getElementById('searchInput');
+  const btnSubmit = document.querySelector('.btn-submit-guess');
+  if (inputEl)   inputEl.disabled   = true;
+  if (btnSubmit) btnSubmit.disabled = true;
+
+  if (mostrarClaim && estado.diamantesPendentes > 0 && !estado.claimFeito) {
+    mostrarBotaoClaim(estado.diamantesPendentes);
+  }
+}
+
+async function terminarJogo(ganhou) {
+  estado.jogoTerminado = true;
+  mostrarResultado(ganhou, true);
   await guardarProgresso();
 }
 

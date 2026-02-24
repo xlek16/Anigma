@@ -13,8 +13,8 @@ function atualizarHeaderStats(diamantes, pontos) {
 // ── Sistema de Níveis ─────────────────────────────────────────
 function calculateLevel(points) {
   if (points < 0) return 1;
-  // Formula: Nível 1 = 0-99, Nível 2 = 100-299, etc.
-  return Math.floor(1 + (Math.sqrt(8 * (points / 100) + 1) - 1) / 2);
+  // Formula: Nível 1 = 0-499, Nível 2 = 500-1499, etc. (Base 500)
+  return Math.floor(1 + (Math.sqrt(8 * (points / 500) + 1) - 1) / 2);
 }
 
 async function handleLevelUp(userId, pontosAntigos, pontosNovos) {
@@ -60,13 +60,14 @@ async function atualizarHeader(session) {
   const btnLoja  = document.getElementById('btnLoja');
   const hStats   = document.getElementById('headerStats');
 
+  const path = window.location.pathname;
+  const isSubFolder = path.includes('/Jogos/') || path.includes('/loja/') || path.includes('/ranking/');
+  const prefix = isSubFolder ? '../' : '';
+
   if (!session) {
     if (btnLogin) {
       btnLogin.style.display = 'inline-flex';
-      
-      // Ajusta o link dependendo se estamos na raiz ou dentro da pasta Jogos
-      const isGamePage = window.location.pathname.includes('/Jogos/');
-      btnLogin.href    = isGamePage ? '../login.html' : 'login.html';
+      btnLogin.href    = prefix + 'login.html';
 
       btnLogin.innerHTML     = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -85,7 +86,7 @@ async function atualizarHeader(session) {
   try {
     let { data: profile } = await window.supabaseClient
       .from('profiles')
-      .select('id, username, diamantes, pontos_totais, unlocked_themes, avatar_url, unlocked_achievements, level')
+      .select('id, username, diamantes, pontos_totais, unlocked_themes, avatar_url, unlocked_achievements, level, last_claim_date, current_streak')
       .eq('id', session.user.id)
       .single();
 
@@ -126,6 +127,41 @@ async function atualizarHeader(session) {
       }
     }
 
+    // ── DAILY STREAK (Recompensa Diária) ──
+    const hoje = new Date().toISOString().split('T')[0];
+    
+    if (profile && profile.last_claim_date !== hoje) {
+      const ontem = new Date();
+      ontem.setDate(ontem.getDate() - 1);
+      const ontemStr = ontem.toISOString().split('T')[0];
+
+      let newStreak = 1;
+      // Se o último login foi ontem, aumenta o streak. Se não, reseta para 1.
+      if (profile.last_claim_date === ontemStr) {
+        newStreak = (profile.current_streak || 0) + 1;
+      }
+
+      // Recompensa: 50 base + 10 por dia de streak (Max: 200)
+      const reward = Math.min(200, 50 + (newStreak - 1) * 10);
+      const newDiamantes = (profile.diamantes || 0) + reward;
+
+      const { error: streakError } = await window.supabaseClient
+        .from('profiles')
+        .update({
+          last_claim_date: hoje,
+          current_streak: newStreak,
+          diamantes: newDiamantes
+        })
+        .eq('id', session.user.id);
+
+      if (!streakError) {
+        profile.diamantes = newDiamantes; // Atualiza localmente para refletir no header
+        setTimeout(() => {
+          alert(`🔥 Daily Streak: Dia ${newStreak}!\n💎 Recebeste ${reward} Diamantes!`);
+        }, 1500);
+      }
+    }
+
     // Guardar temas desbloqueados no localStorage para acesso rápido
     if (profile && profile.unlocked_themes) {
       localStorage.setItem('anigma_unlocked_themes', JSON.stringify(profile.unlocked_themes));
@@ -134,9 +170,9 @@ async function atualizarHeader(session) {
     // 1. Tenta usar o username da BD ou dos metadados (registo)
     let username = profile?.username || session.user.user_metadata?.username;
 
-    // 2. Se não houver username, usa o início do email como fallback
+    // 2. Se não houver username, define como Anónimo (remove o fallback do email)
     if (!username) {
-      username = (session.user.email || 'User').split('@')[0];
+      username = 'Anónimo';
     }
 
     if (btnLogin) {
@@ -157,14 +193,14 @@ async function atualizarHeader(session) {
       }
 
       btnLogin.style.display = 'inline-flex';
-      btnLogin.href          = 'perfil.html';
+      btnLogin.href          = prefix + 'perfil.html';
       btnLogin.innerHTML     = `
         ${avatarHtml}
         ${username}
         <span style="font-size:0.7rem;opacity:0.5;">▾</span>`;
       btnLogin.onclick = function (e) {
         e.preventDefault();
-        mostrarMenuUser(session, username);
+        mostrarMenuUser(session, username, prefix);
       };
     }
 
@@ -186,7 +222,7 @@ async function atualizarHeader(session) {
 }
 
 // ── Menu dropdown do utilizador ───────────────────────────────
-function mostrarMenuUser(session, username) {
+function mostrarMenuUser(session, username, prefix) {
   const existente = document.getElementById('userDropdown');
   if (existente) { existente.remove(); return; }
 
@@ -208,8 +244,8 @@ function mostrarMenuUser(session, username) {
 
   menu.innerHTML = `
     <div style="padding:10px 16px;font-size:0.72rem;color:rgba(255,255,255,0.30);border-bottom:1px solid rgba(255,255,255,0.07);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${session.user.email}</div>
-    <a href="perfil.html" style="display:block;padding:11px 16px;font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.60);text-decoration:none;">Perfil</a>
-    <a href="ranking.html" style="display:block;padding:11px 16px;font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.60);text-decoration:none;">Ranking</a>
+    <a href="${prefix}perfil.html" style="display:block;padding:11px 16px;font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.60);text-decoration:none;">Perfil</a>
+    <a href="${prefix}ranking/ranking.html" style="display:block;padding:11px 16px;font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.60);text-decoration:none;">Ranking</a>
     <div style="height:1px;background:rgba(255,255,255,0.07);margin:4px 0;"></div>
     <button id="btnLogout" style="display:block;width:100%;text-align:left;padding:11px 16px;font-size:0.82rem;font-weight:600;color:#f87171;background:transparent;border:none;cursor:pointer;font-family:inherit;">Sair da conta</button>
   `;
@@ -220,10 +256,7 @@ function mostrarMenuUser(session, username) {
 
   document.getElementById('btnLogout').onclick = async function () {
     await window.supabaseClient.auth.signOut();
-    
-    // Verifica se está na pasta Jogos para redirecionar corretamente para o login
-    const isGamePage = window.location.pathname.includes('/Jogos/');
-    sairDaPagina(isGamePage ? '../login.html' : 'login.html');
+    sairDaPagina(prefix + 'login.html');
   };
 
   setTimeout(() => {

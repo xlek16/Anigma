@@ -58,6 +58,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     .upsert({
       id: data.user.id,
       username: username,
+      avatar_url: 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/login.webp'
     });
 
   if (profileError) {

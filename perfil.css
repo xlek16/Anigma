@@ -1,7 +1,7 @@
 .perfil-main {
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 52px 24px 100px;
 }
 
 .profile-header {
@@ -52,6 +52,32 @@
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.level-progress-container {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 20px;
+}
+
+.level-progress-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.level-progress-fill {
+  height: 100%;
+  background: #4ade80;
+  transition: width 0.5s ease;
+}
+
+.level-progress-text {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  text-align: right;
 }
 
 .profile-stats-row {
@@ -207,3 +233,5 @@ body.light-mode .achievement-card.unlocked { background: #f9f9f9; border-color: 
 body.light-mode .ach-title { color: #111; }
 body.light-mode .ach-desc { color: #666; }
 body.light-mode .btn-equip-title { border-color: #ccc; color: #555; }
+body.light-mode .level-progress-bar { background: rgba(0,0,0,0.1); }
+body.light-mode .level-progress-text { color: rgba(0,0,0,0.5); }
