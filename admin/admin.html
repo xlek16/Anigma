@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIGMA — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Style.css">
+  <link rel="stylesheet" href="admin/admin.css">
+</head>
+<body>
+
+  <div class="page-transition" id="pageTransition"></div>
+  <div class="sakura-container" id="sakuraContainer"></div>
+  <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-wrap">
+      <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
+   </div>
+    <div class="header-right">
+      <a class="btn-nav" href="../index.html">Jogar</a>
+      <a class="btn-nav" href="../ranking/ranking.html">Ranking</a>
+      <a class="btn-nav active" href="admin.html">Admin</a> 
+
+      <div class="theme-wrap" id="themeWrap">
+        <button class="btn-theme" onclick="toggleThemeMenu()">
+          <span class="theme-indicator"></span>
+          <span id="themeLabel">Dark</span>
+          &#9662;
+        </button>
+        <div class="theme-menu" id="themeMenu"></div>
+      </div>
+
+      <div class="header-sep"></div>
+
+      <a class="btn-login" href="../login.html" id="btnLogin">Login</a>
+    </div>
+  </header>
+  
+  <!-- MAIN -->
+  <main class="admin-main">
+    <h1>Painel de Administração</h1>
+
+    <div class="give-diamonds-wrap">
+      <h2>Dar Diamantes a um Usuário</h2>
+      <input type="text" id="userEmail" placeholder="Email do Utilizador">
+      <input type="number" id="diamondAmount" placeholder="Quantidade de Diamantes" value="100">
+      <button class="btn-give-diamonds" onclick="darDiamantes()">Dar Diamantes</button>
+      <div id="adminMsg" class="form-msg"></div>
+    </div>
+  </main>
+
+  <footer>&copy; 2025 ANIGMA</footer>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+  <script src="../supabase.js"></script>
+  <script src="../auth.js"></script>
+  <script src="../Tema.js"></script>
+  <script src="../transicao.js"></script>
+  <script src="admin/admin.js"></script>
+</body>
+</html>

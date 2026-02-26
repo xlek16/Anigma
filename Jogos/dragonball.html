@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIGMA — Dragon Ball</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Style.css">
+  <link rel="stylesheet" href="dragonball.css">
+</head>
+<body>
+
+  <div class="page-transition" id="pageTransition"></div>
+  <div class="sakura-container" id="sakuraContainer"></div>
+  <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-wrap">
+      <img src="../Imagens/LogoSite/LogoSite.png" alt="Anigma Logo" class="logo" id="logoImg">
+    </div>
+    <div class="header-right">
+      <a class="btn-nav" href="../index.html">Jogar</a>
+      <a class="btn-nav" href="../ranking/ranking.html">Ranking</a>
+
+      <div class="theme-wrap" id="themeWrap">
+        <button class="btn-theme" onclick="toggleThemeMenu()">
+          <span class="theme-indicator"></span>
+          <span id="themeLabel">Dark</span>
+          &#9662;
+        </button>
+        <div class="theme-menu" id="themeMenu">
+          <div class="theme-option" data-theme="escuro" onclick="setTheme('escuro')"><span class="theme-dot"></span> Dark</div>
+          <div class="theme-option" data-theme="claro" onclick="setTheme('claro')"><span class="theme-dot"></span> Light</div>
+          <div class="theme-option" data-theme="sakura" onclick="setTheme('sakura')"><span class="theme-dot"></span> Sakura</div>
+          <div class="theme-option" data-theme="oceano" onclick="setTheme('oceano')"><span class="theme-dot"></span> Ocean</div>
+        </div>
+      </div>
+
+      <div class="header-sep"></div>
+
+      <!-- LOJA — visível apenas após login (auth.js mostra) -->
+      <a class="btn-nav" href="../loja/loja.html" id="btnLoja" style="display:none;">💎 Loja</a>
+
+      <!-- STATS — visíveis apenas após login -->
+      <div class="header-stats" id="headerStats" style="display:none;">
+        <div class="header-stat">
+          <span class="header-stat-icon">⭐</span>
+          <span class="header-stat-val" id="headerPontos">0</span>
+        </div>
+        <div class="header-stat">
+          <span class="header-stat-icon">💎</span>
+          <span class="header-stat-val" id="headerDiamantes">0</span>
+        </div>
+      </div>
+
+      <!-- LOGIN — auth.js substitui este botão pelo dropdown quando logado -->
+      <a class="btn-login" href="../login.html" id="btnLogin">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Login
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="game-main">
+
+    <!-- TOPO DO JOGO -->
+    <div class="game-top">
+      <div class="game-anime-title">DRAGON BALL</div>
+      <div class="game-subtitle">Adivinha o personagem secreto de hoje</div>
+
+      <!-- STATS BAR -->
+      <div class="game-stats">
+        <div class="stat-box">
+          <div class="stat-icon">&#9733;</div>
+          <div class="stat-info">
+            <div class="stat-value" id="pontos">100</div>
+            <div class="stat-label">Pontos</div>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">&#128142;</div>
+          <div class="stat-info">
+            <div class="stat-value" id="diamantes">0</div>
+            <div class="stat-label">Diamantes</div>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">&#128260;</div>
+          <div class="stat-info">
+            <div class="stat-value" id="tentativas">0</div>
+            <div class="stat-label">Tentativas</div>
+          </div>
+        </div>
+        <div class="stat-box timer-box">
+          <div class="stat-icon">&#9200;</div>
+          <div class="stat-info">
+            <div class="stat-value" id="timer">00:00:00</div>
+            <div class="stat-label">Novo personagem em</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INPUT DE PESQUISA -->
+    <div class="game-search-wrap">
+      <div class="game-search-box">
+        <input type="text" id="searchInput" placeholder="Escreve o nome do personagem..." autocomplete="off">
+        <button class="btn-submit-guess" onclick="submeterPalpite()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+      </div>
+      <!-- DROPDOWN DE SUGESTOES -->
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
+
+    <!-- DICAS -->
+    <div class="hints-section">
+      <div class="hints-header">
+        <div class="hints-title">
+          &#128161; Dicas
+          <span class="hints-count" id="dicasRestantes">3 gratuitas</span>
+        </div>
+        <div class="hints-info">Disponíveis a partir da 10.ª tentativa · Cada dica custa 20 pontos · <a href="../loja/loja.html" class="hints-shop-link">Comprar mais na Loja</a></div>
+      </div>
+      <div class="hints-buttons" id="hintsButtons">
+        <button class="btn-hint locked" id="hint1" onclick="usarDica(1)">
+          <span class="hint-lock">&#128274;</span>
+          <span class="hint-text">Dica 1</span>
+          <span class="hint-cost">20 pts</span>
+        </button>
+        <button class="btn-hint locked" id="hint2" onclick="usarDica(2)">
+          <span class="hint-lock">&#128274;</span>
+          <span class="hint-text">Dica 2</span>
+          <span class="hint-cost">20 pts</span>
+        </button>
+        <button class="btn-hint locked" id="hint3" onclick="usarDica(3)">
+          <span class="hint-lock">&#128274;</span>
+          <span class="hint-text">Dica 3</span>
+          <span class="hint-cost">20 pts</span>
+        </button>
+      </div>
+      <div id="hintResult" class="hint-result"></div>
+    </div>
+
+    <!-- TABELA DE PALPITES -->
+    <div class="guesses-section" id="guessesSection">
+
+      <!-- CABECALHO DA TABELA -->
+      <div class="guesses-header">
+        <div class="col-img">Imagem</div>
+        <div class="col">Nome</div>
+        <div class="col">Género</div>
+        <div class="col">Raça</div>
+        <div class="col">Afiliação</div>
+        <div class="col">Altura</div>
+        <div class="col">Primeiro Arco</div>
+        <div class="col">Estado</div>
+      </div>
+
+      <!-- LINHAS DOS PALPITES -->
+      <div id="guessesRows"></div>
+
+    </div>
+
+    <!-- MENSAGEM DE VITORIA/DERROTA -->
+    <div class="game-result" id="gameResult" style="display:none;">
+      <div class="result-icon" id="resultIcon">&#127881;</div>
+      <div class="result-title" id="resultTitle">Acertaste!</div>
+      <div class="result-text" id="resultText"></div>
+      <div class="result-diamonds" id="resultDiamonds"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- OUTROS ANIMES -->
+    <div class="section-label">Outros jogos</div>
+    <div class="anime-grid">
+
+      <a class="anime-card" href="jujutsukaisen.html">
+        <div class="anime-thumb">
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JJk.webp" alt="Jujutsu Kaisen">
+        </div>
+        <div class="anime-name">Jujutsu Kaisen</div>
+      </a>
+
+      <a class="anime-card" href="onepiece.html">
+        <div class="anime-thumb">
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/OnePiece.webp" alt="One Piece">
+        </div>
+        <div class="anime-name">One Piece</div>
+      </a>
+
+      <a class="anime-card" href="naruto.html">
+        <div class="anime-thumb">
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/Naruto.webp" alt="Naruto">
+        </div>
+        <div class="anime-name">Naruto</div>
+      </a>
+
+      <a class="anime-card" href="jojo.html">
+        <div class="anime-thumb">
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JOJO.webp" alt="JoJo">
+        </div>
+        <div class="anime-name">JoJo</div>
+      </a>
+
+      <a class="anime-card" href="hunterxhunter.html">
+        <div class="anime-thumb">
+          <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/HXH.webp" alt="Hunter x Hunter">
+        </div>
+        <div class="anime-name">Hunter x Hunter</div>
+      </a>
+
+      <a class="anime-card" href="demonslayer.html">
+        <div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/Ds.webp" alt="Demon Slayer"></div>
+        <div class="anime-name">Demon Slayer</div>
+      </a>
+
+      <a class="anime-card" href="attackontitan.html">
+        <div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/AOT.webp" alt="Attack on Titan"></div>
+        <div class="anime-name">Attack on Titan</div>
+      </a>
+
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/chainsawman.webp" alt="Chainsaw Man"><span class="badge-new">New</span></div><div class="anime-name">Chainsaw Man</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/sl.webp" alt="Solo Leveling"><span class="badge-new">New</span></div><div class="anime-name">Solo leveling</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/frieren.webp" alt="Sousou no Frieren"><span class="badge-new">New</span></div><div class="anime-name">Sousou no Frieren</div></a>
+      <a class="anime-card" href="#"><div class="anime-thumb"><img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/FM.webp" alt="Fullmetal Alchemist"><span class="badge-new">New</span></div><div class="anime-name">Fullmetal Alchemist</div></a>
+
+    </div>
+
+  </main>
+
+  <footer>&copy; 2025 ANIGMA</footer>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+  <script src="../supabase.js"></script>
+  <script src="../nameStyles.js"></script>
+  <script src="../auth.js"></script>
+  <script src="../achievements.js"></script>
+  <script src="dragonball.js"></script>
+  <script src="../Tema.js"></script>
+  <script src="../transicao.js"></script>
+
+</body>
+</html>
