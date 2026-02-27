@@ -1,5 +1,104 @@
 let isPurchasing = false;
 
+// ── COMPRAR TEMA ─────────────────────────────────────────────
+async function comprarTema(temaId, custoDiamantes) {
+  if (isPurchasing) return;
+
+  const btn = event.currentTarget;
+  const textoOriginal = btn.innerHTML;
+
+  const { data: { session } } = await window.supabaseClient.auth.getSession();
+  if (!session) {
+    alert('Precisas de fazer login para comprar na loja.');
+    window.location.href = '../login.html';
+    return;
+  }
+
+  let unlockedLocal = [];
+  try {
+    const stored = localStorage.getItem('anigma_unlocked_themes');
+    if (stored) unlockedLocal = JSON.parse(stored);
+  } catch(e) {}
+
+  if (unlockedLocal.includes(temaId)) {
+    alert('Já tens este tema desbloqueado!');
+    return;
+  }
+
+  if (!confirm(`Desbloquear o tema por ${custoDiamantes} 💎?`)) return;
+
+  try {
+    isPurchasing = true;
+    btn.disabled = true;
+    btn.textContent = 'A processar...';
+
+    const { data: profileData, error: fetchError } = await window.supabaseClient
+      .from('profiles')
+      .select('id, diamantes, unlocked_themes')
+      .eq('id', session.user.id)
+      .single();
+
+    if (fetchError) throw fetchError;
+
+    if ((profileData.diamantes || 0) < custoDiamantes) {
+      alert(`Não tens diamantes suficientes! (Tens: ${profileData.diamantes || 0}, Custo: ${custoDiamantes})`);
+      btn.disabled = false;
+      btn.innerHTML = textoOriginal;
+      isPurchasing = false;
+      return;
+    }
+
+    const unlockedDB  = Array.isArray(profileData.unlocked_themes) ? profileData.unlocked_themes : [];
+    if (unlockedDB.includes(temaId)) {
+      alert('Já tens este tema desbloqueado!');
+      btn.disabled = false;
+      btn.innerHTML = textoOriginal;
+      isPurchasing = false;
+      return;
+    }
+
+    const novosDiamantes = (profileData.diamantes || 0) - custoDiamantes;
+    const novosThemes    = [...unlockedDB, temaId];
+
+    const { data: updatedProfile, error: updateError } = await window.supabaseClient
+      .from('profiles')
+      .update({ diamantes: novosDiamantes, unlocked_themes: novosThemes })
+      .eq('id', session.user.id)
+      .select()
+      .single();
+
+    if (updateError) throw updateError;
+
+    localStorage.setItem('anigma_unlocked_themes', JSON.stringify(novosThemes));
+
+    if (typeof atualizarHeaderStats === 'function') {
+      atualizarHeaderStats(updatedProfile.diamantes, updatedProfile.pontos_totais);
+    }
+
+    if (typeof updateThemeMenu === 'function') updateThemeMenu();
+
+    btn.textContent = '✅ Desbloqueado!';
+    btn.style.background = 'rgba(255,255,255,0.1)';
+    btn.style.color = 'rgba(255,255,255,0.5)';
+    btn.style.cursor = 'not-allowed';
+
+    setTimeout(() => {
+      if (confirm(`Tema desbloqueado! Queres aplicá-lo agora?`)) {
+        if (typeof setTheme === 'function') setTheme(temaId);
+      }
+      isPurchasing = false;
+    }, 500);
+
+  } catch (e) {
+    console.error('Erro ao comprar tema:', e);
+    alert('Erro: ' + e.message);
+    btn.disabled = false;
+    btn.innerHTML = textoOriginal;
+    isPurchasing = false;
+  }
+}
+
+// ── COMPRAR ITEM ─────────────────────────────────────────────
 async function comprarItem(itemId, custoDiamantes, ganhoPontos = 0) {
   if (isPurchasing) { console.warn("Compra já em progresso."); return; }
 
@@ -9,7 +108,7 @@ async function comprarItem(itemId, custoDiamantes, ganhoPontos = 0) {
   const { data: { session } } = await window.supabaseClient.auth.getSession();
   if (!session) {
     alert('Precisas de fazer login para comprar na loja.');
-    window.location.href = 'login.html';
+    window.location.href = '../login.html';
     return;
   }
 
@@ -22,7 +121,6 @@ async function comprarItem(itemId, custoDiamantes, ganhoPontos = 0) {
       throw new Error('Erro de configuração: avatars.js não carregado.');
     }
 
-    // ── Obter perfil atual ────────────────────────────────────
     const { data: profileData, error: fetchError } = await window.supabaseClient
       .from('profiles')
       .select('*')
@@ -33,7 +131,6 @@ async function comprarItem(itemId, custoDiamantes, ganhoPontos = 0) {
 
     const profile = { ...profileData };
 
-    // ── Verificar saldo ───────────────────────────────────────
     if ((profile.diamantes || 0) < custoDiamantes) {
       alert(`Não tens diamantes suficientes! (Tens: ${profile.diamantes || 0}, Custo: ${custoDiamantes})`);
       btn.disabled = false;
@@ -49,7 +146,6 @@ async function comprarItem(itemId, custoDiamantes, ganhoPontos = 0) {
     let estiloGanhoId  = null;
     let overlayMessage = '';
 
-    // ── CAIXA DE AVATAR ───────────────────────────────────────
     if (itemId.startsWith('caixa_avatar_')) {
       const rand = Math.random() * 100;
       let rarity = 'easy';
@@ -62,23 +158,21 @@ async function comprarItem(itemId, custoDiamantes, ganhoPontos = 0) {
       if (!pool || pool.length === 0) throw new Error(`Pool de avatares vazia para raridade: ${rarity}`);
 
       const avatarGanho = pool[Math.floor(Math.random() * pool.length)];
-      // Garantir que é sempre array mesmo se vier null da DB
       const unlocked = Array.isArray(profile.unlocked_avatars) ? profile.unlocked_avatars : [];
       avatarGanhoUrl = avatarGanho;
 
       if (unlocked.includes(avatarGanho)) {
         const refunds = { easy: 15, medium: 25, hard: 40, impossible: 75 };
         const refund  = refunds[rarity] || 15;
-        novosDiamantes        += refund;
-        updateData.diamantes   = novosDiamantes;
-        successMessage         = `Repetido! +${refund} 💎`;
-        overlayMessage         = `Repetido! Reembolso: ${refund} 💎`;
+        novosDiamantes       += refund;
+        updateData.diamantes  = novosDiamantes;
+        successMessage        = `Repetido! +${refund} 💎`;
+        overlayMessage        = `Repetido! Reembolso: ${refund} 💎`;
       } else {
         updateData.unlocked_avatars = [...unlocked, avatarGanho];
         successMessage = 'Novo Avatar!';
       }
 
-    // ── CAIXA DE ESTILO DE NOME ───────────────────────────────
     } else if (itemId.startsWith('caixa_nome_')) {
       if (typeof NAME_STYLES === 'undefined' || typeof NAME_STYLE_RARITY_CONFIG === 'undefined') {
         throw new Error('Erro de configuração: nameStyles.js não carregado.');
@@ -99,24 +193,22 @@ async function comprarItem(itemId, custoDiamantes, ganhoPontos = 0) {
       if (!pool || pool.length === 0) throw new Error(`Pool de estilos vazia para raridade: ${rarityLabel}`);
 
       const estiloGanho = pool[Math.floor(Math.random() * pool.length)];
-      // Garantir que é sempre array mesmo se vier null da DB
       const unlocked = Array.isArray(profile.unlocked_name_styles) ? profile.unlocked_name_styles : [];
       estiloGanhoId = estiloGanho.id;
 
       if (unlocked.includes(estiloGanhoId)) {
         const refunds = { comum: 10, raro: 25, epico: 40, lendario: 75 };
         const refund  = refunds[rarityKey] || 10;
-        novosDiamantes        += refund;
-        updateData.diamantes   = novosDiamantes;
-        successMessage         = `Repetido! +${refund} 💎`;
-        overlayMessage         = `Estilo Repetido! Reembolso: ${refund} 💎`;
+        novosDiamantes       += refund;
+        updateData.diamantes  = novosDiamantes;
+        successMessage        = `Repetido! +${refund} 💎`;
+        overlayMessage        = `Estilo Repetido! Reembolso: ${refund} 💎`;
       } else {
         updateData.unlocked_name_styles = [...unlocked, estiloGanhoId];
         successMessage = 'Novo Estilo!';
       }
     }
 
-    // ── Atualizar Base de Dados ───────────────────────────────
     const { data: updatedProfile, error: updateError } = await window.supabaseClient
       .from('profiles')
       .update(updateData)
@@ -126,21 +218,17 @@ async function comprarItem(itemId, custoDiamantes, ganhoPontos = 0) {
 
     if (updateError) throw new Error('Erro ao atualizar perfil: ' + updateError.message);
 
-    // ── Feedback visual ───────────────────────────────────────
     btn.style.background = '#4ade80';
     btn.textContent = successMessage;
 
-    // Atualizar header
     if (typeof atualizarHeaderStats === 'function') {
       atualizarHeaderStats(updatedProfile.diamantes, updatedProfile.pontos_totais);
     }
 
-    // ── Verificar conquistas com perfil atualizado ────────────
     if (typeof window.verificarConquistas === 'function') {
       await window.verificarConquistas(updatedProfile);
     }
 
-    // ── Animações ─────────────────────────────────────────────
     if (avatarGanhoUrl) mostrarAnimacaoCaixa(avatarGanhoUrl, overlayMessage);
     if (estiloGanhoId)  mostrarAnimacaoEstilo(estiloGanhoId, overlayMessage);
 
@@ -170,7 +258,6 @@ function mostrarAnimacaoCaixa(avatarUrl, overlayMessage) {
     </video>
   `;
   document.body.appendChild(overlay);
-
   setTimeout(() => {
     if (document.body.contains(overlay)) overlay.remove();
     iniciarRoleta(avatarUrl, overlayMessage);
@@ -225,9 +312,9 @@ function iniciarRoleta(finalUrl, overlayMessage) {
     mediaWrap.innerHTML = url.endsWith('.webm') || url.endsWith('.mp4')
       ? `<video src="${url}" autoplay loop muted class="gacha-img"></video>`
       : `<img src="${url}" class="gacha-img" alt="${info.name}">`;
-    nameEl.textContent     = info.name;
-    rarityEl.textContent   = info.rarityLabel;
-    rarityEl.style.color   = info.rarityColor;
+    nameEl.textContent         = info.name;
+    rarityEl.textContent       = info.rarityLabel;
+    rarityEl.style.color       = info.rarityColor;
     rarityEl.style.borderColor = info.rarityColor;
     const card = overlay.querySelector('.gacha-card');
     card.classList.remove('pulse');
@@ -256,7 +343,6 @@ function iniciarRoleta(finalUrl, overlayMessage) {
   cycle();
 }
 
-// ── Animação caixa de estilos de nome ─────────────────────────
 function mostrarAnimacaoEstilo(finalStyleId, overlayMessage) {
   const overlay = document.createElement('div');
   overlay.className = 'gacha-overlay';
@@ -303,12 +389,10 @@ function mostrarAnimacaoEstilo(finalStyleId, overlayMessage) {
     if (styleInfo.className) previewEl.classList.add(styleInfo.className);
     previewEl.textContent = 'Anigma';
     if (styleInfo.dataText) previewEl.setAttribute('data-text', 'Anigma');
-
-    nameEl.textContent          = styleInfo.name;
-    rarityEl.textContent        = styleInfo.rarity;
-    rarityEl.style.color        = getRarityColor(styleInfo.rarity);
-    rarityEl.style.borderColor  = getRarityColor(styleInfo.rarity);
-
+    nameEl.textContent         = styleInfo.name;
+    rarityEl.textContent       = styleInfo.rarity;
+    rarityEl.style.color       = getRarityColor(styleInfo.rarity);
+    rarityEl.style.borderColor = getRarityColor(styleInfo.rarity);
     const card = overlay.querySelector('.gacha-card');
     card.classList.remove('pulse');
     void card.offsetWidth;

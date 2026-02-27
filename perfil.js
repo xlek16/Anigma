@@ -37,14 +37,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // ── Barra de progresso ──
-  // Calcula o nível real a partir dos pontos (ignora o level da DB que pode estar desatualizado)
   const totalPoints = profile.pontos_totais || 0;
   function calcLevel(pts) {
-    // Inversa de: pts_necessarios_para_nivel_N = 250 * N * (N-1)
-    // Resolve: 250*N*(N-1) <= pts  →  N = floor((1 + sqrt(1 + 4*pts/250)) / 2)
     return Math.max(1, Math.floor((1 + Math.sqrt(1 + (4 * pts) / 250)) / 2));
   }
-  const currentLevel    = calcLevel(totalPoints);
+  const currentLevel       = calcLevel(totalPoints);
   const currentLevelBaseXP = 250 * currentLevel * (currentLevel - 1);
   const nextLevelXP        = 250 * (currentLevel + 1) * currentLevel;
   const xpNeeded    = Math.max(1, nextLevelXP - currentLevelBaseXP);
@@ -61,9 +58,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('pStreak').textContent     = profile.current_streak || 0;
 
   // ── Stats dos jogos ──
-  document.getElementById('pDbPoints').textContent   = profile.pontos_db    ?? '--';
-  document.getElementById('pDbAttempts').textContent = profile.tentativas_db ?? '--';
-  document.getElementById('pJjkPoints').textContent  = profile.pontos_jjk    ?? '--';
+  document.getElementById('pDbPoints').textContent    = profile.pontos_db    ?? '--';
+  document.getElementById('pDbAttempts').textContent  = profile.tentativas_db ?? '--';
+  document.getElementById('pJjkPoints').textContent   = profile.pontos_jjk    ?? '--';
   document.getElementById('pJjkAttempts').textContent = profile.tentativas_jjk ?? '--';
 
   // ── Avatar principal ──
@@ -118,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (typeof verificarConquistas === 'function') await verificarConquistas(profile);
 
   // ── Toggle estatísticas ──
-  const toggleBtn    = document.getElementById('toggleStatsBtn');
+  const toggleBtn      = document.getElementById('toggleStatsBtn');
   const statsContainer = document.getElementById('statsContainer');
   if (toggleBtn && statsContainer) {
     toggleBtn.addEventListener('click', () => {
@@ -144,6 +141,7 @@ async function equiparAvatar(url, clickedElement) {
       .from('profiles').update({ avatar_url: url }).eq('id', session.user.id);
     if (error) throw error;
 
+    // Atualizar avatar no card do perfil
     const avatarWrap = document.querySelector('.profile-avatar-wrap');
     if (url.endsWith('.webm') || url.endsWith('.mp4')) {
       avatarWrap.innerHTML = `<video src="${url}" autoplay loop muted class="profile-avatar-img"></video>`;
@@ -151,15 +149,19 @@ async function equiparAvatar(url, clickedElement) {
       avatarWrap.innerHTML = `<img src="${url}" alt="Avatar" class="profile-avatar-img">`;
     }
 
+    // Atualizar avatar no header — sem precisar de reload
     const oldHeaderAvatar = document.getElementById('headerUserAvatar');
     if (oldHeaderAvatar) {
-      const el = url.endsWith('.webm') || url.endsWith('.mp4') ? Object.assign(document.createElement('video'), { autoplay: true, loop: true, muted: true }) : document.createElement('img');
-      el.id = 'headerUserAvatar';
+      const el = url.endsWith('.webm') || url.endsWith('.mp4')
+        ? Object.assign(document.createElement('video'), { autoplay: true, loop: true, muted: true })
+        : document.createElement('img');
+      el.id  = 'headerUserAvatar';
       el.src = url;
       if (el.tagName === 'IMG') el.alt = 'avatar';
       el.style.cssText = 'width:28px;height:28px;border-radius:50%;object-fit:cover;';
       oldHeaderAvatar.replaceWith(el);
     }
+
   } catch (e) {
     console.error('Erro ao equipar avatar:', e);
     alert('Não foi possível equipar o avatar.');
@@ -182,20 +184,22 @@ async function equiparTitulo(titulo, clickedElement) {
       .from('profiles').update({ equipped_title: titulo }).eq('id', session.user.id);
     if (error) throw error;
 
+    // Atualizar título no card do perfil — SEM reload
     const titleEl = document.getElementById('pTitle');
     if (titleEl) { titleEl.textContent = titulo; titleEl.style.display = 'inline-block'; }
 
-    // Atualizar botões de equipar título no render
+    // Atualizar botões de equipar título
     document.querySelectorAll('.btn-equip-title').forEach(btn => {
       btn.textContent = 'Equipar Título';
-      btn.disabled = false;
+      btn.disabled    = false;
       btn.classList.remove('equipped');
     });
     if (clickedElement) {
       clickedElement.textContent = 'Equipado';
-      clickedElement.disabled = true;
+      clickedElement.disabled    = true;
       clickedElement.classList.add('equipped');
     }
+
   } catch (e) {
     console.error('Erro ao equipar título:', e);
     alert('Não foi possível equipar o título.');
@@ -210,11 +214,9 @@ function renderNameStyles(profile) {
   if (!container || typeof NAME_STYLES === 'undefined') return;
   container.innerHTML = '';
 
-  // Garantir que é sempre array — mesmo se a coluna for null na DB
   const unlocked = Array.isArray(profile.unlocked_name_styles) ? profile.unlocked_name_styles : [];
   const equipped  = profile.equipped_name_style || null;
 
-  // Card padrão
   const defaultCard = document.createElement('div');
   defaultCard.className = `name-style-item unlocked${!equipped ? ' equipped' : ''}`;
   defaultCard.innerHTML = `
@@ -249,6 +251,7 @@ async function equiparNameStyle(styleId, clickedElement) {
   const { data: { session } } = await window.supabaseClient.auth.getSession();
   if (!session) return;
 
+  const oldEquipped = document.querySelector('.name-style-item.equipped');
   document.querySelectorAll('.name-style-item.equipped').forEach(el => el.classList.remove('equipped'));
   clickedElement.classList.add('equipped');
 
@@ -261,13 +264,17 @@ async function equiparNameStyle(styleId, clickedElement) {
     const usernameEl = document.getElementById('pUsername');
     if (usernameEl) {
       usernameEl.style.cssText = '';
-      usernameEl.className = '';
       usernameEl.removeAttribute('data-text-effect');
       usernameEl.removeAttribute('data-text');
+      if (typeof NAME_STYLES !== 'undefined') {
+        Object.values(NAME_STYLES).forEach(style => {
+          if (style.className) usernameEl.classList.remove(...style.className.split(' ').filter(Boolean));
+        });
+      }
       if (styleId && NAME_STYLES[styleId]) {
         const s = NAME_STYLES[styleId];
         if (s.style)     usernameEl.style.cssText = s.style;
-        if (s.className) usernameEl.classList.add(s.className);
+        if (s.className) usernameEl.classList.add(...s.className.split(' ').filter(Boolean));
         if (s.dataText) {
           usernameEl.setAttribute('data-text-effect', '');
           usernameEl.setAttribute('data-text', usernameEl.textContent);
@@ -275,23 +282,27 @@ async function equiparNameStyle(styleId, clickedElement) {
       }
     }
 
-    // Atualizar username no header — usa o id="headerUsername" criado pelo auth.js
+    // Atualizar username no header — SEM reload
     const headerNameEl = document.getElementById('headerUsername');
     if (headerNameEl) {
       headerNameEl.style.cssText = '';
-      headerNameEl.className = '';
+      if (typeof NAME_STYLES !== 'undefined') {
+        Object.values(NAME_STYLES).forEach(style => {
+          if (style.className) headerNameEl.classList.remove(...style.className.split(' ').filter(Boolean));
+        });
+      }
       if (styleId && NAME_STYLES[styleId]) {
         const s = NAME_STYLES[styleId];
         if (s.style)     headerNameEl.style.cssText = s.style;
-        if (s.className) headerNameEl.classList.add(s.className);
+        if (s.className) headerNameEl.classList.add(...s.className.split(' ').filter(Boolean));
       }
     }
 
-    console.log('✅ Estilo equipado:', styleId ?? 'padrão');
   } catch (e) {
     console.error('Erro ao equipar estilo:', e);
     alert('Não foi possível equipar o estilo.');
     clickedElement.classList.remove('equipped');
+    if (oldEquipped) oldEquipped.classList.add('equipped');
   }
 }
 
@@ -330,7 +341,7 @@ function renderAchievements(profile) {
       equipBtn.className = 'btn-equip-title';
       if (equippedTitle === ach.reward.title) {
         equipBtn.textContent = 'Equipado';
-        equipBtn.disabled = true;
+        equipBtn.disabled    = true;
         equipBtn.classList.add('equipped');
       } else {
         equipBtn.textContent = 'Equipar Título';

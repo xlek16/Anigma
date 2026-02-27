@@ -50,12 +50,40 @@ async function handleLevelUp(userId, pontosAntigos, pontosNovos) {
       }
 
       setTimeout(() => {
-        alert(`⬆️ Subiste para o Nível ${nivelNovo}!\n\n💎 Ganhaste ${diamantesGanhos} diamantes!`);
+        showLevelUpModal(nivelNovo, diamantesGanhos);
       }, 1500);
     } catch (e) {
       console.error("Erro ao processar subida de nível:", e);
     }
   }
+}
+
+function showLevelUpModal(newLevel, diamondsWon) {
+    // Remove existing modal if any
+    document.querySelector('.levelup-overlay')?.remove();
+
+    const overlay = document.createElement('div');
+    overlay.className = 'levelup-overlay';
+
+    overlay.innerHTML = `
+        <div class="levelup-modal">
+            <div class="levelup-icon">🎉</div>
+            <h2 class="levelup-title">Subiste de Nível!</h2>
+            <div class="levelup-level">${newLevel}</div>
+            <p class="levelup-reward">💎 +${diamondsWon} Diamantes Ganhos!</p>
+            <button class="btn-levelup-close">Continuar</button>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    const closeAction = () => {
+        overlay.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => overlay.remove(), 300);
+    };
+
+    overlay.querySelector('.btn-levelup-close').addEventListener('click', closeAction);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeAction(); });
 }
 
 // ── Criar botão de perfil com dropdown ───────────────────────
@@ -303,7 +331,16 @@ async function atualizarHeader(session) {
         newStreak = (profile.current_streak || 0) + 1;
       }
 
-      const reward = Math.min(200, 50 + (newStreak - 1) * 10);
+      let reward = Math.min(200, 50 + (newStreak - 1) * 10);
+      let rewardMessage = `🔥 Daily Streak: Dia ${newStreak}!\n💎 Recebeste ${reward} Diamantes!`;
+
+      // Adicionar bónus semanal
+      if (newStreak > 0 && newStreak % 7 === 0) {
+        const weeklyBonus = 250; // Bónus generoso
+        reward += weeklyBonus;
+        rewardMessage = `🎉 Bónus Semanal! (Dia ${newStreak})\n\n💎 Recebeste um total de ${reward} Diamantes!`;
+      }
+
       const newDiamantes = (profile.diamantes || 0) + reward;
 
       const { error: streakError } = await window.supabaseClient
@@ -314,7 +351,7 @@ async function atualizarHeader(session) {
       if (!streakError) {
         profile.diamantes = newDiamantes;
         setTimeout(() => {
-          alert(`🔥 Daily Streak: Dia ${newStreak}!\n💎 Recebeste ${reward} Diamantes!`);
+          alert(rewardMessage);
         }, 1500);
       }
     }
