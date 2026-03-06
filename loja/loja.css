@@ -1,0 +1,505 @@
+/* ═══════════════════════════════════════
+   LOJA — CSS REDESENHADO
+═══════════════════════════════════════ */
+
+.shop-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px 100px;
+}
+
+/* ── HERO ── */
+.shop-hero {
+  text-align: center;
+  margin-bottom: 64px;
+  padding: 48px 24px;
+  position: relative;
+}
+
+.shop-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.shop-hero-badge {
+  display: inline-block;
+  background: rgba(139,92,246,0.15);
+  border: 1px solid rgba(139,92,246,0.3);
+  color: #a78bfa;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.shop-hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.shop-hero-desc {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.5);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── SECÇÕES ── */
+.shop-section {
+  margin-bottom: 56px;
+}
+
+.shop-section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.shop-section-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.shop-section-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.shop-section-sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── GRID ── */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ── CARD ── */
+.shop-card {
+  position: relative;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.shop-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.16);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.shop-card-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--glow, rgba(255,255,255,0.1)), transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.shop-card-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #a78bfa;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.shop-card-icon {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.shop-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.shop-card-desc {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.55;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+/* ── CHANCES ── */
+.shop-card-chances {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.chance-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* ── BOTÃO COMPRAR ── */
+.btn-buy {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(139,92,246,0.9);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(139,92,246,0.3);
+  margin-top: auto;
+}
+
+.btn-buy:hover {
+  background: rgba(124,58,237,1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(139,92,246,0.4);
+}
+
+.btn-buy:active { transform: scale(0.98); }
+
+.btn-buy span {
+  background: rgba(255,255,255,0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+}
+
+/* ── CARD CYBERPUNK ── */
+.shop-card-cyberpunk {
+  border-color: rgba(252,238,10,0.2);
+  background: rgba(8,0,16,0.6);
+}
+
+.shop-card-cyberpunk:hover {
+  border-color: rgba(252,238,10,0.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(252,238,10,0.1), 0 0 60px rgba(255,0,255,0.05);
+}
+
+.cyberpunk-preview-text {
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #fcee0a;
+  text-shadow: 0 0 10px #fcee0a, 0 0 20px rgba(255,0,255,0.5);
+  background: rgba(252,238,10,0.05);
+  border: 1px solid rgba(252,238,10,0.15);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+  0%, 100% { text-shadow: 0 0 8px #fcee0a, 0 0 16px rgba(255,0,255,0.5); }
+  50%       { text-shadow: 0 0 4px #fcee0a, 0 0 8px rgba(255,0,255,0.3); }
+}
+
+.btn-buy-cyberpunk {
+  background: linear-gradient(135deg, #fcee0a, #ff00ff);
+  color: #000;
+  box-shadow: 0 4px 20px rgba(252,238,10,0.3), 0 0 30px rgba(255,0,255,0.1);
+  font-weight: 800;
+}
+
+.btn-buy-cyberpunk:hover {
+  background: linear-gradient(135deg, #ffe436, #ff44ff);
+  box-shadow: 0 6px 24px rgba(252,238,10,0.5), 0 0 40px rgba(255,0,255,0.2);
+}
+
+.btn-buy-cyberpunk span {
+  background: rgba(0,0,0,0.2);
+  color: #000;
+}
+
+/* ── GACHA / ROLETA ── */
+.gacha-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.gacha-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gacha-card {
+  width: 300px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 28px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: transform 0.1s;
+}
+
+.gacha-card.pulse { transform: scale(1.02); }
+
+.gacha-card.finished {
+  animation: gachaFinish 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-color: #ffd700;
+  box-shadow: 0 0 40px rgba(255,215,0,0.2);
+}
+
+@keyframes gachaFinish {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.gacha-media-wrap {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.gacha-img { width: 100%; height: 100%; object-fit: cover; }
+
+.gacha-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.gacha-rarity {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  letter-spacing: 1.5px;
+}
+
+.btn-close-reward {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 800;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.btn-close-reward:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+
+/* ── ANIMAÇÃO DA CAIXA ── */
+.box-animation-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-video {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 16px;
+  box-shadow: 0 0 60px rgba(255,255,255,0.1);
+}
+
+/* ── HEADER STATS ── */
+.header-stats {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.header-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-right: 1px solid rgba(255,255,255,0.10);
+}
+
+.header-stat:last-child { border-right: none; }
+.header-stat-icon { font-size: 0.85rem; line-height: 1; }
+.header-stat-val  { font-size: 0.82rem; font-weight: 700; color: #fff; min-width: 20px; }
+
+/* ── LIGHT MODE ── */
+body.light-mode .shop-hero-title { color: #111; }
+body.light-mode .shop-hero-desc  { color: #555; }
+body.light-mode .shop-section-title { color: #111; }
+body.light-mode .shop-section-sub { color: #888; }
+body.light-mode .shop-card { background: #fff; border-color: #e5e7eb; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+body.light-mode .shop-card:hover { box-shadow: 0 12px 28px rgba(0,0,0,0.12); border-color: #d1d5db; }
+body.light-mode .shop-card-title { color: #111; }
+body.light-mode .shop-card-desc  { color: #666; }
+body.light-mode .chance-tag { background: #f3f4f6; border-color: #e5e7eb; }
+body.light-mode .header-stats { background: #fff; border-color: #ddd; }
+body.light-mode .header-stat  { border-right-color: #eee; }
+body.light-mode .header-stat-val { color: #111; }
+
+/* ── TEMA SAKURA ── */
+body.theme-sakura .shop-hero-badge { background: rgba(249,168,212,0.15); border-color: rgba(249,168,212,0.3); color: #f9a8d4; }
+body.theme-sakura .shop-card { background: rgba(249,168,212,0.04); border-color: rgba(249,168,212,0.12); }
+body.theme-sakura .shop-card:hover { border-color: rgba(249,168,212,0.3); }
+body.theme-sakura .shop-card-title { color: #f9a8d4; }
+body.theme-sakura .shop-card-desc  { color: rgba(249,168,212,0.6); }
+body.theme-sakura .shop-section-header { border-bottom-color: rgba(249,168,212,0.12); }
+body.theme-sakura .shop-section-title { color: #f9a8d4; }
+body.theme-sakura .shop-section-sub   { color: rgba(249,168,212,0.5); }
+body.theme-sakura .header-stats { background: rgba(249,168,212,0.08); border-color: rgba(249,168,212,0.20); }
+
+/* ── TEMA OCEANO ── */
+body.theme-oceano .shop-hero-badge { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3); color: #38bdf8; }
+body.theme-oceano .shop-card { background: rgba(56,189,248,0.04); border-color: rgba(56,189,248,0.12); }
+body.theme-oceano .shop-card:hover { border-color: rgba(56,189,248,0.3); }
+body.theme-oceano .shop-card-title { color: #38bdf8; }
+body.theme-oceano .shop-card-desc  { color: rgba(56,189,248,0.6); }
+body.theme-oceano .shop-section-header { border-bottom-color: rgba(56,189,248,0.12); }
+body.theme-oceano .shop-section-title { color: #38bdf8; }
+body.theme-oceano .shop-section-sub   { color: rgba(56,189,248,0.5); }
+body.theme-oceano .header-stats { background: rgba(56,189,248,0.08); border-color: rgba(56,189,248,0.20); }
+
+/* ── TEMA CYBERPUNK ── */
+body.theme-cyberpunk .shop-hero-badge { background: rgba(252,238,10,0.1); border-color: rgba(252,238,10,0.3); color: #fcee0a; }
+body.theme-cyberpunk .shop-hero-title { color: #fcee0a; text-shadow: 0 0 20px rgba(252,238,10,0.3); }
+body.theme-cyberpunk .shop-card { background: rgba(252,238,10,0.03); border-color: rgba(252,238,10,0.15); }
+body.theme-cyberpunk .shop-card:hover { border-color: rgba(252,238,10,0.35); box-shadow: 0 0 30px rgba(252,238,10,0.1); }
+body.theme-cyberpunk .shop-card-title { color: #fcee0a; }
+body.theme-cyberpunk .shop-card-desc  { color: rgba(252,238,10,0.55); }
+body.theme-cyberpunk .shop-section-title { color: #ff00ff; }
+body.theme-cyberpunk .shop-section-sub   { color: rgba(252,238,10,0.4); }
+body.theme-cyberpunk .shop-section-header { border-bottom-color: rgba(252,238,10,0.1); }
+body.theme-cyberpunk .header-stats { background: rgba(252,238,10,0.06); border-color: rgba(252,238,10,0.3); }
+body.theme-cyberpunk .header-stat  { border-right-color: rgba(252,238,10,0.15); }
+body.theme-cyberpunk .header-stat-val { color: #fcee0a; }
+body.theme-cyberpunk .btn-buy { background: rgba(252,238,10,0.15); color: #fcee0a; border: 1px solid rgba(252,238,10,0.3); box-shadow: none; }
+body.theme-cyberpunk .btn-buy:hover { background: rgba(252,238,10,0.25); }
+
+/* ── PREVIEWS DOS TEMAS NA LOJA ── */
+.shop-card-preview, .bleach-preview, .floresta-preview, .rgb-preview {
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.bleach-preview  { background: rgba(96,144,224,0.06); border: 1px solid rgba(96,144,224,0.15); }
+.floresta-preview { background: rgba(74,222,128,0.05); border: 1px solid rgba(74,222,128,0.15); }
+.rgb-preview { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); }
+
+.rgb-title {
+  animation: rgb-text-animation 3s linear infinite;
+}
+
+.rgb-buy-btn {
+  background: linear-gradient(135deg, #ff4444, #44ff44, #4444ff);
+  background-size: 200% 100%;
+  animation: rgb-btn-shift 3s linear infinite;
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 4px 20px rgba(255,255,255,0.15);
+}
+
+@keyframes rgb-btn-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Suporte tema Bleach nos stats do header */
+body.theme-bleach .header-stats { background: rgba(96,144,224,0.08); border-color: rgba(96,144,224,0.2); }
+body.theme-bleach .header-stat  { border-right-color: rgba(96,144,224,0.12); }
+body.theme-bleach .header-stat-val { color: #c8d2ff; }
+body.theme-bleach .shop-card { background: rgba(96,144,224,0.04); border-color: rgba(96,144,224,0.12); }
+body.theme-bleach .shop-card-title { color: #c8d2ff; }
+body.theme-bleach .shop-card-desc  { color: rgba(200,210,255,0.55); }
+body.theme-bleach .shop-section-title { color: #6090e0; }
+body.theme-bleach .shop-section-sub  { color: rgba(200,210,255,0.45); }
+body.theme-bleach .shop-section-header { border-bottom-color: rgba(96,144,224,0.1); }
+
+/* Suporte tema Floresta na loja */
+body.theme-floresta .header-stats { background: rgba(74,222,128,0.07); border-color: rgba(74,222,128,0.18); }
+body.theme-floresta .shop-card { background: rgba(74,222,128,0.03); border-color: rgba(74,222,128,0.1); }
+body.theme-floresta .shop-card-title { color: #c8ecc8; }
+body.theme-floresta .shop-card-desc  { color: rgba(200,236,200,0.55); }
+body.theme-floresta .shop-section-title { color: #4ade80; }
+body.theme-floresta .shop-section-sub  { color: rgba(200,236,200,0.45); }
+body.theme-floresta .shop-section-header { border-bottom-color: rgba(74,222,128,0.1); }
+
+/* Suporte tema RGB na loja */
+body.theme-rgb .header-stats { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+body.theme-rgb .shop-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
+body.theme-rgb .shop-section-header { border-bottom-color: rgba(255,255,255,0.07); }

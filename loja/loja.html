@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIGMA — Loja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Style.css">
+  <link rel="stylesheet" href="loja.css">
+</head>
+<body>
+
+  <div class="page-transition" id="pageTransition"></div>
+  <div class="sakura-container" id="sakuraContainer"></div>
+  <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
+  <div class="bg-photo"></div>
+  <div class="bg-overlay"></div>
+
+  <header>
+    <div class="logo-wrap">
+      <img src="../Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
+    </div>
+    <div class="header-right">
+      <a class="btn-nav" href="../index.html">Jogar</a>
+      <a class="btn-nav" href="../ranking/ranking.html">Ranking</a>
+      <div class="theme-wrap" id="themeWrap">
+        <button class="btn-theme" onclick="toggleThemeMenu()">
+          <span class="theme-indicator"></span>
+          <span id="themeLabel">Dark</span>
+          &#9662;
+        </button>
+        <div class="theme-menu" id="themeMenu"></div>
+      </div>
+      <div class="header-sep"></div>
+      <a class="btn-nav active" href="loja.html" id="btnLoja" style="display:none;">💎 Loja</a>
+      <a class="btn-nav" href="../Seasonpass.html" id="btnSeasonPass" style="display:none;">🎫 Passe</a>
+      <div class="header-stats" id="headerStats" style="display:none;">
+        <div class="header-stat"><span class="header-stat-icon">⭐</span><span class="header-stat-val" id="headerPontos">0</span></div>
+        <div class="header-stat"><span class="header-stat-icon">💎</span><span class="header-stat-val" id="headerDiamantes">0</span></div>
+      </div>
+      <a class="btn-login" href="../login.html" id="btnLogin">Login</a>
+    </div>
+  </header>
+
+  <main class="shop-main">
+
+    <div class="shop-hero">
+      <div class="shop-hero-badge">💎 Loja Oficial</div>
+      <h1 class="shop-hero-title">Personaliza o teu Perfil</h1>
+      <p class="shop-hero-desc">Ganha diamantes a jogar e troca-os por avatares e temas exclusivos. Sakura e Ocean são gratuitos!</p>
+    </div>
+
+    <!-- AVATARES -->
+    <div class="shop-section">
+      <div class="shop-section-header">
+        <span class="shop-section-icon">🎁</span>
+        <div>
+          <div class="shop-section-title">Avatares & Estilos</div>
+          <div class="shop-section-sub">Abre caixas para ganhar itens aleatórios</div>
+        </div>
+      </div>
+      <div class="shop-grid">
+
+        <div class="shop-card">
+          <div class="shop-card-glow" style="--glow: rgba(167,139,250,0.3)"></div>
+          <div class="shop-card-badge">Popular</div>
+          <div class="shop-card-icon">🎁</div>
+          <div class="shop-card-title">Caixa de Avatar</div>
+          <div class="shop-card-desc">Avatar aleatório para o teu perfil. Pode ser animado e de raridade Lendária!</div>
+          <div class="shop-card-chances">
+            <span class="chance-tag" style="color:#31f700;">● 60% Comum</span>
+            <span class="chance-tag" style="color:#ffcc00;">● 30% Raro</span>
+            <span class="chance-tag" style="color:#ff4444;">● 9% Épico</span>
+            <span class="chance-tag" style="color:#b44dff;">● 1% Lendário</span>
+          </div>
+          <button class="btn-buy" onclick="comprarItem('caixa_avatar_1', 250)">
+            <span>250 💎</span> Comprar
+          </button>
+        </div>
+
+        <div class="shop-card">
+          <div class="shop-card-glow" style="--glow: rgba(251,191,36,0.3)"></div>
+          <div class="shop-card-badge" style="background:#f59e0b;">Novo</div>
+          <div class="shop-card-icon">🎨</div>
+          <div class="shop-card-title">Caixa de Estilo</div>
+          <div class="shop-card-desc">Desbloqueia um estilo de nome exclusivo e aleatório para o teu perfil.</div>
+          <div class="shop-card-chances">
+            <span class="chance-tag" style="color:#aaa;">● 60% Comum</span>
+            <span class="chance-tag" style="color:#38bdf8;">● 25% Raro</span>
+            <span class="chance-tag" style="color:#a78bfa;">● 13% Épico</span>
+            <span class="chance-tag" style="color:#fbbf24;">● 2% Lendário</span>
+          </div>
+          <button class="btn-buy" onclick="comprarItem('caixa_nome_1', 60)">
+            <span>60 💎</span> Comprar
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TEMAS -->
+    <div class="shop-section">
+      <div class="shop-section-header">
+        <span class="shop-section-icon">🎨</span>
+        <div>
+          <div class="shop-section-title">Temas Exclusivos</div>
+          <div class="shop-section-sub">Personaliza toda a interface — Sakura e Ocean são gratuitos para todos!</div>
+        </div>
+      </div>
+      <div class="shop-grid">
+
+        <!-- Bleach -->
+        <div class="shop-card" id="card-tema-bleach" style="border-color:rgba(96,144,224,0.3);background:rgba(5,8,16,0.6);">
+          <div class="shop-card-glow" style="--glow:rgba(96,144,224,0.2)"></div>
+          <div class="shop-card-icon">⚔️</div>
+          <div class="shop-card-title" style="color:#6090e0;">Tema Bleach</div>
+          <div class="shop-card-desc" style="color:rgba(96,144,224,0.7);">Preto profundo com partículas de reiatsu azul. Para os shinigami de alma.</div>
+          <div class="shop-card-preview bleach-preview">
+            <span style="color:#6090e0;text-shadow:0 0 8px #6090e0;font-weight:800;letter-spacing:3px;">A N I G M A</span>
+          </div>
+          <button class="btn-buy" id="btn-tema-bleach" onclick="comprarTema('bleach', 600)"
+            style="background:linear-gradient(135deg,#6090e0,#3060c0);color:#fff;box-shadow:0 4px 16px rgba(96,144,224,0.3);">
+            <span>600 💎</span> Desbloquear
+          </button>
+        </div>
+
+        <!-- Floresta -->
+        <div class="shop-card" id="card-tema-floresta" style="border-color:rgba(74,222,128,0.3);background:rgba(3,13,5,0.6);">
+          <div class="shop-card-glow" style="--glow:rgba(74,222,128,0.2)"></div>
+          <div class="shop-card-icon">🌿</div>
+          <div class="shop-card-title" style="color:#4ade80;">Tema Floresta</div>
+          <div class="shop-card-desc" style="color:rgba(74,222,128,0.7);">Verde natureza com folhas a cair e raios de luz. Sente a floresta.</div>
+          <div class="shop-card-preview floresta-preview">
+            <span style="color:#4ade80;text-shadow:0 0 8px rgba(74,222,128,0.5);font-weight:800;letter-spacing:3px;">A N I G M A</span>
+          </div>
+          <button class="btn-buy" id="btn-tema-floresta" onclick="comprarTema('floresta', 600)"
+            style="background:linear-gradient(135deg,#4ade80,#16a34a);color:#030d05;box-shadow:0 4px 16px rgba(74,222,128,0.3);font-weight:800;">
+            <span>600 💎</span> Desbloquear
+          </button>
+        </div>
+
+        <!-- RGB -->
+        <div class="shop-card" id="card-tema-rgb" style="border-color:rgba(255,255,255,0.15);background:rgba(5,5,10,0.6);">
+          <div class="shop-card-glow" style="--glow:rgba(255,100,100,0.2)"></div>
+          <div class="shop-card-badge" style="background:linear-gradient(135deg,#f00,#0f0,#00f);color:#fff;">Raro</div>
+          <div class="shop-card-icon">🌈</div>
+          <div class="shop-card-title rgb-title">Tema RGB</div>
+          <div class="shop-card-desc" style="color:rgba(255,255,255,0.55);">Fundo que muda de cor em arco-íris. Máximo impacto visual.</div>
+          <div class="shop-card-preview rgb-preview">
+            <span class="rgb-text-fast" style="font-weight:800;letter-spacing:3px;">A N I G M A</span>
+          </div>
+          <button class="btn-buy rgb-buy-btn" id="btn-tema-rgb" onclick="comprarTema('rgb', 800)">
+            <span>800 💎</span> Desbloquear
+          </button>
+        </div>
+
+        <!-- Cyberpunk -->
+        <div class="shop-card shop-card-cyberpunk" id="card-tema-cyberpunk">
+          <div class="shop-card-glow" style="--glow:rgba(252,238,10,0.2)"></div>
+          <div class="shop-card-badge" style="background:linear-gradient(135deg,#fcee0a,#ff00ff);color:#000;">Exclusivo</div>
+          <div class="shop-card-icon">⚡</div>
+          <div class="shop-card-title" style="color:#fcee0a;text-shadow:0 0 10px rgba(252,238,10,0.5);">Tema Cyberpunk</div>
+          <div class="shop-card-desc" style="color:rgba(252,238,10,0.6);">Néons, glitch e linhas de velocidade. O futuro distópico na tua tela.</div>
+          <div class="cyberpunk-preview-text">A · N · I · G · M · A</div>
+          <button class="btn-buy btn-buy-cyberpunk" id="btn-tema-cyberpunk" onclick="comprarTema('cyberpunk', 1000)">
+            <span>1000 💎</span> Desbloquear
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+  <script src="../supabase.js"></script>
+  <script src="../nameStyles.js"></script>
+  <script src="../Seasonpass.js"></script>
+  <script src="../auth.js"></script>
+  <script src="../Tema.js"></script>
+  <script src="../transicao.js"></script>
+  <script src="../avatars.js"></script>
+  <script src="../achievements.js"></script>
+  <script src="loja.js"></script>
+
+  <script>
+    function atualizarBotoesTemas() {
+      let unlocked = [];
+      try { const s = localStorage.getItem('anigma_unlocked_themes'); if (s) unlocked = JSON.parse(s); } catch(e) {}
+      ['cyberpunk','bleach','rgb','floresta'].forEach(tema => {
+        const btn = document.getElementById(`btn-tema-${tema}`);
+        if (btn && unlocked.includes(tema)) {
+          btn.innerHTML = '✅ Desbloqueado';
+          btn.disabled = true;
+          btn.style.cssText = 'width:100%;padding:12px;border-radius:8px;border:none;font-weight:700;font-family:inherit;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);cursor:not-allowed;box-shadow:none;';
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', atualizarBotoesTemas);
+  </script>
+</body>
+</html>

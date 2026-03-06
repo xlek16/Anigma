@@ -1,0 +1,450 @@
+/* dragonball.css */
+
+.game-main {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+}
+
+/* TOPO */
+.game-top {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.game-anime-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.game-subtitle {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.40);
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+}
+
+/* STATS */
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 8px;
+  padding: 12px 20px;
+  min-width: 120px;
+}
+
+.stat-icon { font-size: 1.2rem; }
+.stat-value { font-size: 1.1rem; font-weight: 800; color: #ffffff; line-height: 1; }
+.stat-label { font-size: 0.68rem; color: rgba(255,255,255,0.35); margin-top: 2px; letter-spacing: 0.5px; }
+
+.timer-box { border-color: rgba(255,200,0,0.25); background: rgba(255,200,0,0.05); }
+.timer-box .stat-value { color: #ffd700; }
+
+/* SEARCH */
+.game-search-wrap {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto 28px;
+}
+
+.game-search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+
+.game-search-box:focus-within {
+  border-color: rgba(255,255,255,0.45);
+}
+
+.game-search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 14px 18px;
+  font-size: 0.92rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.game-search-box input::placeholder { color: rgba(255,255,255,0.30); }
+
+.btn-submit-guess {
+  background: #ffffff;
+  border: none;
+  padding: 14px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+
+.btn-submit-guess svg { width: 18px; height: 18px; color: #111; }
+.btn-submit-guess:hover { background: #e0e0e0; }
+
+/* SUGESTOES */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #1a1a22;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 100;
+  display: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.search-suggestions.open { display: block; }
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.12s;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.suggestion-item:last-child { border-bottom: none; }
+.suggestion-item:hover { background: rgba(255,255,255,0.07); }
+
+.suggestion-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+
+.suggestion-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* DICAS */
+.hints-section {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hints-header { margin-bottom: 14px; }
+
+.hints-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.hints-count {
+  font-size: 0.72rem;
+  background: rgba(255,215,0,0.15);
+  border: 1px solid rgba(255,215,0,0.30);
+  color: #ffd700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.hints-info {
+  font-size: 0.74rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+}
+
+.hints-shop-link {
+  color: #ffd700;
+  text-decoration: underline;
+}
+
+.hints-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-hint {
+  flex: 1;
+  min-width: 120px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+}
+
+.btn-hint.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-hint.unlocked {
+  opacity: 1;
+  border-color: rgba(255,215,0,0.35);
+  cursor: pointer;
+}
+
+.btn-hint.unlocked:hover {
+  background: rgba(255,215,0,0.10);
+  border-color: rgba(255,215,0,0.60);
+}
+
+.btn-hint.used {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hint-lock { font-size: 0.85rem; }
+.hint-text { font-size: 0.82rem; font-weight: 600; color: #ffffff; flex: 1; text-align: left; }
+.hint-cost { font-size: 0.70rem; color: rgba(255,215,0,0.70); font-weight: 700; }
+
+.hint-result {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #ffd700;
+  font-weight: 600;
+  min-height: 20px;
+  text-align: center;
+}
+
+/* TABELA DE PALPITES */
+.guesses-section {
+  margin-bottom: 48px;
+  overflow-x: auto;
+}
+
+.guesses-header {
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 6px;
+  padding: 0 2px;
+}
+
+.guesses-header .col,
+.guesses-header .col-img {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.30);
+  text-align: center;
+  padding: 6px 4px;
+}
+
+/* LINHA DE PALPITE */
+.guess-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 4px;
+  animation: slideIn 0.35s ease forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.guess-cell {
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 10px 6px;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 52px;
+  transition: background 0.3s;
+  position: relative;
+}
+
+.guess-cell.correct  { background: rgba(21,128,61,0.55);  border: 1px solid rgba(22,163,74,0.60); }
+.guess-cell.close    { background: rgba(120,53,15,0.55);   border: 1px solid rgba(217,119,6,0.60); }
+.guess-cell.wrong    { background: rgba(127,29,29,0.55);   border: 1px solid rgba(185,28,28,0.60); }
+
+.guess-cell img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.arrow-up   { color: #4ade80; font-size: 0.75rem; }
+.arrow-down { color: #f87171; font-size: 0.75rem; }
+
+/* RESULTADO */
+.game-result {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  margin-bottom: 48px;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.result-icon  { font-size: 3rem; margin-bottom: 12px; }
+.result-title { font-size: 1.8rem; font-weight: 800; color: #ffffff; margin-bottom: 8px; }
+.result-text  { font-size: 0.90rem; color: rgba(255,255,255,0.55); margin-bottom: 12px; }
+.result-diamonds { font-size: 1rem; color: #ffd700; font-weight: 700; }
+
+/* TEMAS */
+body.light-mode .stat-box { background: #fff; border-color: #ddd; }
+body.light-mode .stat-value { color: #111; }
+body.light-mode .stat-label { color: #888; }
+body.light-mode .game-anime-title { color: #111; }
+body.light-mode .game-subtitle { color: #666; }
+body.light-mode .game-search-box { background: #fff; border-color: #ccc; }
+body.light-mode .game-search-box input { color: #111; }
+body.light-mode .game-search-box input::placeholder { color: #aaa; }
+body.light-mode .btn-submit-guess { background: #111; }
+body.light-mode .btn-submit-guess svg { color: #fff; }
+body.light-mode .search-suggestions { background: #fff; border-color: #ddd; }
+body.light-mode .suggestion-item:hover { background: #f5f5f5; }
+body.light-mode .suggestion-name { color: #111; }
+body.light-mode .hints-section { background: #fff; border-color: #ddd; }
+body.light-mode .hints-title { color: #111; }
+body.light-mode .hints-info { color: #888; }
+body.light-mode .btn-hint { background: #f5f5f5; border-color: #ddd; }
+body.light-mode .hint-text { color: #111; }
+body.light-mode .guesses-header .col,
+body.light-mode .guesses-header .col-img { color: #888; }
+body.light-mode .guess-cell { background: #e8e8e8; color: #111; }
+body.light-mode .game-result { background: #fff; border-color: #ddd; }
+body.light-mode .result-title { color: #111; }
+body.light-mode .result-text { color: #555; }
+body.light-mode .hint-result { color: #b45309; }
+body.light-mode .hint-cost { color: #b45309; }
+body.light-mode .hints-count { color: #92400e; background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); }
+
+
+body.theme-sakura .game-anime-title { color: #f9a8d4; }
+body.theme-sakura .stat-box { background: rgba(249,168,212,0.05); border-color: rgba(249,168,212,0.15); }
+body.theme-sakura .game-search-box { border-color: rgba(249,168,212,0.25); }
+body.theme-sakura .btn-submit-guess { background: #f9a8d4; }
+body.theme-sakura .hints-section { background: rgba(249,168,212,0.04); border-color: rgba(249,168,212,0.12); }
+
+body.theme-oceano .game-anime-title { color: #38bdf8; }
+body.theme-oceano .stat-box { background: rgba(56,189,248,0.05); border-color: rgba(56,189,248,0.15); }
+body.theme-oceano .game-search-box { border-color: rgba(56,189,248,0.25); }
+body.theme-oceano .btn-submit-guess { background: #38bdf8; }
+body.theme-oceano .hints-section { background: rgba(56,189,248,0.04); border-color: rgba(56,189,248,0.12); }
+
+/* HEADER STATS */
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 6px 14px;
+}
+
+.header-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 8px;
+  border-right: 1px solid rgba(255,255,255,0.10);
+}
+
+.header-stat:last-child { border-right: none; }
+
+.header-stat-icon { font-size: 0.85rem; }
+.header-stat-val  { font-size: 0.82rem; font-weight: 700; color: #ffffff; }
+
+/* CLAIM BUTTON */
+.btn-claim {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  color: #111111;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 16px;
+  box-shadow: 0 4px 20px rgba(255,215,0,0.35);
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  animation: pulseClaim 1.5s ease infinite;
+}
+
+.btn-claim:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,215,0,0.55);
+}
+
+.btn-claim:disabled {
+  animation: none;
+  cursor: not-allowed;
+}
+
+@keyframes pulseClaim {
+  0%, 100% { box-shadow: 0 4px 20px rgba(255,215,0,0.35); }
+  50%       { box-shadow: 0 4px 32px rgba(255,215,0,0.70); }
+}
+
+/* temas */
+body.light-mode .header-stats { background: #fff; border-color: #ddd; }
+body.light-mode .header-stat  { border-right-color: #eee; }
+body.light-mode .header-stat-val { color: #111; }
+body.theme-sakura .header-stats { background: rgba(249,168,212,0.08); border-color: rgba(249,168,212,0.20); }
+body.theme-oceano .header-stats { background: rgba(56,189,248,0.08);  border-color: rgba(56,189,248,0.20); }

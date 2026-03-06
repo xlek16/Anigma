@@ -1,0 +1,210 @@
+/* ── Season Pass Premium Banner ──────────────────────── */
+.sp-premium-banner {
+  position: relative;
+  width: 100%;
+  height: 110px;
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+  margin-bottom: -18px;
+}
+
+.sp-premium-banner-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(60,80,160,0.7) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(100,50,130,0.5) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(120,160,220,0.3) 0%, transparent 50%),
+    linear-gradient(135deg, #050d20 0%, #0d1a35 40%, #08102a 100%);
+}
+
+/* Partículas mágicas no banner */
+.sp-banner-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.sp-banner-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: bannerParticle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes bannerParticle {
+  0%, 100% { transform: translateY(0) scale(1); opacity: var(--lo, 0.3); }
+  50%       { transform: translateY(-8px) scale(1.3); opacity: var(--hi, 0.8); }
+}
+
+/* Runas no banner */
+.sp-banner-rune {
+  position: absolute;
+  font-family: 'Cinzel', serif;
+  color: rgba(180, 210, 255, 0.12);
+  font-size: var(--sz, 1rem);
+  animation: bannerRune var(--dur, 8s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  user-select: none;
+}
+
+@keyframes bannerRune {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+  50%       { transform: translateY(-5px) rotate(10deg); opacity: 0.2; }
+}
+
+/* Linha brilhante no topo */
+.sp-premium-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c8a96e, #a0c0e8, #c8a96e, transparent);
+  z-index: 2;
+  animation: bannerLineShimmer 3s ease-in-out infinite;
+}
+
+@keyframes bannerLineShimmer {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+/* Conteúdo do banner */
+.sp-banner-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 3;
+}
+
+.sp-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sp-banner-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 12px rgba(200,169,110,0.6));
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+
+.sp-banner-text { display: flex; flex-direction: column; gap: 2px; }
+
+.sp-banner-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px rgba(180,210,255,0.5);
+}
+
+.sp-banner-sub {
+  font-size: 0.7rem;
+  color: rgba(200,169,110,0.8);
+  letter-spacing: 2px;
+  font-family: 'Cinzel', serif;
+}
+
+.sp-banner-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, rgba(200,169,110,0.2), rgba(200,169,110,0.08));
+  border: 1px solid rgba(200,169,110,0.4);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #c8a96e;
+  letter-spacing: 2px;
+  box-shadow: 0 0 16px rgba(200,169,110,0.15);
+  animation: badgePulse 2.5s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(200,169,110,0.15); }
+  50%       { box-shadow: 0 0 22px rgba(200,169,110,0.35); }
+}
+
+/* Sem premium — banner discreto */
+.sp-free-banner {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+  margin-bottom: -18px;
+  background: linear-gradient(135deg, #0a0f1e, #111827);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.sp-free-banner-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px;
+}
+
+.sp-free-banner-cta {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: rgba(200,169,110,0.5);
+  text-decoration: none;
+  border: 1px solid rgba(200,169,110,0.15);
+  padding: 5px 14px;
+  border-radius: 20px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.sp-free-banner-cta:hover {
+  color: #c8a96e;
+  border-color: rgba(200,169,110,0.35);
+}
+
+/* ── Tag Premium no Ranking ──────────────────────────── */
+.sp-ranking-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, rgba(200,169,110,0.18), rgba(200,169,110,0.06));
+  border: 1px solid rgba(200,169,110,0.35);
+  color: #c8a96e;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 1.5px;
+  font-family: 'Cinzel', serif;
+  vertical-align: middle;
+  margin-left: 6px;
+  animation: rankTagGlow 2.5s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+@keyframes rankTagGlow {
+  0%, 100% { box-shadow: 0 0 4px rgba(200,169,110,0.1); }
+  50%       { box-shadow: 0 0 10px rgba(200,169,110,0.3); }
+}
+
+/* Adaptar profile-header-card para ter border-radius no topo quando tem banner */
+.sp-premium-banner + .profile-header-card,
+.sp-free-banner + .profile-header-card {
+  border-radius: 0 0 18px 18px;
+  margin-top: 0;
+}
