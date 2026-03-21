@@ -2,10 +2,10 @@
 
 // ── Raridade ──────────────────────────────────────────────────
 const ACHIEVEMENT_RARITY = {
-  bronze:   { label: 'Bronze',   color: '#cd7f32', glow: 'rgba(205,127,50,0.3)'   },
-  prata:    { label: 'Prata',    color: '#b0b8c8', glow: 'rgba(176,184,200,0.3)'  },
-  ouro:     { label: 'Ouro',     color: '#ffd700', glow: 'rgba(255,215,0,0.3)'    },
-  diamante: { label: 'Diamante', color: '#38bdf8', glow: 'rgba(56,189,248,0.3)'   },
+  bronze: { label: 'Bronze', color: '#cd7f32', glow: 'rgba(205,127,50,0.3)' },
+  prata: { label: 'Prata', color: '#b0b8c8', glow: 'rgba(176,184,200,0.3)' },
+  ouro: { label: 'Ouro', color: '#ffd700', glow: 'rgba(255,215,0,0.3)' },
+  diamante: { label: 'Diamante', color: '#38bdf8', glow: 'rgba(56,189,248,0.3)' },
   lendario: { label: 'Lendário', color: '#a78bfa', glow: 'rgba(167,139,250,0.35)' },
 };
 
@@ -273,22 +273,6 @@ const ACHIEVEMENTS = {
     check: (p) => (p.season_pass_level || 0) >= 50,
   },
 
-  // ═══════════ SEASON PASS ══════════════════════════════════
-  sp_nivel_10: {
-    name: 'Explorador da Época',
-    description: 'Alcança o nível 10 no Season Pass.',
-    icon: '🎫', rarity: 'bronze',
-    reward: { diamonds: 100 },
-    check: (p) => (p.season_pass_level || 0) >= 10,
-  },
-  sp_completo: {
-    name: 'Mestre da Época',
-    description: 'Completa o Season Pass inteiro.',
-    icon: '🏁', rarity: 'ouro',
-    reward: { diamonds: 1000, title: 'Mestre da Época' },
-    check: (p) => (p.season_pass_level || 0) >= 50,
-  },
-
   // ═══════════ OCULTAS ══════════════════════════════════════
   sniper: {
     name: '🎯 Sniper',
@@ -410,6 +394,7 @@ function mostrarToastConquista(ach) {
 async function verificarConquistas(profile) {
   if (!profile?.id) return;
   const unlocked = profile.unlocked_achievements || [];
+  console.log(`[Achievements] Verificando para ${profile.username} (${profile.id}). Já desbloqueadas:`, unlocked.length);
   const novos = []; const recompensas = { diamonds: 0, titles: [] };
 
   for (const [id, ach] of Object.entries(ACHIEVEMENTS)) {
@@ -430,19 +415,31 @@ async function verificarConquistas(profile) {
   try {
     const novaLista = [...unlocked, ...novos];
     const novosDiam = (profile.diamantes || 0) + recompensas.diamonds;
-    const novosTit  = [...new Set([...(profile.unlocked_titles || []), ...recompensas.titles])];
+    const novosTit = [...new Set([...(profile.unlocked_titles || []), ...recompensas.titles])];
 
-    const { error } = await window.supabaseClient.from('profiles').update({
+    // 1. Atualizar conquistas e títulos na tabela 'profile_cosmetics'
+    const { error: err1 } = await window.supabaseClient.from('profile_cosmetics').update({
       unlocked_achievements: novaLista,
-      diamantes:             novosDiam,
-      unlocked_titles:       novosTit,
-    }).eq('id', profile.id);
+      unlocked_titles: novosTit,
+    }).eq('user_id', profile.id);
+    if (err1) throw err1;
 
-    if (error) throw error;
+    // Atualiza localmente já
+    profile.unlocked_achievements = novaLista;
+    profile.unlocked_titles = novosTit;
+
+    // 2. Atualizar diamantes na tabela 'profile_stats'
+    if (recompensas.diamonds > 0) {
+      const { error: err2 } = await window.supabaseClient.from('profile_stats').update({
+        diamantes: novosDiam
+      }).eq('user_id', profile.id);
+      if (err2) throw err2;
+      profile.diamantes = novosDiam;
+    }
 
     profile.unlocked_achievements = novaLista;
-    profile.diamantes             = novosDiam;
-    profile.unlocked_titles       = novosTit;
+    profile.diamantes = novosDiam;
+    profile.unlocked_titles = novosTit;
 
     if (typeof atualizarHeaderStats === 'function') {
       atualizarHeaderStats(novosDiam, profile.pontos_totais);
@@ -470,14 +467,14 @@ function renderAchievements(profile) {
 
     grupo.forEach(([id, ach]) => {
       const isUnlocked = unlocked.includes(id);
-      const isHidden   = ach.hidden && !isUnlocked;
+      const isHidden = ach.hidden && !isUnlocked;
 
       const card = document.createElement('div');
       card.className = [
         'ach-card',
         `rarity-${rarity}`,
         isUnlocked ? 'unlocked' : 'locked',
-        isHidden   ? 'hidden-locked' : '',
+        isHidden ? 'hidden-locked' : '',
       ].filter(Boolean).join(' ');
 
       const rewardText = [
@@ -498,7 +495,7 @@ function renderAchievements(profile) {
 
       // Botão de equipar título
       if (isUnlocked && ach.reward?.title) {
-        const btnWrap  = document.createElement('div');
+        const btnWrap = document.createElement('div');
         btnWrap.className = 'ach-button-wrap';
         const equipBtn = document.createElement('button');
         equipBtn.className = 'btn-equip-title' + (equippedTitle === ach.reward.title ? ' equipped' : '');
@@ -515,6 +512,6 @@ function renderAchievements(profile) {
 }
 
 window.verificarConquistas = verificarConquistas;
-window.renderAchievements  = renderAchievements;
-window.ACHIEVEMENTS        = ACHIEVEMENTS;
-window.ACHIEVEMENT_RARITY  = ACHIEVEMENT_RARITY;
+window.renderAchievements = renderAchievements;
+window.ACHIEVEMENTS = ACHIEVEMENTS;
+window.ACHIEVEMENT_RARITY = ACHIEVEMENT_RARITY;

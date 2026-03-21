@@ -1,9 +1,16 @@
 async function handleGoogleAuth() {
   const { error } = await window.supabaseClient.auth.signInWithOAuth({
     provider: 'google',
+    options: {
+      redirectTo: window.location.origin + '/index.html'
+    }
   });
   if (error) {
-    document.getElementById('registerMsg').textContent = 'Erro ao autenticar com Google: ' + error.message;
+    if (error.message.includes('provider is not enabled')) {
+      document.getElementById('registerMsg').textContent = 'O Login com Google não está ativado no teu Supabase Dashboard. Ativa-o em Authentication > Providers.';
+    } else {
+      document.getElementById('registerMsg').textContent = 'Erro ao autenticar com Google: ' + error.message;
+    }
   }
 }
 

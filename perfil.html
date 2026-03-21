@@ -1,144 +1,301 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ANIGMA — Perfil</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="Style.css">
-  <link rel="stylesheet" href="perfil.css">
-  <link rel="stylesheet" href="perfil_banner.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - ANIGMA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=Cinzel:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="perfil.css">
+    <link rel="stylesheet" href="perfil_banner.css">
+    <style>
+        .header-stats {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .header-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            border-right: 1px solid rgba(255, 255, 255, 0.10);
+        }
+
+        .header-stat:last-child {
+            border-right: none;
+        }
+
+        .header-stat-val {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #ffffff;
+            min-width: 20px;
+        }
+    </style>
 </head>
+
 <body>
+    <div class="page-transition" id="pageTransition"></div>
+    <div class="sakura-container" id="sakuraContainer"></div>
+    <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
+    <div class="bg-photo"></div>
+    <div class="bg-overlay"></div>
 
-  <div class="page-transition" id="pageTransition"></div>
-  <div class="sakura-container" id="sakuraContainer"></div>
-  <canvas class="ocean-canvas" id="oceanCanvas"></canvas>
-  <div class="bg-photo"></div>
-  <div class="bg-overlay"></div>
-
-  <header>
-    <div class="logo-wrap">
-      <img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg">
-    </div>
-    <div class="header-right">
-      <a class="btn-nav" href="index.html">Jogar</a>
-      <a class="btn-nav" href="ranking/ranking.html">Ranking</a>
-      <div class="theme-wrap" id="themeWrap">
-        <button class="btn-theme" onclick="toggleThemeMenu()">
-          <span class="theme-indicator"></span>
-          <span id="themeLabel">Dark</span>
-          &#9662;
-        </button>
-        <div class="theme-menu" id="themeMenu"></div>
-      </div>
-      <div class="header-sep"></div>
-      <a class="btn-nav" href="loja/loja.html" id="btnLoja" style="display:none;">💎 Loja</a>
-      <a class="btn-nav" href="Seasonpass.html" id="btnSeasonPass" style="display:none;">🎫 Passe</a>
-      <div class="header-stats" id="headerStats" style="display:none;">
-        <div class="header-stat">
-          <span class="header-stat-icon">⭐</span>
-          <span class="header-stat-val" id="headerPontos">0</span>
+    <header>
+        <div class="logo-wrap">
+            <a href="index.html"><img src="Imagens/LogoSite/LogoSite.png" alt="Anigma" id="logoImg"></a>
         </div>
-        <div class="header-stat">
-          <span class="header-stat-icon">💎</span>
-          <span class="header-stat-val" id="headerDiamantes">0</span>
+        <div class="header-right">
+            <a class="btn-nav" href="index.html">Jogar</a>
+            <a class="btn-nav" href="ranking/ranking.html">Ranking</a>
+
+            <div class="theme-wrap" id="themeWrap">
+                <button class="btn-theme" onclick="toggleThemeMenu()">
+                    <span class="theme-indicator"></span>
+                    <span id="themeLabel">Dark</span>
+                    &#9662;
+                </button>
+                <div class="theme-menu" id="themeMenu">
+                    <div class="theme-option" data-theme="escuro" onclick="setTheme('escuro')"><span
+                            class="theme-dot"></span> Dark</div>
+                    <div class="theme-option" data-theme="claro" onclick="setTheme('claro')"><span
+                            class="theme-dot"></span> Light</div>
+                    <div class="theme-option" data-theme="naruto" onclick="setTheme('naruto')"><span
+                            class="theme-dot"></span> Naruto</div>
+                    <div class="theme-option" data-theme="onepiece" onclick="setTheme('onepiece')"><span
+                            class="theme-dot"></span> One Piece</div>
+                </div>
+            </div>
+
+            <div class="header-sep"></div>
+
+            <a class="btn-nav" href="loja/loja.html" id="btnLoja" style="display:none;">💎 Loja</a>
+            <a class="btn-nav" href="Seasonpass.html" id="btnSeasonPass" style="display:none;">🎫 Passe</a>
+
+            <div class="header-stats" id="headerStats" style="display:none;">
+                <div class="header-stat">
+                    <span class="header-stat-icon">⭐</span>
+                    <span class="header-stat-val" id="headerPontos">0</span>
+                </div>
+                <div class="header-stat">
+                    <span class="header-stat-icon">💎</span>
+                    <span class="header-stat-val" id="headerDiamantes">0</span>
+                </div>
+            </div>
+
+            <a class="btn-login" href="login.html" id="btnLogin">Login</a>
         </div>
-      </div>
-      <a class="btn-login" href="login.html" id="btnLogin">Login</a>
-    </div>
-  </header>
+    </header>
 
-  <main class="perfil-main">
-    
-    <div class="profile-header-card">
-      <div class="profile-avatar-wrap"></div>
-      <div class="profile-user-info">
-        <h1 id="pUsername">Carregando...</h1>
-        <span id="pTitle" class="profile-title-badge" style="display:none;"></span>
-        <div class="profile-level-bar-wrap">
-          <div id="pLevelFill" class="level-progress-fill" style="width: 0%;"></div>
-          <div class="level-bar-text">
-            <span><span id="pCurrentXP">0</span> / <span id="pNextXP">100</span> XP</span>
-            <span>Próximo Nível: <span id="pNextLevel">2</span></span>
-          </div>
+    <main class="perfil-main">
+
+        <!--
+          ┌─────────────────────────────────────────────────┐
+          │  BLOCO BANNER + CARD  (colados, sem gap)        │
+          │                                                  │
+          │  [ BANNER 220px com botões de edição ]          │
+          │  ┌──────────────────────────────────────────┐   │
+          │  │ 🟣  Nome     [barra XP]                  │   │
+          │  └──────────────────────────────────────────┘   │
+          └─────────────────────────────────────────────────┘
+        -->
+        <div class="perfil-banner-card-wrap">
+
+            <!-- BANNER -->
+            <div id="profileBannerWrap" class="profile-banner-wrap-custom">
+                <!-- conteúdo do banner (img/video/placeholder) -->
+                <div id="bannerContent" class="banner-dynamic-content">
+                    <!-- preenchido pelo JS -->
+                </div>
+
+                <!-- Botões de edição — só visíveis no perfil próprio -->
+                <div class="banner-edit-overlay perfil-edit-only">
+                    <div class="banner-edit-buttons">
+                        <label for="bannerInput" class="btn-edit-banner">
+                            <span class="edit-icon">📸</span>
+                            <span>Alterar Banner</span>
+                            <input type="file" id="bannerInput" accept="image/*,image/gif" style="display:none;">
+                        </label>
+                        <button id="btnExternalBanner" class="btn-edit-banner">
+                            <span class="edit-icon">🔗</span>
+                            <span>Link Externo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /BANNER -->
+
+            <!-- CABEÇALHO DO PERFIL (SOBREPOSTO AO BANNER) -->
+            <div class="profile-header-card profile-card-with-banner">
+                <div class="profile-avatar-row">
+                    <div class="profile-avatar-wrap">
+                        <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/avatar_default.png"
+                            alt="Avatar" class="profile-avatar-img">
+                    </div>
+                </div>
+
+                <div class="profile-user-info">
+                    <h1 id="pUsername">Carregando...</h1>
+                    <span id="pTitle" class="profile-title-badge" style="display:none;">Título</span>
+
+                    <div class="profile-level-bar-wrap">
+                        <div id="pLevelFill" class="level-progress-fill" style="width:0%"></div>
+                        <div class="level-bar-text">
+                            <span><span id="pCurrentXP">0</span> / <span id="pNextXP">0</span> XP</span>
+                            <span>LVL <span id="pLevel">1</span> (Próximo: <span id="pNextLevel">2</span>)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /CARD -->
+
         </div>
-      </div>
-    </div>
+        <!-- /perfil-banner-card-wrap -->
 
-    <div class="stats-toggle-wrap">
-      <button id="toggleStatsBtn" class="btn-toggle-stats">📊 Ver Estatísticas</button>
-    </div>
-
-    <div id="statsContainer" class="stats-container">
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-card-label">Nível</div><div class="stat-card-value" id="pLevel">1</div></div>
-        <div class="stat-card"><div class="stat-card-label">Pontos Totais</div><div class="stat-card-value">⭐ <span id="pPoints">0</span></div></div>
-        <div class="stat-card"><div class="stat-card-label">Diamantes</div><div class="stat-card-value">💎 <span id="pDiamonds">0</span></div></div>
-        <div class="stat-card"><div class="stat-card-label">Streak Diária</div><div class="stat-card-value">🔥 <span id="pStreak">0</span></div></div>
-      </div>
-      <div class="profile-section">
-        <h2 class="section-label">Estatísticas da Partida Diária</h2>
-        <div class="game-stats-grid">
-          <div class="game-stat-card">
-            <div class="game-stat-header">
-              <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/dragonball.webp" alt="Dragon Ball">
-              <h3>Dragon Ball</h3>
-            </div>
-            <div class="game-stat-body">
-              <div class="stat-item"><span class="stat-item-label">Pontos restantes</span><span class="stat-item-value" id="pDbPoints">--</span></div>
-              <div class="stat-item"><span class="stat-item-label">Tentativas usadas</span><span class="stat-item-value" id="pDbAttempts">--</span></div>
-            </div>
-          </div>
-          <div class="game-stat-card">
-            <div class="game-stat-header">
-              <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JJk.webp" alt="Jujutsu Kaisen">
-              <h3>Jujutsu Kaisen</h3>
-            </div>
-            <div class="game-stat-body">
-              <div class="stat-item"><span class="stat-item-label">Pontos restantes</span><span class="stat-item-value" id="pJjkPoints">--</span></div>
-              <div class="stat-item"><span class="stat-item-label">Tentativas usadas</span><span class="stat-item-value" id="pJjkAttempts">--</span></div>
-            </div>
-          </div>
+        <!-- ESTATÍSTICAS (Toggle) -->
+        <div class="stats-toggle-wrap">
+            <button id="toggleStatsBtn" class="btn-toggle-stats">📊 Ver Estatísticas</button>
         </div>
-      </div>
-    </div>
 
-    <div id="avatarContainer" class="profile-section">
-      <h2 class="section-label">Meus Avatares</h2>
-      <p class="section-desc">Clica num avatar para o equipar.</p>
-      <div id="avatarGrid"><div class="loading-spinner"></div></div>
-    </div>
+        <div id="statsContainer" class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-label">Pontos Totais</div>
+                    <div class="stat-card-value"><span id="pPoints">0</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Diamantes</div>
+                    <div class="stat-card-value">💎 <span id="pDiamonds">0</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Streak Atual</div>
+                    <div class="stat-card-value">🔥 <span id="pStreak">0</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">Passe de Batalha</div>
+                    <div class="stat-card-value">LVL <span id="pSpLevel">1</span></div>
+                </div>
+            </div>
 
-    <div id="nameStyleContainer" class="profile-section">
-      <h2 class="section-label">Meus Estilos de Nome</h2>
-      <p class="section-desc">Clica num estilo para o equipar.</p>
-      <div id="nameStyleGrid"><div class="loading-spinner"></div></div>
-    </div>
+            <div class="profile-section">
+                <div class="section-label">Histórico de Jogos</div>
+                <div class="game-stats-grid">
+                    <div class="game-stat-card">
+                        <div class="game-stat-header">
+                            <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/dragonball.webp"
+                                alt="DB">
+                            <h3>Dragon Ball</h3>
+                        </div>
+                        <div class="game-stat-body">
+                            <div class="stat-item">
+                                <span class="stat-item-label">Pontos Hoje</span>
+                                <span id="pDbPoints" class="stat-item-value">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-item-label">Tentativas</span>
+                                <span id="pDbAttempts" class="stat-item-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-stat-card">
+                        <div class="game-stat-header">
+                            <img src="https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/JJk.webp"
+                                alt="JJK">
+                            <h3>Jujutsu Kaisen</h3>
+                        </div>
+                        <div class="game-stat-body">
+                            <div class="stat-item">
+                                <span class="stat-item-label">Pontos Hoje</span>
+                                <span id="pJjkPoints" class="stat-item-value">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-item-label">Tentativas</span>
+                                <span id="pJjkAttempts" class="stat-item-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div id="achievementsContainer" class="profile-section">
-      <h2 class="section-label">Conquistas & Títulos</h2>
-      <p class="section-desc">Desbloqueia conquistas para ganhar diamantes e equipar títulos exclusivos.</p>
-      <div class="achievements-grid" id="achievementsGrid"><div class="loading-spinner"></div></div>
-    </div>
+        <!-- TABS -->
+        <nav class="perfil-tabs-nav">
+            <button class="tab-btn active" onclick="mudarTab('avatars', this)">
+                <span class="tab-icon">👤</span> Avatares
+            </button>
+            <button class="tab-btn" onclick="mudarTab('banners', this)">
+                <span class="tab-icon">🖼️</span> Banners <span id="countBanners" class="tab-count">0</span>
+            </button>
+            <button class="tab-btn" onclick="mudarTab('nameStyles', this)">
+                <span class="tab-icon">✍️</span> Estilos
+            </button>
+            <button class="tab-btn" onclick="mudarTab('conquistas', this)">
+                <span class="tab-icon">🏆</span> Conquistas
+            </button>
+        </nav>
 
-  </main>
+        <!-- PAINÉIS -->
+        <div id="panel-avatars" class="tab-panel active">
+            <div class="avatar-tab-header">
+                <p class="section-desc">Escolhe o teu avatar para exibires no ranking e perfil.</p>
+            </div>
+            <div id="avatarGrid">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
 
-  <footer>&copy; 2025 ANIGMA</footer>
+        <div id="panel-banners" class="tab-panel">
+            <div class="avatar-tab-header">
+                <p class="section-desc">Banners desbloqueados na loja ou eventos.</p>
+            </div>
+            <div id="bannersGrid" class="banners-grid">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
-  <script src="supabase.js"></script>
-  <script src="Db.js"></script>
-  <script src="auth.js"></script>
-  <script src="Seasonpass.js"></script>
-  <script src="premium_banner.js"></script>
-  <script src="Tema.js"></script>
-  <script src="transicao.js"></script>
-  <script src="nameStyles.js"></script>
-  <script src="avatars.js"></script>
-  <script src="achievements.js"></script>
-  <script src="perfil.js"></script>
+        <div id="nameStyles" class="tab-panel">
+            <div class="avatar-tab-header">
+                <p class="section-desc">Muda a aparência do teu nome no ranking.</p>
+            </div>
+            <div id="nameStyleGrid">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+
+        <div id="panel-conquistas" class="tab-panel">
+            <div class="avatar-tab-header">
+                <p class="section-desc">Os teus marcos e feitos no Anigma.</p>
+            </div>
+            <div id="achievementsGrid" class="achievements-grid">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>&copy; 2025 ANIGMA</footer>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.0/dist/umd/supabase.js"></script>
+    <script src="supabase.js"></script>
+    <script src="avatars.js"></script>
+    <script src="nameStyles.js"></script>
+    <script src="achievements.js"></script>
+    <script src="premium_banner.js"></script>
+    <script src="auth.js"></script>
+    <script src="Tema.js"></script>
+    <script src="transicao.js"></script>
+    <script src="perfil.js"></script>
 </body>
+
 </html>

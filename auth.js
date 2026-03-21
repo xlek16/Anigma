@@ -1,11 +1,11 @@
 // auth.js — atualizado para novas tabelas
 
 function atualizarHeaderStats(diamantes, pontos) {
-  const hPontos    = document.getElementById('headerPontos');
+  const hPontos = document.getElementById('headerPontos');
   const hDiamantes = document.getElementById('headerDiamantes');
-  const hStats     = document.getElementById('headerStats');
-  if (hStats)     hStats.style.display   = 'flex';
-  if (hPontos)    hPontos.textContent    = Math.max(0, pontos ?? 0);
+  const hStats = document.getElementById('headerStats');
+  if (hStats) hStats.style.display = 'flex';
+  if (hPontos) hPontos.textContent = Math.max(0, pontos ?? 0);
   if (hDiamantes) hDiamantes.textContent = diamantes ?? 0;
 }
 
@@ -16,10 +16,10 @@ function calculateLevel(points) {
 
 async function handleLevelUp(userId, pontosAntigos, pontosNovos) {
   const nivelAntigo = calculateLevel(pontosAntigos);
-  const nivelNovo   = calculateLevel(pontosNovos);
+  const nivelNovo = calculateLevel(pontosNovos);
   if (nivelNovo <= nivelAntigo) return;
 
-  const niveisSubidos   = nivelNovo - nivelAntigo;
+  const niveisSubidos = nivelNovo - nivelAntigo;
   const diamantesGanhos = niveisSubidos * 10;
 
   try {
@@ -58,8 +58,8 @@ function criarBotaoPerfil(profile, prefix) {
   const btnLogin = document.getElementById('btnLogin');
   if (!btnLogin) return;
 
-  const avatarUrl = profile.avatar_url || 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/avatar_default.png';
-  const username  = profile.username || 'Perfil';
+  const avatarUrl = profile.avatar_url || 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/avatar_default.png';
+  const username = profile.username || 'Perfil';
 
   document.getElementById('userDropdownWrap')?.remove();
   btnLogin.style.display = 'none';
@@ -75,9 +75,9 @@ function criarBotaoPerfil(profile, prefix) {
 
   let avatarEl;
   if (avatarUrl.endsWith('.webm') || avatarUrl.endsWith('.mp4')) {
-    avatarEl = Object.assign(document.createElement('video'), { autoplay:true, loop:true, muted:true });
+    avatarEl = Object.assign(document.createElement('video'), { autoplay: true, loop: true, muted: true });
   } else {
-    avatarEl = Object.assign(document.createElement('img'), { alt:'avatar' });
+    avatarEl = Object.assign(document.createElement('img'), { alt: 'avatar' });
   }
   avatarEl.id = 'headerUserAvatar';
   avatarEl.src = avatarUrl;
@@ -89,7 +89,7 @@ function criarBotaoPerfil(profile, prefix) {
   usernameSpan.textContent = username;
   if (profile.equipped_name_style && typeof NAME_STYLES !== 'undefined' && NAME_STYLES[profile.equipped_name_style]) {
     const s = NAME_STYLES[profile.equipped_name_style];
-    if (s.style)     usernameSpan.style.cssText = s.style;
+    if (s.style) usernameSpan.style.cssText = s.style;
     if (s.className) usernameSpan.className = s.className;
   }
   btn.appendChild(usernameSpan);
@@ -126,23 +126,33 @@ function criarBotaoPerfil(profile, prefix) {
 }
 
 async function atualizarHeader(session) {
-  const btnLogin      = document.getElementById('btnLogin');
-  const btnLoja       = document.getElementById('btnLoja');
+  const btnLogin = document.getElementById('btnLogin');
+  const btnLoja = document.getElementById('btnLoja');
   const btnSeasonPass = document.getElementById('btnSeasonPass');
-  const hStats        = document.getElementById('headerStats');
+  const hStats = document.getElementById('headerStats');
 
   const path = window.location.pathname;
   const isSubFolder = path.includes('/Jogos/') || path.includes('/loja/') || path.includes('/ranking/');
   const prefix = isSubFolder ? '../' : '';
 
   if (!session) {
+    // Redirecionar para register.html se não estiver em página pública ou de auth
+    const path = window.location.pathname;
+    const isAuthPage = path.includes('login.html') || path.includes('register.html');
+    const isPublicPage = path.includes('ranking.html') || path.includes('index.html') || path.endsWith('/');
+    
+    if (!isAuthPage && !isPublicPage) {
+      window.location.href = prefix + 'register.html';
+      return;
+    }
+
     if (btnLogin) {
       btnLogin.style.display = 'inline-flex';
-      btnLogin.href = prefix + 'login.html';
+      btnLogin.href = prefix + 'register.html';
       btnLogin.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Login`;
     }
     if (btnLoja) btnLoja.style.display = 'none';
-    if (hStats)  hStats.style.display  = 'none';
+    if (hStats) hStats.style.display = 'none';
     if (btnSeasonPass) btnSeasonPass.style.display = 'none';
     return;
   }
@@ -155,14 +165,14 @@ async function atualizarHeader(session) {
       window.supabaseClient.from('profile_cosmetics').select('unlocked_themes').eq('user_id', session.user.id).single(),
     ]);
 
-    let profile   = profileRes.data;
-    let stats     = statsRes.data;
+    let profile = profileRes.data;
+    let stats = statsRes.data;
     let cosmetics = cosmeticsRes.data;
 
     if (!profile) {
       const tempProfile = {
         username: session.user.user_metadata?.username || session.user.email?.split('@')[0] || 'Utilizador',
-        avatar_url: session.user.user_metadata?.avatar_url || 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/avatar_default.png',
+        avatar_url: session.user.user_metadata?.avatar_url || 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/avatar_default.png',
         equipped_name_style: null,
       };
       criarBotaoPerfil(tempProfile, prefix);
@@ -188,7 +198,7 @@ async function atualizarHeader(session) {
 
     // Daily streak
     if (stats) {
-      const hoje  = new Date().toISOString().split('T')[0];
+      const hoje = new Date().toISOString().split('T')[0];
       const ontem = new Date(Date.now() - 86400000).toISOString().split('T')[0];
 
       if (stats.last_streak_date !== hoje) {
@@ -215,9 +225,9 @@ async function atualizarHeader(session) {
     }
 
     atualizarHeaderStats(stats?.diamantes || 0, stats?.pontos_totais || 0);
-    if (btnLoja)       btnLoja.style.display       = 'inline-flex';
+    if (btnLoja) btnLoja.style.display = 'inline-flex';
     if (btnSeasonPass) btnSeasonPass.style.display = 'inline-flex';
-    if (hStats)        hStats.style.display        = 'flex';
+    if (hStats) hStats.style.display = 'flex';
 
     criarBotaoPerfil(profile, prefix);
 
