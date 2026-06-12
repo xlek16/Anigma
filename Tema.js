@@ -27,6 +27,12 @@ const TEMAS = {
 
   // Dragon Ball — laranja ki, Super Saiyan dourado, espaço
   dragonball: { label: 'Dragon Ball', classe: 'theme-dragonball', pago: true },
+
+  // Sailor Moon — rosa mágico, brilhos cósmicos e estrelas
+  sailormoon: { label: 'Sailor Moon', classe: 'theme-sailormoon', pago: true },
+
+  // Chainsaw Man — laranja néon / ferrugem, faíscas industriais e sangue
+  chainsawman: { label: 'Chainsaw Man', classe: 'theme-chainsawman', pago: true },
 };
 
 // ── Gratuitos: Naruto (partículas de folhas) e One Piece (oceano) substituem Sakura e Ocean
@@ -38,6 +44,7 @@ const pathPrefix = isSubFolder ? '../' : '';
 
 const LOGO_BRANCA = pathPrefix + 'Imagens/LogoSite/LogoSite.png';
 const LOGO_PRETA  = pathPrefix + 'Imagens/LogoSite/LogoPreta.png';
+const STORAGE_URL = 'https://xxpmvxcjnqwzrsbnqdsg.supabase.co/storage/v1/object/public/temas/';
 
 let _temasDesbloqueados = ['escuro', 'claro', 'naruto', 'onepiece'];
 
@@ -80,12 +87,15 @@ function setTheme(tema) {
 
   document.body.classList.remove(
     'light-mode','theme-naruto','theme-onepiece','theme-bleach',
-    'theme-aot','theme-demonslayer','theme-jjk','theme-dragonball'
+    'theme-aot','theme-demonslayer','theme-jjk','theme-dragonball',
+    'theme-sailormoon','theme-chainsawman'
   );
 
   // Parar efeitos anteriores
   pararNaruto(); pararOnePiece(); pararBleach(); pararAot();
   pararDemonSlayer(); pararJJK(); pararDragonBall();
+  pararSailorMoon(); pararChainsawMan();
+  limparAssets();
 
   if (TEMAS[tema].classe) document.body.classList.add(TEMAS[tema].classe);
 
@@ -104,6 +114,8 @@ function setTheme(tema) {
   if (tema === 'demonslayer') iniciarDemonSlayer();
   if (tema === 'jjk')        iniciarJJK();
   if (tema === 'dragonball') iniciarDragonBall();
+  if (tema === 'sailormoon') iniciarSailorMoon();
+  if (tema === 'chainsawman') iniciarChainsawMan();
 
   localStorage.setItem('anigma_tema', tema);
   closeThemeMenu();
@@ -159,18 +171,29 @@ function iniciarNaruto() {
     p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
     c.appendChild(p);
   }
+  const assets = obterContainerAssets();
+  assets.innerHTML = `<img src="${STORAGE_URL}kunai.webp" class="theme-float-asset asset-right-top" alt="">`;
 }
 function pararNaruto() {
   const c = document.getElementById('sakuraContainer'); if(c) c.innerHTML='';
 }
 
 // ── ONE PIECE — Ondas do oceano (mantém o canvas de ondas) ──
-function iniciarOnePiece() { iniciarOndas('onepiece'); }
+function iniciarOnePiece() {
+  iniciarOndas('onepiece');
+  const assets = obterContainerAssets();
+  assets.innerHTML = `<img src="${STORAGE_URL}luffyhat.png" class="theme-float-asset asset-left-bottom" alt="">`;
+}
 function pararOnePiece()   { pararCanvas(); }
 
 // ── BLEACH — Partículas de reiatsu (azul) ────────────────────
 let bleachAnim = null;
 function iniciarBleach() {
+  const assets = obterContainerAssets();
+  assets.innerHTML = `
+    <img src="${STORAGE_URL}hollowmask.webp" class="theme-float-asset asset-left-bottom" alt="">
+    <img src="${STORAGE_URL}shinigami.webp" class="theme-float-asset asset-right-top" alt="">
+  `;
   const canvas = obterCanvas(); if (!canvas) return;
   const ctx = canvas.getContext('2d');
   redimCanvas(canvas);
@@ -203,6 +226,11 @@ function pararBleach(){if(bleachAnim){cancelAnimationFrame(bleachAnim);bleachAni
 // ── ATTACK ON TITAN — Vapor de Titans (verde/cinza, névoa) ──
 let aotAnim = null;
 function iniciarAot() {
+  const assets = obterContainerAssets();
+  assets.innerHTML = `
+    <img src="${STORAGE_URL}asasliberdade.webp" class="theme-float-asset asset-left-bottom" alt="">
+    <img src="${STORAGE_URL}aot.webp" class="theme-float-asset asset-right-top" alt="">
+  `;
   const canvas = obterCanvas(); if (!canvas) return;
   const ctx = canvas.getContext('2d');
   redimCanvas(canvas);
@@ -274,6 +302,11 @@ function pararDemonSlayer(){if(dsAnim){cancelAnimationFrame(dsAnim);dsAnim=null;
 // ── JJK — Energia Amaldiçoada (roxo/preto) ──────────────────
 let jjkAnim = null;
 function iniciarJJK() {
+  const assets = obterContainerAssets();
+  assets.innerHTML = `
+    <img src="${STORAGE_URL}fingersukuna.webp" class="theme-float-asset asset-left-bottom" alt="">
+    <img src="${STORAGE_URL}oculos_gojo.webp" class="theme-float-asset asset-right-top" alt="">
+  `;
   const canvas = obterCanvas(); if (!canvas) return;
   const ctx = canvas.getContext('2d');
   redimCanvas(canvas);
@@ -380,6 +413,128 @@ function iniciarOndas(tipo) {
   draw();
 }
 function pararCanvas(){if(opAnim){cancelAnimationFrame(opAnim);opAnim=null;}limparCanvas();}
+
+// ── SAILOR MOON — Brilhos cósmicos e estrelas cintilantes ─────
+let smAnim = null;
+function iniciarSailorMoon() {
+  const assets = obterContainerAssets();
+  assets.innerHTML = `<img src="${STORAGE_URL}sailormoon.png" class="theme-float-asset asset-left-bottom" alt="">`;
+  const canvas = obterCanvas(); if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  redimCanvas(canvas);
+  const estrelas = Array.from({length:50}, () => novaEstrelaSM(canvas));
+  let t = 0;
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const bg = ctx.createLinearGradient(0,0,0,canvas.height);
+    bg.addColorStop(0,'rgba(30,5,40,0.6)'); bg.addColorStop(1,'rgba(10,2,25,0.75)');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+    estrelas.forEach(p=>{
+      p.y += p.vy; p.x += p.vx + Math.sin(t*.02 + p.y*.01)*.2; p.rot += p.rotV;
+      if (p.y > canvas.height + 10) { Object.assign(p, novaEstrelaSM(canvas)); p.y = -10; }
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.abs(Math.sin(t*0.01 + p.phase)) * p.opacity;
+      ctx.fillStyle = p.cor;
+      ctx.beginPath();
+      for(let i=0; i<4; i++) {
+        ctx.rotate(Math.PI/2);
+        ctx.lineTo(0, p.size); ctx.lineTo(p.size*0.3, p.size*0.3);
+      }
+      ctx.closePath(); ctx.fill(); ctx.restore();
+    });
+    ctx.globalAlpha = 1; t++; smAnim = requestAnimationFrame(draw);
+  }
+  draw();
+}
+function novaEstrelaSM(c){
+  const cores = ['#ff85a2','#ffd6e8','#ffe885','#f6d6ff'];
+  return {
+    x: Math.random()*c.width, y: Math.random()*c.height,
+    size: Math.random()*5+3, opacity: Math.random()*.6+.4,
+    vx: (Math.random()-.5)*0.2, vy: Math.random()*0.4+0.2,
+    rot: Math.random()*Math.PI*2, rotV: (Math.random()-.5)*0.02,
+    phase: Math.random()*Math.PI*2, cor: cores[Math.floor(Math.random()*cores.length)]
+  };
+}
+function pararSailorMoon(){if(smAnim){cancelAnimationFrame(smAnim);smAnim=null;}limparCanvas();}
+
+// ── CHAINSAW MAN — Faíscas industriais e salpicos de sangue ──
+let csmAnim = null;
+function iniciarChainsawMan() {
+  const assets = obterContainerAssets();
+  assets.innerHTML = `<img src="${STORAGE_URL}pochita.png" class="theme-float-asset asset-left-bottom" alt="">`;
+  const canvas = obterCanvas(); if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  redimCanvas(canvas);
+  const faiscas = Array.from({length:40}, () => novaFaiscaCSM(canvas));
+  const gotas = Array.from({length:20}, () => novaGotaCSM(canvas));
+  let t = 0;
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const bg = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+    bg.addColorStop(0,'rgba(5,5,5,0.75)'); bg.addColorStop(1,'rgba(25,10,0,0.85)');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+    
+    faiscas.forEach(f=>{
+      f.x += f.vx; f.y += f.vy; f.life -= f.decay;
+      if (f.life <= 0) { Object.assign(f, novaFaiscaCSM(canvas)); }
+      ctx.save(); ctx.globalAlpha = f.life;
+      ctx.shadowBlur = 8; ctx.shadowColor = '#ff5500';
+      ctx.fillStyle = '#ff8800';
+      ctx.fillRect(f.x, f.y, f.w, f.h);
+      ctx.restore();
+    });
+
+    gotas.forEach(g=>{
+      g.x += g.vx; g.y += g.vy;
+      if (g.y > canvas.height + 10) { Object.assign(g, novaGotaCSM(canvas)); }
+      ctx.save(); ctx.globalAlpha = g.opacity;
+      ctx.fillStyle = '#8b0000';
+      ctx.beginPath();
+      ctx.ellipse(g.x, g.y, g.size*0.6, g.size*1.8, Math.PI/6, 0, Math.PI*2);
+      ctx.fill(); ctx.restore();
+    });
+
+    ctx.globalAlpha = 1; t++; csmAnim = requestAnimationFrame(draw);
+  }
+  draw();
+}
+function novaFaiscaCSM(c){
+  return {
+    x: Math.random()*c.width, y: c.height + 10,
+    w: Math.random()*2+1, h: Math.random()*8+4,
+    vx: (Math.random()-.5)*3, vy: -(Math.random()*6+4),
+    life: 1.0, decay: Math.random()*0.02+0.01
+  };
+}
+function novaGotaCSM(c){
+  return {
+    x: Math.random()*c.width, y: -20,
+    size: Math.random()*3+2,
+    vx: Math.random()*1+0.5, vy: Math.random()*4+5,
+    opacity: Math.random()*0.6+0.2
+  };
+}
+function pararChainsawMan(){if(csmAnim){cancelAnimationFrame(csmAnim);csmAnim=null;}limparCanvas();}
+
+// ── Utilitários assets flutuantes ─────────────────────────────
+function obterContainerAssets() {
+  let container = document.getElementById('themeAssetsContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'themeAssetsContainer';
+    container.className = 'theme-assets-container';
+    document.body.prepend(container);
+  }
+  return container;
+}
+
+function limparAssets() {
+  const container = document.getElementById('themeAssetsContainer');
+  if (container) {
+    container.innerHTML = '';
+  }
+}
 
 // ── Utilitários canvas ────────────────────────────────────────
 function obterCanvas() {

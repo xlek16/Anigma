@@ -91,7 +91,7 @@ async function carregarPerfilPublico(username) {
     const xpNeeded = Math.max(1, nextLv - baseLv);
     const pct = Math.min(100, (currentXP / xpNeeded) * 100);
 
-    const avatarUrl = profileData.avatar_url || 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/avatar_default.png';
+    const avatarUrl = profileData.avatar_url || 'https://xxpmvxcjnqwzrsbnqdsg.supabase.co/storage/v1/object/public/avatares/bulma.webp';
     const avatarHtml = avatarUrl.endsWith('.webm') || avatarUrl.endsWith('.mp4')
       ? `<video src="${avatarUrl}" autoplay loop muted class="profile-avatar-img pub-avatar"></video>`
       : `<img src="${avatarUrl}" alt="Avatar" class="profile-avatar-img pub-avatar">`;
@@ -273,7 +273,7 @@ async function carregarPerfilProprio(session) {
   if (spLevelEl) spLevelEl.textContent = profile.season_pass_level;
 
   // Avatar atual
-  const currentAvatar = profile.avatar_url || 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/avatar_default.png';
+  const currentAvatar = profile.avatar_url || 'https://xxpmvxcjnqwzrsbnqdsg.supabase.co/storage/v1/object/public/avatares/bulma.webp';
   const avatarWrap = document.querySelector('.profile-avatar-wrap');
   avatarWrap.innerHTML = currentAvatar.endsWith('.webm') || currentAvatar.endsWith('.mp4')
     ? `<video src="${currentAvatar}" autoplay loop muted class="profile-avatar-img"></video>`
@@ -283,7 +283,7 @@ async function carregarPerfilProprio(session) {
   const avatarContainer = document.getElementById('avatarGrid');
   avatarContainer.innerHTML = '';
   let unlocked = Array.isArray(profile.unlocked_avatars) ? profile.unlocked_avatars : [];
-  const defaultAvatar = 'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/avatar_default.png';
+  const defaultAvatar = 'https://xxpmvxcjnqwzrsbnqdsg.supabase.co/storage/v1/object/public/avatares/bulma.webp';
   if (!unlocked.includes(defaultAvatar)) unlocked = [defaultAvatar, ...unlocked];
 
   if (typeof AVATARES !== 'undefined') {

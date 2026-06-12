@@ -145,6 +145,38 @@
   line-height: 1;
 }
 
+/* ── THEME IMAGE ICON ── */
+.shop-card-icon-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.shop-card:hover .shop-card-icon-img {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.shop-theme-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  filter: brightness(0.95);
+  transition: filter 0.3s ease;
+}
+
+.shop-card:hover .shop-theme-img {
+  filter: brightness(1.1);
+}
+
 .shop-card-title {
   font-size: 1.25rem;
   font-weight: 800;
@@ -503,3 +535,555 @@ body.theme-floresta .shop-section-header { border-bottom-color: rgba(74,222,128,
 body.theme-rgb .header-stats { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
 body.theme-rgb .shop-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
 body.theme-rgb .shop-section-header { border-bottom-color: rgba(255,255,255,0.07); }
+
+/* ═══════════════════════════════════════════════════════════
+   THEME PREVIEW PANELS — Anime-Specific Visuals
+   ═══════════════════════════════════════════════════════════ */
+
+.theme-preview-panel {
+  position: relative;
+  width: 100%;
+  height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-label {
+  position: relative;
+  z-index: 10;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 3px;
+}
+
+/* ── BLEACH PANEL ─────────────────────────────────────────── */
+.bleach-panel {
+  background: linear-gradient(180deg, #030610 0%, #060c1a 100%);
+  border: 1px solid rgba(96,144,224,0.2);
+}
+
+.bleach-moon {
+  position: absolute;
+  top: 8px; right: 16px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(180,210,255,0.25), transparent 70%);
+  box-shadow: 0 0 16px rgba(150,190,255,0.2), 0 0 32px rgba(96,144,224,0.1);
+  border: 1px solid rgba(180,210,255,0.15);
+}
+
+.bleach-reiatsu {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 100%, rgba(96,144,224,0.12) 0%, transparent 60%);
+  animation: reiatsuPulse 3s ease-in-out infinite;
+}
+
+@keyframes reiatsuPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.bleach-sword {
+  position: absolute;
+  left: 18px;
+  bottom: 10px;
+  width: 6px;
+  height: 72px;
+  transform: rotate(-35deg);
+  transform-origin: bottom center;
+  animation: swordGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes swordGlow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(96,144,224,0.5)); }
+  50% { filter: drop-shadow(0 0 10px rgba(96,144,224,0.9)); }
+}
+
+.bleach-sword-blade {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 50px;
+  background: linear-gradient(180deg, rgba(220,235,255,0.9), rgba(96,144,224,0.6));
+  border-radius: 2px 2px 0 0;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+}
+
+.bleach-sword-guard {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 5px;
+  background: rgba(96,144,224,0.8);
+  border-radius: 2px;
+}
+
+.bleach-sword-handle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 18px;
+  background: linear-gradient(180deg, rgba(60,80,140,0.9), rgba(30,40,80,0.9));
+  border-radius: 0 0 3px 3px;
+}
+
+/* ── AOT PANEL ────────────────────────────────────────────── */
+.aot-panel {
+  background: linear-gradient(180deg, #050a04 0%, #0a1407 100%);
+  border: 1px solid rgba(90,138,58,0.2);
+}
+
+.aot-fog {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(180,210,160,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 60%, rgba(140,180,120,0.06) 0%, transparent 50%);
+  animation: fogDrift 5s ease-in-out infinite alternate;
+}
+
+@keyframes fogDrift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(8px); }
+}
+
+.aot-wings {
+  position: absolute;
+  top: 8px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.6rem;
+  opacity: 0.7;
+  animation: wingsFloat 3s ease-in-out infinite;
+}
+
+@keyframes wingsFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+.aot-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(80,120,60,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80,120,60,0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ── JJK PANEL ────────────────────────────────────────────── */
+.jjk-panel {
+  background: linear-gradient(180deg, #030008 0%, #080014 100%);
+  border: 1px solid rgba(139,92,246,0.25);
+}
+
+.jjk-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.jjk-orb-1 {
+  width: 60px; height: 60px;
+  left: -10px; top: -10px;
+  background: radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%);
+  animation: orbFloat 4s ease-in-out infinite;
+}
+
+.jjk-orb-2 {
+  width: 80px; height: 80px;
+  right: -20px; bottom: -20px;
+  background: radial-gradient(circle, rgba(100,40,180,0.2) 0%, transparent 70%);
+  animation: orbFloat 5s ease-in-out infinite reverse;
+}
+
+.jjk-orb-3 {
+  width: 40px; height: 40px;
+  right: 30%; top: 10%;
+  background: radial-gradient(circle, rgba(200,150,255,0.2) 0%, transparent 70%);
+  animation: orbFloat 3s ease-in-out infinite 1s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.15) translateY(-5px); }
+}
+
+.jjk-cracks {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background:
+    linear-gradient(35deg, transparent 45%, rgba(139,92,246,0.8) 45.5%, transparent 46%),
+    linear-gradient(-20deg, transparent 55%, rgba(100,40,180,0.6) 55.5%, transparent 56%),
+    linear-gradient(60deg, transparent 30%, rgba(139,92,246,0.4) 30.5%, transparent 31%);
+  animation: crackFlash 4s step-start infinite;
+}
+
+@keyframes crackFlash {
+  0%, 90%, 100% { opacity: 0.1; }
+  92%, 95% { opacity: 0.4; }
+}
+
+/* ── DRAGON BALL PANEL ────────────────────────────────────── */
+.db-panel {
+  background: radial-gradient(ellipse at 50% 120%, rgba(255,140,0,0.15) 0%, #0d0600 60%);
+  border: 1px solid rgba(255,184,0,0.2);
+}
+
+.db-aura {
+  position: absolute;
+  bottom: -20px; left: 50%;
+  transform: translateX(-50%);
+  width: 100px; height: 80px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255,184,0,0.25) 0%, transparent 70%);
+  animation: auraPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes auraPulse {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.8; }
+  50% { transform: translateX(-50%) scaleX(1.2); opacity: 1; }
+}
+
+.db-ball {
+  position: absolute;
+  top: 10px; right: 20px;
+  font-size: 1.5rem;
+  color: #ff8c00;
+  text-shadow: 0 0 8px rgba(255,140,0,0.8), 0 0 16px rgba(255,184,0,0.4);
+  animation: dbSpin 4s linear infinite;
+}
+
+@keyframes dbSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.db-sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.db-sparks span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: #ffb800;
+  animation: sparkFly 2s ease-out infinite;
+}
+
+.db-sparks span:nth-child(1) { width: 3px; height: 3px; left: 45%; bottom: 20%; animation-delay: 0s; }
+.db-sparks span:nth-child(2) { width: 2px; height: 2px; left: 52%; bottom: 25%; animation-delay: 0.3s; }
+.db-sparks span:nth-child(3) { width: 4px; height: 4px; left: 38%; bottom: 18%; animation-delay: 0.6s; }
+.db-sparks span:nth-child(4) { width: 2px; height: 2px; left: 60%; bottom: 30%; animation-delay: 0.9s; }
+.db-sparks span:nth-child(5) { width: 3px; height: 3px; left: 55%; bottom: 15%; animation-delay: 1.2s; }
+
+@keyframes sparkFly {
+  0%   { transform: translateY(0) translateX(0); opacity: 1; }
+  100% { transform: translateY(-40px) translateX(calc((var(--d, 1)) * 20px)); opacity: 0; }
+}
+
+/* ── DEMON SLAYER PANEL ───────────────────────────────────── */
+.ds-panel {
+  background: linear-gradient(180deg, #02000a 0%, #0a0020 100%);
+  border: 1px solid rgba(106,176,212,0.2);
+  overflow: hidden;
+}
+
+.ds-wave {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: waveSweep 3s ease-in-out infinite;
+}
+
+.ds-wave-1 {
+  top: 30%;
+  border-top: 2px solid rgba(100,180,255,0.25);
+  animation-delay: 0s;
+}
+
+.ds-wave-2 {
+  top: 50%;
+  border-top: 1.5px solid rgba(160,220,255,0.18);
+  animation-delay: 0.8s;
+  animation-duration: 4s;
+}
+
+.ds-wave-3 {
+  top: 70%;
+  border-top: 1px solid rgba(200,240,255,0.12);
+  animation-delay: 1.6s;
+  animation-duration: 5s;
+}
+
+@keyframes waveSweep {
+  0%   { transform: translateX(-5%) scaleY(1); }
+  50%  { transform: translateX(5%) scaleY(1.3); }
+  100% { transform: translateX(-5%) scaleY(1); }
+}
+
+.ds-petals {
+  position: absolute;
+  top: 0; right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: petalsFloat 4s ease-in-out infinite;
+}
+
+.ds-petals span {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  animation: petalDrop 4s ease-in infinite;
+}
+
+.ds-petals span:nth-child(2) { animation-delay: 1.2s; }
+.ds-petals span:nth-child(3) { animation-delay: 2.4s; }
+
+@keyframes petalDrop {
+  0%   { transform: translateY(-10px) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(120px) rotate(180deg); opacity: 0; }
+}
+
+.ds-blade {
+  position: absolute;
+  left: 20px;
+  bottom: 8px;
+  width: 4px;
+  height: 60px;
+  background: linear-gradient(180deg, rgba(200,240,255,0.95), rgba(106,176,212,0.6), rgba(204,34,68,0.7));
+  border-radius: 2px 2px 0 0;
+  transform: rotate(-25deg);
+  transform-origin: bottom;
+  filter: drop-shadow(0 0 6px rgba(106,176,212,0.6));
+  animation: bladeGlow 2s ease-in-out infinite;
+}
+
+@keyframes bladeGlow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(106,176,212,0.6)); }
+  50% { filter: drop-shadow(0 0 10px rgba(106,176,212,1)); }
+}
+
+/* ── SAILOR MOON PANEL ────────────────────────────────────── */
+.sm-panel {
+  background: radial-gradient(ellipse at 70% 20%, rgba(80,0,100,0.6) 0%, #0a0118 100%);
+  border: 1px solid rgba(255,105,180,0.25);
+}
+
+.sm-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sm-star {
+  position: absolute;
+  color: #ffd700;
+  font-size: 0.75rem;
+  text-shadow: 0 0 6px rgba(255,215,0,0.8), 0 0 12px rgba(255,105,180,0.4);
+  animation: starTwinkle 2s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  50% { opacity: 0.3; transform: scale(0.6) rotate(20deg); }
+}
+
+.sm-moon {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+}
+
+.sm-moon-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+  animation: moonPulse 3s ease-in-out infinite;
+}
+
+@keyframes moonPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+.sm-moon-crescent {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #ffe87c;
+  box-shadow: 0 0 10px rgba(255,215,0,0.6), 0 0 20px rgba(255,105,180,0.3);
+  clip-path: polygon(0 0, 60% 0, 60% 100%, 0 100%);
+}
+
+.sm-moon-crescent::after {
+  content: '';
+  position: absolute;
+  top: 2px; right: -4px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #0a0118;
+}
+
+.sm-wand {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  font-size: 1.6rem;
+  animation: wandFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(255,105,180,0.6));
+}
+
+@keyframes wandFloat {
+  0%, 100% { transform: rotate(-10deg) translateY(0); }
+  50% { transform: rotate(-15deg) translateY(-4px); }
+}
+
+/* ── CHAINSAW MAN PANEL ───────────────────────────────────── */
+.csm-panel {
+  background: linear-gradient(135deg, #050505 0%, #150500 100%);
+  border: 1px solid rgba(255,69,0,0.25);
+}
+
+.csm-sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.csm-sparks span {
+  position: absolute;
+  display: block;
+  background: #ff6600;
+  border-radius: 1px;
+  animation: sparkShoot 1.5s linear infinite;
+  box-shadow: 0 0 4px #ff4500;
+}
+
+.csm-sparks span:nth-child(1) { width: 2px; height: 6px; left: 15%; top: 70%; animation-delay: 0s; --sx: -15px; --sy: -30px; }
+.csm-sparks span:nth-child(2) { width: 1px; height: 4px; left: 30%; top: 80%; animation-delay: 0.25s; --sx: 10px; --sy: -25px; }
+.csm-sparks span:nth-child(3) { width: 2px; height: 8px; left: 50%; top: 85%; animation-delay: 0.5s; --sx: -8px; --sy: -35px; }
+.csm-sparks span:nth-child(4) { width: 1px; height: 5px; left: 65%; top: 75%; animation-delay: 0.75s; --sx: 12px; --sy: -28px; }
+.csm-sparks span:nth-child(5) { width: 2px; height: 7px; left: 80%; top: 80%; animation-delay: 1s; --sx: -5px; --sy: -32px; }
+.csm-sparks span:nth-child(6) { width: 1px; height: 4px; left: 42%; top: 90%; animation-delay: 1.25s; --sx: 18px; --sy: -20px; }
+
+@keyframes sparkShoot {
+  0%   { transform: translate(0, 0) rotate(var(--r, 20deg)); opacity: 1; }
+  100% { transform: translate(var(--sx, -10px), var(--sy, -30px)) rotate(var(--r, 20deg)); opacity: 0; }
+}
+
+.csm-blood-drops {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.csm-drop {
+  position: absolute;
+  top: -8px;
+  width: 5px;
+  height: 10px;
+  background: #8b0000;
+  border-radius: 50% 50% 40% 40%;
+  animation: bloodFall 2.5s ease-in infinite;
+  box-shadow: 0 0 4px rgba(139,0,0,0.5);
+}
+
+@keyframes bloodFall {
+  0%   { transform: translateY(0) scaleY(1); opacity: 0.9; }
+  80%  { transform: translateY(110px) scaleY(1.2); opacity: 0.8; }
+  100% { transform: translateY(120px) scaleY(0.5); opacity: 0; }
+}
+
+.csm-pochita {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  font-size: 1.5rem;
+  animation: pochitaRun 3s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+}
+
+@keyframes pochitaRun {
+  0%   { transform: translateX(0) scaleX(1); }
+  45%  { transform: translateX(60px) scaleX(1); }
+  50%  { transform: translateX(60px) scaleX(-1); }
+  95%  { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(0) scaleX(1); }
+}
+
+.csm-chainsaw {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-30deg);
+  width: 18px;
+  height: 55px;
+  animation: chainsawRev 0.08s linear infinite;
+}
+
+@keyframes chainsawRev {
+  0%   { transform: translateY(-50%) rotate(-30deg) translateX(0); }
+  50%  { transform: translateY(-50%) rotate(-30deg) translateX(0.5px); }
+  100% { transform: translateY(-50%) rotate(-30deg) translateX(0); }
+}
+
+.csm-cs-body {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 42px;
+  background: linear-gradient(180deg, #555, #333);
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(255,69,0,0.4);
+}
+
+.csm-cs-chain {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 46px;
+  border: 2px solid rgba(255,80,0,0.7);
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(255,69,0,0.5), inset 0 0 6px rgba(255,69,0,0.2);
+  animation: chainSpin 0.15s linear infinite;
+}
+
+@keyframes chainSpin {
+  from { border-color: rgba(255,80,0,0.7); }
+  to   { border-color: rgba(255,150,50,0.9); }
+}
+
+.csm-cs-teeth {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 8px;
+  background: linear-gradient(90deg, #ff4500 0%, #ff6600 50%, #ff4500 100%);
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0 0 8px rgba(255,69,0,0.8);
+}

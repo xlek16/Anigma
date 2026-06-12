@@ -206,6 +206,8 @@ footer { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,
 .theme-option[data-theme="demonslayer"] .theme-dot { background: #cc2244; box-shadow: 0 0 6px #cc2244; }
 .theme-option[data-theme="jjk"]         .theme-dot { background: #8b5cf6; box-shadow: 0 0 6px #8b5cf6; }
 .theme-option[data-theme="dragonball"]  .theme-dot { background: #ffb800; box-shadow: 0 0 6px #ffb800; }
+.theme-option[data-theme="sailormoon"]  .theme-dot { background: #ff69b4; box-shadow: 0 0 6px #ff69b4; }
+.theme-option[data-theme="chainsawman"] .theme-dot { background: #ff4500; box-shadow: 0 0 6px #ff4500; }
 .theme-option.active .theme-dot { background: #22c55e !important; border: none !important; box-shadow: 0 0 6px #22c55e !important; }
 
 /* ── CANVAS / EFEITOS ── */
@@ -216,7 +218,9 @@ body.theme-onepiece .ocean-canvas,
 body.theme-aot .ocean-canvas,
 body.theme-demonslayer .ocean-canvas,
 body.theme-jjk .ocean-canvas,
-body.theme-dragonball .ocean-canvas { display: block; }
+body.theme-dragonball .ocean-canvas,
+body.theme-sailormoon .ocean-canvas,
+body.theme-chainsawman .ocean-canvas { display: block; }
 
 /* ── PAGE TRANSITIONS ── */
 .page-transition { position: fixed; inset: 0; background: #0a0a0e; z-index: 9999; pointer-events: none; animation: fadeOut 0.5s ease forwards; animation-delay: 0.1s; }
@@ -793,3 +797,435 @@ body.theme-dragonball .rule-card,
 body.theme-dragonball .ranking-note,
 body.theme-dragonball .pontos-note,
 body.theme-dragonball .dinheiro-note { animation: kiPulse 3s ease-in-out infinite; }
+
+/* ── THEME-SAILORMOON ────────────────────────────────────── */
+body.theme-sailormoon { background: #150520; color: #ffccd8; }
+body.theme-sailormoon .bg-overlay { background: rgba(21,5,32,0.85); }
+body.theme-sailormoon header {
+  background: rgba(21,5,32,0.95);
+  border-bottom: 1px solid rgba(255,105,180,0.25);
+  box-shadow: 0 0 20px rgba(255,105,180,0.15);
+}
+body.theme-sailormoon .btn-nav { border-color: rgba(255,105,180, 0.3); color: rgba(255,105,180, 0.7); }
+body.theme-sailormoon .btn-nav:hover { background: rgba(255,105,180, 0.12); color: #ff69b4; border-color: #ff69b4; }
+body.theme-sailormoon .btn-nav.active { background: linear-gradient(135deg, #ff69b4, #ffd700); border-color: #ff69b4; color: #150520; font-weight: 800; }
+body.theme-sailormoon .btn-login,
+body.theme-sailormoon .btn-theme { border-color: rgba(255,105,180, 0.4); color: #ff69b4; }
+body.theme-sailormoon .btn-login:hover,
+body.theme-sailormoon .btn-theme:hover { background: rgba(255,105,180, 0.1); }
+body.theme-sailormoon .btn-loja { border-color: rgba(255,105,180, 0.3); color: #ff69b4; }
+body.theme-sailormoon .btn-loja:hover { background: rgba(255,105,180, 0.12); border-color: #ff69b4; }
+body.theme-sailormoon .theme-menu { background: #220a33; border-color: rgba(255,105,180, 0.25); }
+body.theme-sailormoon .theme-option { color: rgba(255,180,200,0.7); }
+body.theme-sailormoon .theme-option:hover { background: rgba(255,105,180, 0.1); color: #ff69b4; }
+body.theme-sailormoon .anime-section-title { color: #ff69b4; text-shadow: 0 0 12px rgba(255,105,180,0.6), 0 0 24px rgba(255,215,0,0.3); }
+body.theme-sailormoon .anime-thumb { background: #220a33; border-color: rgba(255,105,180, 0.3); }
+body.theme-sailormoon .anime-card:hover .anime-thumb { border-color: #ff69b4; box-shadow: 0 0 16px rgba(255,105,180,0.4), 0 0 32px rgba(255,215,0,0.2); }
+body.theme-sailormoon .anime-name { color: rgba(255,180,200,0.7); }
+body.theme-sailormoon .anime-card:hover .anime-name { color: #ff69b4; }
+body.theme-sailormoon .section-label { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.4); }
+body.theme-sailormoon .rules-intro { color: rgba(255,180,200, 0.5); }
+body.theme-sailormoon .rule-card { background: rgba(255,105,180, 0.05); border-color: rgba(255,105,180, 0.15); }
+body.theme-sailormoon .rule-card-title { color: #ffe6eb; }
+body.theme-sailormoon .rule-card-desc  { color: rgba(255,180,200, 0.5); }
+body.theme-sailormoon .colors-label,
+body.theme-sailormoon .arrows-label { color: rgba(255,105,180, 0.45); }
+body.theme-sailormoon .arrows-table-wrap { background: rgba(255,105,180, 0.02); border-color: rgba(255,105,180, 0.15); }
+body.theme-sailormoon .arrows-table th { color: rgba(255,105,180, 0.5); border-bottom-color: rgba(255,105,180, 0.1); background: rgba(255,105,180, 0.03); }
+body.theme-sailormoon .arrows-table td { color: rgba(255,200,215,0.7); border-bottom-color: rgba(255,105,180, 0.08); }
+body.theme-sailormoon .divider { background: linear-gradient(90deg,transparent,#ff69b4,transparent); }
+body.theme-sailormoon .ranking-note,
+body.theme-sailormoon .pontos-note,
+body.theme-sailormoon .dinheiro-note { background: rgba(255,105,180, 0.04); border-color: rgba(255,105,180, 0.15); }
+body.theme-sailormoon .ranking-note-title,
+body.theme-sailormoon .pontos-note-title,
+body.theme-sailormoon .dinheiro-note-title { color: #ff69b4; }
+body.theme-sailormoon .about-name { color: #ff69b4; }
+body.theme-sailormoon .about-text { color: rgba(255,180,200,0.6); }
+body.theme-sailormoon .about-link { background: rgba(255,105,180, 0.06); border-color: rgba(255,105,180, 0.2); color: rgba(255,180,200,0.7); }
+body.theme-sailormoon footer { border-top-color: rgba(255,105,180,0.12); color: rgba(255,105,180,0.3); }
+body.theme-sailormoon .header-stats { background: rgba(255,105,180, 0.06); border-color: rgba(255,105,180, 0.2); }
+body.theme-sailormoon .header-stat  { border-right-color: rgba(255,105,180, 0.15); }
+body.theme-sailormoon .header-stat-val { color: #ff69b4; }
+body.theme-sailormoon [class*="Fill"], body.theme-sailormoon .xp-fill { background: linear-gradient(90deg, #ff69b4, #9370db, #ffd700) !important; }
+body.theme-sailormoon ::-webkit-scrollbar-thumb { background: #ff69b4; }
+
+/* ── THEME-CHAINSAWMAN ───────────────────────────────────── */
+body.theme-chainsawman { background: #080808; color: #ff7744; }
+body.theme-chainsawman .bg-overlay { background: rgba(8,8,8,0.92); }
+body.theme-chainsawman header {
+  background: rgba(8,8,8,0.96);
+  border-bottom: 1px solid rgba(255,69,0,0.3);
+  box-shadow: 0 0 20px rgba(255,69,0,0.2);
+}
+body.theme-chainsawman .btn-nav { border-color: rgba(255,69,0, 0.3); color: rgba(255,69,0, 0.6); }
+body.theme-chainsawman .btn-nav:hover { background: rgba(255,69,0, 0.15); color: #ff4500; border-color: #ff4500; }
+body.theme-chainsawman .btn-nav.active { background: #ff4500; border-color: #ff4500; color: #000000; font-weight: 800; }
+body.theme-chainsawman .btn-login,
+body.theme-chainsawman .btn-theme { border-color: rgba(255,69,0, 0.4); color: #ff4500; }
+body.theme-chainsawman .btn-login:hover,
+body.theme-chainsawman .btn-theme:hover { background: rgba(255,69,0, 0.15); }
+body.theme-chainsawman .btn-loja { border-color: rgba(255,69,0, 0.3); color: #ff4500; }
+body.theme-chainsawman .btn-loja:hover { background: rgba(255,69,0, 0.15); border-color: #ff4500; }
+body.theme-chainsawman .theme-menu { background: #111; border-color: rgba(255,69,0, 0.3); }
+body.theme-chainsawman .theme-option { color: rgba(255,120,60,0.7); }
+body.theme-chainsawman .theme-option:hover { background: rgba(255,69,0, 0.12); color: #ff4500; }
+body.theme-chainsawman .anime-section-title { color: #ff4500; text-shadow: 0 0 8px rgba(255,69,0,0.5), 0 0 16px rgba(139,0,0,0.5); }
+body.theme-chainsawman .anime-thumb { background: #111; border-color: rgba(255,69,0, 0.35); }
+body.theme-chainsawman .anime-card:hover .anime-thumb { border-color: #ff4500; box-shadow: 0 0 16px rgba(255,69,0,0.5), 0 0 32px rgba(139,0,0,0.3); }
+body.theme-chainsawman .anime-name { color: rgba(255,120,60,0.7); }
+body.theme-chainsawman .anime-card:hover .anime-name { color: #ff4500; }
+body.theme-chainsawman .section-label { color: #ff4500; text-transform: uppercase; letter-spacing: 1px; }
+body.theme-chainsawman .rules-intro { color: rgba(255,100,50, 0.6); }
+body.theme-chainsawman .rule-card { background: rgba(255,69,0, 0.05); border-color: rgba(255,69,0, 0.2); }
+body.theme-chainsawman .rule-card-title { color: #ffaa77; }
+body.theme-chainsawman .rule-card-desc  { color: rgba(255,100,50, 0.5); }
+body.theme-chainsawman .colors-label,
+body.theme-chainsawman .arrows-label { color: rgba(255,69,0, 0.45); }
+body.theme-chainsawman .arrows-table-wrap { background: rgba(255,69,0, 0.02); border-color: rgba(255,69,0, 0.2); }
+body.theme-chainsawman .arrows-table th { color: rgba(255,69,0, 0.5); border-bottom-color: rgba(255,69,0, 0.15); background: rgba(255,69,0, 0.05); }
+body.theme-chainsawman .arrows-table td { color: rgba(255,150,100,0.7); border-bottom-color: rgba(255,69,0, 0.1); }
+body.theme-chainsawman .divider { background: linear-gradient(90deg,transparent,#ff4500,transparent); }
+body.theme-chainsawman .ranking-note,
+body.theme-chainsawman .pontos-note,
+body.theme-chainsawman .dinheiro-note { background: rgba(255,69,0, 0.05); border-color: rgba(255,69,0, 0.2); }
+body.theme-chainsawman .ranking-note-title,
+body.theme-chainsawman .pontos-note-title,
+body.theme-chainsawman .dinheiro-note-title { color: #ff4500; }
+body.theme-chainsawman .about-name { color: #ff4500; }
+body.theme-chainsawman .about-text { color: rgba(255,120,60,0.6); }
+body.theme-chainsawman .about-link { background: rgba(255,69,0, 0.08); border-color: rgba(255,69,0, 0.25); color: rgba(255,150,100,0.7); }
+body.theme-chainsawman footer { border-top-color: rgba(255,69,0,0.15); color: rgba(255,69,0,0.3); }
+body.theme-chainsawman .header-stats { background: rgba(255,69,0, 0.06); border-color: rgba(255,69,0, 0.2); }
+body.theme-chainsawman .header-stat  { border-right-color: rgba(255,69,0, 0.15); }
+body.theme-chainsawman .header-stat-val { color: #ff4500; }
+body.theme-chainsawman [class*="Fill"], body.theme-chainsawman .xp-fill { background: linear-gradient(90deg, #8b0000, #ff4500, #ff8800) !important; }
+body.theme-chainsawman ::-webkit-scrollbar-thumb { background: #ff4500; }
+/* =============================================================
+   THEMATIC ATMOSPHERES - Kanji Watermarks + Anime Backgrounds
+   ============================================================= */
+
+/* NARUTO - kanji Nin + chakra laranja */
+body.theme-naruto {
+  background-image:
+    radial-gradient(ellipse at 75% 108%, rgba(255,107,0,0.18) 0%, transparent 52%),
+    radial-gradient(ellipse at 15% -5%,  rgba(255,107,0,0.07) 0%, transparent 42%),
+    radial-gradient(ellipse at 50% 50%,  rgba(180,60,0,0.04)  0%, transparent 65%);
+}
+body.theme-naruto::before {
+  content: '忍';
+  position: fixed; bottom: 20px; right: 10px;
+  font-size: 320px; font-weight: 900; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,107,0,0.07);
+  pointer-events: none; z-index: 0; user-select: none;
+}
+
+/* ONE PIECE - kanji Kaizoku + oceano profundo */
+body.theme-onepiece {
+  background-image:
+    radial-gradient(ellipse at 50% 108%, rgba(0,100,180,0.20) 0%, transparent 55%),
+    radial-gradient(ellipse at 15%  50%, rgba(0,50,120,0.08)  0%, transparent 40%),
+    radial-gradient(ellipse at 85%  20%, rgba(0,70,150,0.06)  0%, transparent 40%);
+}
+body.theme-onepiece::before {
+  content: '海賊';
+  position: fixed; bottom: 20px; right: 8px;
+  font-size: 160px; font-weight: 900; line-height: 1.05;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(0,153,230,0.08);
+  pointer-events: none; z-index: 0; user-select: none;
+  writing-mode: vertical-rl;
+}
+
+/* BLEACH - kanji Zanpakuto + lua cheia brilhante */
+body.theme-bleach {
+  background-image:
+    radial-gradient(circle   at 83% 17%, rgba(160,195,255,0.12) 0%, transparent 34%),
+    radial-gradient(ellipse  at 25% 85%, rgba(60,90,180,0.07)   0%, transparent 45%),
+    radial-gradient(ellipse  at 50% 50%, rgba(30,50,120,0.05)   0%, transparent 60%);
+}
+body.theme-bleach::before {
+  content: '斬魄刀';
+  position: fixed; bottom: 20px; right: 8px;
+  font-size: 110px; font-weight: 900; line-height: 1.05;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(96,144,224,0.09);
+  pointer-events: none; z-index: 0; user-select: none;
+  writing-mode: vertical-rl;
+}
+body.theme-bleach::after {
+  content: '';
+  position: fixed; top: 108px; right: 50px;
+  width: 105px; height: 105px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%, rgba(210,225,255,0.18) 0%, rgba(150,185,255,0.08) 35%, transparent 65%);
+  border: 1px solid rgba(180,210,255,0.10);
+  box-shadow: 0 0 30px rgba(96,144,224,0.08), 0 0 80px rgba(96,144,224,0.05), inset 0 0 15px rgba(200,220,255,0.06);
+  pointer-events: none; z-index: 0;
+  animation: luaBleach 5s ease-in-out infinite;
+}
+@keyframes luaBleach {
+  0%, 100% { box-shadow: 0 0 30px rgba(96,144,224,0.08), 0 0 80px rgba(96,144,224,0.05); transform: translateY(0); }
+  50%       { box-shadow: 0 0 50px rgba(96,144,224,0.14), 0 0 120px rgba(96,144,224,0.08); transform: translateY(-5px); }
+}
+
+/* AOT - kanji Jiyuu (Liberdade) + névoa militar */
+body.theme-aot {
+  background-image:
+    radial-gradient(ellipse at 50%  95%, rgba(90,138,58,0.12) 0%, transparent 58%),
+    radial-gradient(ellipse at 80%  40%, rgba(60,100,40,0.06) 0%, transparent 38%),
+    radial-gradient(ellipse at 20%  20%, rgba(40,70,25,0.05)  0%, transparent 38%);
+}
+body.theme-aot::before {
+  content: '自由';
+  position: fixed; bottom: 20px; right: 8px;
+  font-size: 140px; font-weight: 900; line-height: 1.05;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(90,138,58,0.09);
+  pointer-events: none; z-index: 0; user-select: none;
+  writing-mode: vertical-rl;
+}
+
+/* DEMON SLAYER - kanji Zenshuchu + agua e sangue */
+body.theme-demonslayer {
+  background-image:
+    radial-gradient(ellipse at 25%  60%, rgba(100,170,210,0.09) 0%, transparent 48%),
+    radial-gradient(ellipse at 75%  75%, rgba(200,30,60,0.06)   0%, transparent 42%),
+    radial-gradient(ellipse at 50%  -5%, rgba(80,0,20,0.12)     0%, transparent 50%),
+    radial-gradient(ellipse at 50% 108%, rgba(50,100,160,0.08)  0%, transparent 50%);
+}
+body.theme-demonslayer::before {
+  content: '全集中';
+  position: fixed; bottom: 20px; right: 8px;
+  font-size: 110px; font-weight: 900; line-height: 1.05;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(106,176,212,0.09);
+  pointer-events: none; z-index: 0; user-select: none;
+  writing-mode: vertical-rl;
+}
+
+/* JJK - kanji Jujutsu + dominio escuro */
+body.theme-jjk {
+  background-image:
+    radial-gradient(ellipse at 18%  18%, rgba(139,92,246,0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at 82%  82%, rgba(100,40,200,0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 50%  50%, rgba(60,0,110,0.07)   0%, transparent 58%),
+    radial-gradient(ellipse at 50% 108%, rgba(80,20,150,0.08)  0%, transparent 45%);
+}
+body.theme-jjk::before {
+  content: '呪術';
+  position: fixed; bottom: 20px; right: 8px;
+  font-size: 150px; font-weight: 900; line-height: 1.05;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(139,92,246,0.09);
+  pointer-events: none; z-index: 0; user-select: none;
+  writing-mode: vertical-rl;
+}
+body.theme-jjk header {
+  box-shadow: 0 0 30px rgba(139,92,246,0.12), 0 1px 0 rgba(139,92,246,0.2) !important;
+}
+
+/* DRAGON BALL - kanji Chou (Super) + aura de ki */
+body.theme-dragonball {
+  background-image:
+    radial-gradient(ellipse at 50% 110%, rgba(255,140,0,0.22)  0%, transparent 55%),
+    radial-gradient(ellipse at 82%  18%, rgba(255,80,0,0.07)   0%, transparent 38%),
+    radial-gradient(ellipse at 18%  75%, rgba(200,100,0,0.06)  0%, transparent 38%);
+}
+body.theme-dragonball::before {
+  content: '超';
+  position: fixed; bottom: 20px; right: 10px;
+  font-size: 320px; font-weight: 900; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,184,0,0.08);
+  pointer-events: none; z-index: 0; user-select: none;
+}
+
+/* SAILOR MOON - campo de estrelas + kanji Tsuki + lua */
+body.theme-sailormoon {
+  background-image:
+    radial-gradient(1.5px 1.5px at  7% 12%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 18% 38%, rgba(255,220,255,0.28) 0%, transparent 100%),
+    radial-gradient(2px   2px   at 27%  7%, rgba(255,255,210,0.35) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 42% 25%, rgba(255,255,255,0.22) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 56%  4%, rgba(255,220,255,0.32) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 67% 33%, rgba(255,255,255,0.27) 0%, transparent 100%),
+    radial-gradient(2px   2px   at 76% 14%, rgba(255,255,220,0.32) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 89% 42%, rgba(255,255,255,0.22) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 13% 62%, rgba(255,200,255,0.22) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 33% 77%, rgba(255,255,255,0.17) 0%, transparent 100%),
+    radial-gradient(2px   2px   at 52% 68%, rgba(255,220,255,0.20) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 73% 83%, rgba(255,255,255,0.16) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 94% 72%, rgba(255,200,220,0.22) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 44% 90%, rgba(255,210,255,0.18) 0%, transparent 100%),
+    radial-gradient(circle  at 83% 12%, rgba(255,215,0,0.11)   0%, transparent 28%),
+    radial-gradient(ellipse at 20% 72%, rgba(150,50,200,0.10)  0%, transparent 48%),
+    radial-gradient(ellipse at 60% 45%, rgba(100,0,160,0.06)   0%, transparent 58%),
+    radial-gradient(ellipse at 50% 108%, rgba(180,0,120,0.08)  0%, transparent 45%);
+}
+body.theme-sailormoon::before {
+  content: '月';
+  position: fixed; bottom: 20px; right: 10px;
+  font-size: 320px; font-weight: 900; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,105,180,0.08);
+  pointer-events: none; z-index: 0; user-select: none;
+}
+body.theme-sailormoon::after {
+  content: '';
+  position: fixed; top: 106px; right: 46px;
+  width: 112px; height: 112px; border-radius: 50%;
+  background: radial-gradient(circle at 36% 36%, rgba(255,248,200,0.22) 0%, rgba(255,215,0,0.07) 38%, transparent 65%);
+  border: 1px solid rgba(255,215,0,0.12);
+  box-shadow: 0 0 30px rgba(255,215,0,0.09), 0 0 70px rgba(255,105,180,0.07), inset 0 0 18px rgba(255,240,180,0.06);
+  pointer-events: none; z-index: 0;
+  animation: luaSM 4s ease-in-out infinite;
+}
+@keyframes luaSM {
+  0%, 100% { box-shadow: 0 0 30px rgba(255,215,0,0.09), 0 0 70px rgba(255,105,180,0.07); transform: translateY(0); }
+  50%       { box-shadow: 0 0 55px rgba(255,215,0,0.16), 0 0 110px rgba(255,105,180,0.12); transform: translateY(-6px); }
+}
+body.theme-sailormoon header {
+  box-shadow: 0 0 30px rgba(255,105,180,0.12), 0 1px 0 rgba(255,105,180,0.2) !important;
+}
+
+/* CHAINSAW MAN - kanji Chi (Sangue) + drip no header */
+body.theme-chainsawman {
+  background-image:
+    radial-gradient(ellipse at 50%  -8%, rgba(139,0,0,0.22)  0%, transparent 48%),
+    radial-gradient(ellipse at 25%  55%, rgba(80,0,0,0.07)   0%, transparent 38%),
+    radial-gradient(ellipse at 75%  88%, rgba(60,0,0,0.09)   0%, transparent 40%),
+    radial-gradient(ellipse at 50% 108%, rgba(100,10,0,0.08) 0%, transparent 45%);
+}
+body.theme-chainsawman::before {
+  content: '血';
+  position: fixed; bottom: 20px; right: 10px;
+  font-size: 320px; font-weight: 900; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,69,0,0.08);
+  pointer-events: none; z-index: 0; user-select: none;
+}
+body.theme-chainsawman header {
+  border-bottom-color: rgba(180,0,0,0.55) !important;
+  box-shadow: 0 0 25px rgba(139,0,0,0.22), 0 2px 0 rgba(180,0,0,0.35), 0 4px 16px rgba(80,0,0,0.30) !important;
+}
+body.theme-chainsawman .anime-section-title {
+  text-shadow: 0 0 18px rgba(255,69,0,0.55), 0 0 36px rgba(139,0,0,0.4) !important;
+}
+
+/* ── ELEMENTOS FLUTUANTES DOS TEMAS ── */
+.theme-assets-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.theme-float-asset {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.50; /* Aumentada a opacidade base para ficarem bem visíveis */
+  mix-blend-mode: screen; /* Remove fundos pretos/escuros das imagens automaticamente */
+  transition: opacity 0.5s ease;
+  will-change: transform;
+}
+
+/* Tornar o chapéu do Luffy de One Piece ainda mais visível e brilhante */
+body.theme-onepiece .theme-float-asset {
+  opacity: 0.85 !important;
+  filter: drop-shadow(0 0 12px rgba(0, 153, 230, 0.45));
+}
+
+/* Animações de Flutuação Ampla que andam por TODA a tela (Sway total) */
+@keyframes floatSlowLeft {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(45vw, -30vh) rotate(120deg); }
+  50% { transform: translate(75vw, 10vh) rotate(240deg); }
+  75% { transform: translate(35vw, 50vh) rotate(360deg); }
+  100% { transform: translate(0, 0) rotate(480deg); }
+}
+
+@keyframes floatSlowRight {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-35vw, 35vh) rotate(-90deg); }
+  50% { transform: translate(-75vw, -10vh) rotate(-180deg); }
+  75% { transform: translate(-30vw, -40vh) rotate(-270deg); }
+  100% { transform: translate(0, 0) rotate(-360deg); }
+}
+
+@keyframes floatPulse {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-45vw, -25vh) scale(1.15) rotate(180deg); }
+  100% { transform: translate(0, 0) scale(1) rotate(360deg); }
+}
+
+/* Posicionamentos estratégicos dos assets */
+.asset-left-bottom {
+  bottom: 8%;
+  left: 5%;
+  width: 170px;
+  max-width: 28vw;
+  animation: floatSlowLeft 22s ease-in-out infinite; /* Aumentado tempo para suavizar o movimento longo */
+}
+
+.asset-right-top {
+  top: 18%;
+  right: 5%;
+  width: 210px;
+  max-width: 32vw;
+  animation: floatSlowRight 26s ease-in-out infinite;
+}
+
+.asset-center-left {
+  top: 45%;
+  left: 4%;
+  width: 140px;
+  max-width: 22vw;
+  animation: floatPulse 20s ease-in-out infinite;
+}
+
+/* ── CUSTOMIZAÇÃO DE HEADERS PARA CADA TEMA ── */
+body.theme-naruto header {
+  border-bottom: 3px solid #ff6b00 !important;
+  box-shadow: 0 4px 20px rgba(255,107,0,0.2) !important;
+}
+body.theme-onepiece header {
+  border-bottom: 3px solid #0099e6 !important;
+  box-shadow: 0 4px 20px rgba(0, 153, 230, 0.2) !important;
+}
+body.theme-bleach header {
+  border-bottom: 3px solid #6090e0 !important;
+  box-shadow: 0 4px 20px rgba(96,144,224,0.25) !important;
+}
+body.theme-aot header {
+  border-bottom: 3px solid #5a8a3a !important;
+  box-shadow: 0 4px 20px rgba(90,138,58,0.2) !important;
+}
+body.theme-demonslayer header {
+  border-bottom: 3px solid #cc2244 !important;
+  box-shadow: 0 4px 20px rgba(204,34,68,0.2) !important;
+}
+body.theme-jjk header {
+  border-bottom: 3px solid #8b5cf6 !important;
+  box-shadow: 0 4px 25px rgba(139,92,246,0.3) !important;
+}
+body.theme-dragonball header {
+  border-bottom: 3px solid #ffb800 !important;
+  box-shadow: 0 4px 20px rgba(255,184,0,0.25) !important;
+}
+body.theme-sailormoon header {
+  border-bottom: 3px solid #ff69b4 !important;
+  box-shadow: 0 4px 20px rgba(255,105,180,0.25) !important;
+}
+body.theme-chainsawman header {
+  border-bottom: 3px solid #ff4500 !important;
+  box-shadow: 0 4px 25px rgba(255,69,0,0.3) !important;
+}
+body.light-mode header {
+  border-bottom: 2px solid #b5b5b5 !important;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06) !important;
+}
+
+
+

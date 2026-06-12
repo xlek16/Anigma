@@ -22,22 +22,25 @@ async function carregarRanking() {
 
     const userIds = profiles.map(p => p.id);
 
-    const [statsRes, spRes] = await Promise.all([
+    const [statsRes, spRes, cosmeticsRes] = await Promise.all([
       window.supabaseClient.from('profile_stats').select('user_id, pontos_totais').in('user_id', userIds),
       window.supabaseClient.from('season_pass').select('user_id, season_pass_premium').in('user_id', userIds),
+      window.supabaseClient.from('profile_cosmetics').select('user_id, banner_url').in('user_id', userIds),
     ]);
 
     const statsMap = Object.fromEntries((statsRes.data || []).map(s => [s.user_id, s]));
-    const spMap    = Object.fromEntries((spRes.data || []).map(s => [s.user_id, s]));
+    const spMap = Object.fromEntries((spRes.data || []).map(s => [s.user_id, s]));
+    const bannerMap = Object.fromEntries((cosmeticsRes.data || []).map(c => [c.user_id, c.banner_url]));
 
     const combined = profiles
       .map(p => {
         const pts = statsMap[p.id]?.pontos_totais ?? 0;
         return {
           ...p,
-          pontos_totais:       pts,
-          level:               calcLevel(pts), // ← calculado na hora, não da DB
+          pontos_totais: pts,
+          level: calcLevel(pts),
           season_pass_premium: spMap[p.id]?.season_pass_premium ?? false,
+          banner_url: bannerMap[p.id] || null,
         };
       })
       .sort((a, b) => b.pontos_totais - a.pontos_totais)
@@ -72,6 +75,25 @@ function renderRanking(data) {
     row.className = 'ranking-row' + (index < 3 ? ` top-${index + 1}` : '') + (isPrem ? ' rank-prem' : '');
     row.dataset.userId = profile.id;
 
+    // ── Banner de fundo ──────────────────────────────────────────
+    if (profile.banner_url) {
+      const bannerBg = document.createElement('div');
+      bannerBg.className = 'rank-banner-bg';
+      bannerBg.innerHTML = `<img src="${profile.banner_url}" alt="" loading="lazy">`;
+      row.appendChild(bannerBg);
+
+      const overlay = document.createElement('div');
+      overlay.className = 'rank-banner-overlay';
+      row.appendChild(overlay);
+    }
+
+    // ── Coluna #pos ──────────────────────────────────────────────
+    const posCol = document.createElement('div');
+    posCol.className = 'rank-col rank-pos';
+    posCol.textContent = index + 1;
+    row.appendChild(posCol);
+
+    // ── Coluna utilizador ────────────────────────────────────────
     const avatarUrl = profile.avatar_url ||
       'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/animes/avatar_default.png';
 
@@ -84,7 +106,7 @@ function renderRanking(data) {
     usernameSpan.textContent = profile.username;
     if (profile.equipped_name_style && typeof NAME_STYLES !== 'undefined' && NAME_STYLES[profile.equipped_name_style]) {
       const s = NAME_STYLES[profile.equipped_name_style];
-      if (s.style)     usernameSpan.style.cssText = s.style;
+      if (s.style) usernameSpan.style.cssText = s.style;
       if (s.className) usernameSpan.classList.add(s.className);
     }
 
@@ -94,13 +116,20 @@ function renderRanking(data) {
     userLink.innerHTML = avatarHtml;
     userLink.appendChild(usernameSpan);
     if (isPrem) userLink.insertAdjacentHTML('beforeend', `<span class="rank-prem-badge">★ S1</span>`);
+    row.appendChild(userLink);
 
-    row.innerHTML = `
-      <div class="rank-col rank-pos">${index + 1}</div>
-      <div class="rank-col rank-level"><span class="rank-level-badge">LVL ${profile.level}</span></div>
-      <div class="rank-col rank-points">⭐ ${profile.pontos_totais.toLocaleString('pt-PT')}</div>
-    `;
-    row.insertBefore(userLink, row.querySelector('.rank-level'));
+    // ── Coluna nível ─────────────────────────────────────────────
+    const levelCol = document.createElement('div');
+    levelCol.className = 'rank-col rank-level';
+    levelCol.innerHTML = `<span class="rank-level-badge">LVL ${profile.level}</span>`;
+    row.appendChild(levelCol);
+
+    // ── Coluna pontos ────────────────────────────────────────────
+    const pointsCol = document.createElement('div');
+    pointsCol.className = 'rank-col rank-points';
+    pointsCol.textContent = `⭐ ${profile.pontos_totais.toLocaleString('pt-PT')}`;
+    row.appendChild(pointsCol);
+
     rankingBody.appendChild(row);
   });
 }

@@ -3,31 +3,22 @@
 const AVATARES = {
   // ── EASY (Verde) ─────────────────────────────────────────────
   easy: [
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/majinboo.webp',
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/miwa.webp',
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/spandan.webp',
-    
+    'https://xxpmvxcjnqwzrsbnqdsg.supabase.co/storage/v1/object/public/avatares/bulma.webp'
   ],
 
   // ── MEDIUM (Amarelo) ─────────────────────────────────────────
   medium: [
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/choso.webp',
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/bulma.webp',
+    'https://xxpmvxcjnqwzrsbnqdsg.supabase.co/storage/v1/object/public/avatares/naruto.webp'
   ],
 
   // ── HARD (Vermelho) ──────────────────────────────────────────
   hard: [
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/yuta.webp',
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/vegita.webp',
+    'https://xxpmvxcjnqwzrsbnqdsg.supabase.co/storage/v1/object/public/avatares/benimaru.webp'
   ],
 
   // ── IMPOSSIBLE (Roxo) ────────────────────────────────────────
   impossible: [
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/sukuna.webm',
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/Gojo.webm',
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/Goku.webm',
-    'https://kpfrlivnrqqzajwpambo.supabase.co/storage/v1/object/public/Avatares/dio.webm',
-    
+    'https://xxpmvxcjnqwzrsbnqdsg.supabase.co/storage/v1/object/public/avatares/rengoku.webp'
   ]
 };
 
